@@ -1,0 +1,32 @@
+2018-09-04 22:34:50,690 +0200 [main] INFO  (ArrayHelper.java:42) - Wartość 0
+2018-09-04 22:35:09,312 +0200 [main] INFO  (ForEachOps.java:184) - A
+2018-09-04 22:35:09,314 +0200 [main] INFO  (ForEachOps.java:184) - B
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - C
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - D
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - E
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - F
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - G
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - H
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - I
+2018-09-04 22:35:09,316 +0200 [main] INFO  (ForEachOps.java:184) - J
+04wrz2018 22:36:57,118 +0200 [main] INFO  (ForEachOps.java:184) - A
+04wrz2018 22:36:57,120 +0200 [main] INFO  (ForEachOps.java:184) - B
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - C
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - D
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - E
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - F
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - G
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - H
+04wrz2018 22:36:57,122 +0200 [main] INFO  (ForEachOps.java:184) - I
+04wrz2018 22:36:57,123 +0200 [main] INFO  (ForEachOps.java:184) - J
+04.09.2018 22:37:27,927 +0200 [main] INFO  (ForEachOps.java:184) - A
+04.09.2018 22:37:27,929 +0200 [main] INFO  (ForEachOps.java:184) - B
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - C
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - D
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - E
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - F
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - G
+04.09.2018 22:37:27,931 +0200 [main] INFO  (ForEachOps.java:184) - H
+04.09.2018 22:37:27,932 +0200 [main] INFO  (ForEachOps.java:184) - I
+04.09.2018 22:37:27,932 +0200 [main] INFO  (ForEachOps.java:184) - J
+04.09.2018 22:37:43,836 +0200 [main] INFO  (ArrayHelper.java:42) - Wartość 0

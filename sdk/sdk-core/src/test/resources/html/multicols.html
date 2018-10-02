@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CSS3 column demo</title>
+<style type='text/css'>
+.body{
+	margin: 0px;
+	padding: 0px;
+	width: 14cm;
+	height: 21cm;
+}
+.cols3 {
+	-webkit-column-count: 3;
+	-webkit-column-gap: 20px;
+	-webkit-column-rule: 1px solid #000;
+	-moz-column-count: 3;
+	-moz-column-gap: 20px;
+	-moz-column-rule: 1px solid #000;
+	column-count: 3;
+	column-gap: 20px;
+	column-rule: 1px solid silver;
+	-webkit-margin-before: 0;
+  -webkit-margin-after: 0;	
+}
+
+.cols3 h1 {
+	-webkit-column-span: all;
+	-moz-column-span: all;
+	column-span: all;
+}
+
+ul li
+{
+	list-style-type: decimal-leading-zero;
+}
+
+ul li:nth-child(odd) {
+	color:blue;
+	
+}
+
+</style>
+</head>
+<body>
+	<div class='cols3'>
+		<h1>Integer posuere erat a ante</h1>
+		<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam quis risus eget urna mollis ornare vel eu leo.
+			Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
+			elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean
+			lacinia bibendum nulla sed consectetur.</p>
+		<p>Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Etiam porta sem
+			malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce
+			dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur
+			adipiscing elit.</p>
+		<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+			condimentum nibh, ut fermentum massa justo sit amet risus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo
+			quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo. Aenean lacinia bibendum
+			nulla sed consectetur.</p>
+		<p>Curabitur blandit tempus porttitor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Donec id
+			elit non mi porta gravida at eget metus. Curabitur blandit tempus porttitor.</p>
+	</div>
+	<ul>
+		<li>Mercedes</li>
+		<li>Volvo</li>
+		<li>Skoda</li>
+		<li>Subaru</li>
+		<li>Toyota</li>
+	</ul>
+	<hr style="width:10cm">
+</body>
+</html>

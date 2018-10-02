@@ -1,0 +1,101 @@
+F1 » Pomoc
+F2 » Odśwież panel źródłowy
+F3 » Podgląd plików
+F4 » Edytuj pliki
+F5 » Kopiuj pliki
+F6 » Zmień nazwę lub przenieś pliki
+F7 » Nowy katalog
+F8 » Usuń pliki
+F9 » Aktywuj menu nad panelem źródłowym (lewym lub prawym)
+F10 » Aktywuj lub deaktywuj menu
+ALT+F1 » Zmień lewy napęd
+ALT+F2 » Zmień prawy napęd
+ALT+F3 » Użyj alternatywnej (zewnętrznej lub wewnętrznej) przeglądarki
+ALT+SHIFT+F3 » Uruchom przeglądarkę i załaduj plik korzystając z możliwości wbudowanych (bez korzystania z modułów lub obsługi multimediów).
+ALT+F4 » Zakończ
+ALT+F5 » Pakuj pliki
+ALT+SHIFT+F5 » Przenieś do archiwum
+ALT+F7 » Szukaj
+ALT+F8 » Otwórz historię wiersza poleceń
+ALT+F9 » Rozpakuj wybrane pliki
+ALT+SHIFT+F9 » Testuj archiwum
+ALT+F10 » Otwórz okno z drzewem bieżącego katalogu
+SHIFT+F1 » Menu widoku kolumn użytkownika
+SHIFT+F2 » Porównaj listy plików
+SHIFT+F3 » Wyświetl tylko plik wskazany kursorem, jeśli wybrano wiele plików.
+SHIFT+F4 » Utwórz nowy plik tekstowy i załaduj go do edytora.
+SHIFT+F5 » Kopiuj pliki (ze zmianą nazwy) do tego samego katalogu.
+SHIFT+F10 » Wyświetl menu kontekstowe
+SHIFT+CTRL+F5 » Utwórz skróty dla wybranych plików (tylko nowa powłoka na systemach 95/98/NT)
+SHIFT+F6 » Zmień nazwę plików w tym samym katalogu
+SHIFT+ESC » Zminimalizuj program Total Commander do ikony.
+ALT+W lewo/W prawo » Przejdź do poprzedniego/następnego z katalogu z wcześniej wyświetlonych.
+ALT+W dół » Otwórz listę historii poprzednio wyświetlonych katalogów (podobną do listy historii w przeglądarce WWW).
+NUM + » Rozwiń element
+NUM - » Zwiń element
+NUM * » Odwróć wybór
+NUM / » Przywróć wybór
+CTRL+NUM + » Wybierz wszystko
+CTRL+NUM - » Anuluj wybór wszystkiego
+ALT+NUM + » Wybierz wszystkie pliki z tym samym rozszerzeniem.
+ALT+NUM - » Usuń zaznaczenie dla wszystkich plików z tym samym rozszerzeniem.
+CTRL+PgUp lub Backspace » Przejdź do katalogu nadrzędnego (cd ..)
+CTRL+< » Przejdź do katalogu głównego (większość klawiatur europejskich)
+CTRL+\ » Przejdź do katalogu głównego (klawiatury amerykańskie)
+CTRL+PgDn » Otwórz katalog/archiwum (także samorozpakowujące archiwum .EXE)
+CTRL+W lewo/W prawo » Otwórz katalog/archiwum i wyświetl je w panelu docelowym.Jeśli kursor nie wskazuje katalogu, wyświetlany jest bieżący katalog.
+CTRL+SHIFT+F1 » Widok miniatur (podglądu obrazów)
+CTRL+F1 » Tryb wyświetlania 'Krótki' (tylko nazwy plików)
+CTRL+F2 » Tryb wyświetlania 'Pełny' (wszystkie dane plików)
+CTRL+SHIFT+F2 » Widok komentarzy (skrót dla tworzenia nowych komentarzy to Ctrl+Z)
+CTRL+F3 » Sortuj wg nazwy
+CTRL+F » Sortuj wg rozszerzenia
+CTRL+F5 » Sortuj wg daty/czasu
+CTRL+F6 » Sortuj wg wielkości
+CTRL+F7 » Bez sortowania
+CTRL+F8 » Wyświetl drzewo katalogów
+CTRL+shift+F8 » Włącz/wyłącz osobne drzewo katalogów
+CTRL+F9 » Wydrukuj plik wskazany kursorem, korzystając ze skojarzonego programu.
+CTRL+F10 » Pokaż wszystkie pliki
+CTRL+F11 » Pokaż tylko programy
+CTRL+F12 » Pokaż pliki zdefiniowane przez użytkownika
+TAB » Przejdź z panelu aktywnego do drugiego
+litera » Przekierowanie do wiersza poleceń, kursor jest przenoszony do wiersza poleceń
+INSERT » Wybierz plik lub katalog.
+SPACJA » Wybierz plik lub katalog (jak INSERT). Po wybraniu niezaznaczonego katalogu wskazanego kursorem przy użyciu klawisza SPACJA, określona zostanie wielkość znajdujących się w nim plików i podkatalogów, która następnie zostanie wyświetlona, w pełnym widoku, zamiast ciągu <DIR>. Zachowanie to można zmienić przy użyciu opcji 'Konfiguracja' - 'Opcje' - 'Działania' - 'Przy wybieraniu spacją'.
+ENTER » Zmień katalog / uruchom program / uruchom skojarzony program / wykonaj wiersz poleceń, jeśli zawiera polecenia. Jeśli panel źródłowy wyświetla zawartość archiwum, zostaną wyświetlone jego szczegółowe dane.
+SHIFT+ENTER »
+1. Uruchom wiersz poleceń / program wskazany kursorem, poprzedzając jego nazwę poleceniem cmd /c i pozostawiając okno programu otwarte po jego zakończeniu. Funkcja ta działa, jeśli w katalogu Windows znajduje się plik NOCLOSE.PIF!
+2. Dla plików ZIP: Użyj opcji alternatywnej do określonej na stronie Kompresory: (Obsługuj archiwa jak katalogi <-> wywołaj skojarzony program, tzn. winzip lub quinzip).
+3. Wewnątrz archiwum: Rozpakuj plik wskazany kursorem i traktuj go jak archiwum (przetwarzanie zagnieżdżonych archiwów zip).
+4. W liście ostatnio używanych katalogów (Historia, Ctrl+D) otwiera katalog w nowej zakładce.
+ALT+SHIFT+ENTER » Zlicz wielkości wszystkich katalogów w bieżącym katalogu. Wielkości te są wyświetlane w widoku pełnym, zamiast ciągu <DIR>.
+ALT+ENTER » Wyświetl arkusz właściwości.
+CTRL+A » Wybierz wszystko
+CTRL+B » Płaska struktura plików: Pokaż zawartość bieżącego katalogu i wszystkich jego podkatalogów na jednej liście.
+CTRL+C (wersja 32-bitowa) » Kopiuj pliki do schowka
+CTRL+D » Otwórz menu katalogów ('ulubione')
+CTRL+F » Połącz z serwerem FTP
+CTRL+SHIFT+F » Rozłącz serwer FTP
+CTRL+I » Przejdź do drugiego panela
+CTRL+L » Oblicz zajmowane miejsce (wybranych plików).
+CTRL+M » Narzędzie zmiany nazw
+CTRL+SHIFT+M » Zmień tryb przesyłania FTP.
+CTRL+N » Nowe połączenie FTP (należy wprowadzić adres URL lub hosta)
+CTRL+P » Kopiuj bieżącą ścieżkę do wiersza poleceń.
+CTRL+Q » Wyświetl panel szybkiego podglądu zamiast panela plików.
+CTRL+R » Odczytaj katalog źródłowy
+CTRL+T » Otwórz nową zakładkę katalogu i aktywuj ją.
+CTRL+SHIFT+T » Otwórz nową zakładkę katalogu, ale nie aktywuj jej.
+CTRL+U » Zamień miejscami panele plików.
+CTRL+SHIFT+U » Zamień miejscami panele plików i zakładki.
+CTRL+V (wersja 32-bitowa) » Wklej ze schowka do bieżącego katalogu.
+CTRL+W » Zamknij aktywną zakładkę.
+CTRL+SHIFT+W » Zamknij wszystkie otwarte zakładki.
+CTRL+X (wersja 32-bitowa) » Wytnij pliki do schowka.
+CTRL+Z » Edytuj komentarz pliku
+CTRL+UP » Otwórz plik wskazany kursorem w nowej zakładce
+CTRL+SHIFT+UP » Otwórz plik wskazany kursorem w drugim panelu (jako nową zakładkę).
+CTRL+TAB » Przejdź do następnej zakładki.
+CTRL+SHIFT+TAB » Przejdź do poprzedniej zakładki.
+ALTGR+litera lub CTRL+ALT+litera » Szybkie wyszukiwanie w bieżącym katalogu pliku wg nazwy (rozpoczynającej się od wpisanych liter).
