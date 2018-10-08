@@ -1,75 +1,91 @@
 package com.codigo.aplios.sdk.color;
 
-import static org.junit.Assert.fail;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testy konwersji wartości barwy zapisanej w RBG na CMYK")
 public class TestRgbToCmykColors {
 
 	// https://www.rapidtables.com/convert/color/rgb-to-cmyk.html
-	//https://www.w3schools.com/colors/colors_picker.asp?colorhex=00ffff
+	// https://www.w3schools.com/colors/colors_picker.asp?colorhex=00ffff
 
 	@Test
-	public void test1() {
+	@DisplayName("Test konwersji wartości barwy białej RGB na CMYK")
+	public void shouldBeCmykWhiteColor() {
 
-		/**
-		 * (R,G,B) Hex (C,M,Y,K) Black (0,0,0) #000000 (0,0,0,1) White (255,255,255)
-		 * #FFFFFF (0,0,0,0) Red (255,0,0) #FF0000 (0,1,1,0) Green (0,255,0) #00FF00
-		 * (1,0,1,0) Blue (0,0,255) #0000FF (1,1,0,0) Yellow (255,255,0) #FFFF00
-		 * (0,0,1,0) Cyan (0,255,255) #00FFFF (1,0,0,0) Magenta (255,0,255) #FF00FF
-		 * (0,1,0,0)
-		 **/
+		var rgbWhite = 0xFF_FF_FF;
+		var cmykWhite = RgbToCmykColorConverter.of(rgbWhite);
+		System.out.println("while " + cmykWhite);
 
-		// The R,G,B values are divided by 255 to change the range from 0..255 to 0..1:
+		assertThat(cmykWhite.getCyanColor(), is(0));
+		assertThat(cmykWhite.getMagnetaColor(), is(0));
+		assertThat(cmykWhite.getYellowColor(), is(0));
+		assertThat(cmykWhite.getBlackColor(), is(0));
 
-		// K = 1-max(R', G', B')
-
-		// The cyan color (C) is calculated from the red (R') and black (K) colors:
-
-		// C = (1-R'-K) / (1-K)
-
-		// The magenta color (M) is calculated from the green (G') and black (K) colors:
-
-		// M = (1-G'-K) / (1-K)
-
-		// The yellow color (Y) is calculated from the blue (B') and black (K) colors:
-
-		// Y = (1-B'-K) / (1-K)
-
-		var red = 0.0;
-		var green = 0.0;
-		var blue = 0.0;
-		var cyan = 0.0;
-		var magneta = 0.0;
-		var yellow = 0.0;
-		var max = 0.0;
-		var black = 0.0;
-
-		red = 255.0;
-		green = 10.0;
-		blue = 50.0;
-
-		red = red / 255.0;
-		green = green / 255.0;
-		blue = blue / 255.0;
-
-		max = Math.max(blue, Math.max(red, green));
-
-		black = 1.0 - max;
-
-		if (black != 1.0) {
-
-			cyan = (1.0 - red - black) / (1.0 - black);
-			magneta = (1.0 - green - black) / (1.0 - black);
-			yellow = (1.0 - blue - black) / (1.0 - black);
-		}
-
-		cyan = Math.round(100.0 * cyan);
-		magneta = Math.round(100.0 * magneta);
-		yellow = Math.round(100.0 * yellow);
-		black = Math.round(100.0 * black);
-		
-		fail("Dodać implementacje");
-
+		assertThat(cmykWhite.getCyanValue(), is(0.0));
+		assertThat(cmykWhite.getMagnetaValue(), is(0.0));
+		assertThat(cmykWhite.getYellowValue(), is(0.0));
+		assertThat(cmykWhite.getBlackValue(), is(0.0));
 	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy czerwonej RGB na CMYK")
+	public void shouldBeCmykRedColor() {
+
+		var rgbRed = 0xFF_00_00;
+		var cmykRed = RgbToCmykColorConverter.of(rgbRed);
+		System.out.println("red " + cmykRed);
+
+		assertThat(cmykRed.getCyanColor(), is(0));
+		assertThat(cmykRed.getMagnetaColor(), is(100));
+		assertThat(cmykRed.getYellowColor(), is(100));
+		assertThat(cmykRed.getBlackColor(), is(0));
+
+		assertThat(cmykRed.getCyanValue(), is(0.0));
+		assertThat(cmykRed.getMagnetaValue(), is(1.0));
+		assertThat(cmykRed.getYellowValue(), is(1.0));
+		assertThat(cmykRed.getBlackValue(), is(0.0));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy zielonej RGB na CMYK")
+	public void shouldBeCmykLimeColor() {
+
+		var rgbLime = 0x00_FF_00;
+		var cmykLime = RgbToCmykColorConverter.of(rgbLime);
+		System.out.println("lime " + cmykLime);
+
+		assertThat(cmykLime.getCyanColor(), is(100));
+		assertThat(cmykLime.getMagnetaColor(), is(0));
+		assertThat(cmykLime.getYellowColor(), is(100));
+		assertThat(cmykLime.getBlackColor(), is(0));
+
+		assertThat(cmykLime.getCyanValue(), is(1.0));
+		assertThat(cmykLime.getMagnetaValue(), is(0.0));
+		assertThat(cmykLime.getYellowValue(), is(1.0));
+		assertThat(cmykLime.getBlackValue(), is(0.0));
+	}
+	
+	@Test
+	@DisplayName("Test konwersji wartości barwy czarnej RGB na CMYK")
+	public void shouldBeCmykBlackColor() {
+		
+		var rgbBlack = 0x00_00_00;
+		var cmykBlack = RgbToCmykColorConverter.of(rgbBlack);
+		System.out.println("black " + cmykBlack);
+		
+		assertThat(cmykBlack.getCyanColor(), is(0));
+		assertThat(cmykBlack.getMagnetaColor(), is(0));
+		assertThat(cmykBlack.getYellowColor(), is(0));
+		assertThat(cmykBlack.getBlackColor(), is(0));
+		
+		assertThat(cmykBlack.getCyanValue(), is(0.0));
+		assertThat(cmykBlack.getMagnetaValue(), is(0.0));
+		assertThat(cmykBlack.getYellowValue(), is(0.0));
+		assertThat(cmykBlack.getBlackValue(), is(1.0));
+	}
+
 }
