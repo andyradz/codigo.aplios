@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.color;
+package com.codigo.aplios.sdk.core.helpers;
 
 final class RgbToHexColorConverter {
 
@@ -6,12 +6,12 @@ final class RgbToHexColorConverter {
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>RgbToHexColorConverter</code>
-	 * 
+	 *
 	 * @param redValue
 	 * @param greenValue
 	 * @param blueValue
 	 */
-	public RgbToHexColorConverter(int redValue, int greenValue, int blueValue) {
+	public RgbToHexColorConverter(final int redValue, final int greenValue, final int blueValue) {
 
 		if ((redValue < 0) && (redValue > 255))
 			throw new IllegalArgumentException();
@@ -22,23 +22,25 @@ final class RgbToHexColorConverter {
 		if ((blueValue < 0) && (blueValue > 255))
 			throw new IllegalArgumentException();
 
-		hexColorValue = blueValue;
-		hexColorValue |= greenValue << 8;
-		hexColorValue |= redValue << 16;
+		this.hexColorValue = blueValue;
+		this.hexColorValue |= greenValue << 8;
+		this.hexColorValue |= redValue << 16;
 	}
 
-	public RgbToHexColorConverter(int rgbValue) {
+	public RgbToHexColorConverter(final int rgbValue) {
 
-		hexColorValue = rgbValue;
+		this.hexColorValue = rgbValue;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 
-		return Integer.toHexString(hexColorValue)
+		return Integer.toHexString(this.hexColorValue)
 				.toUpperCase();
 	}
 }
