@@ -1,75 +1,51 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.color;
 
 import java.util.Objects;
 
 final class HexToRbgColorConverter {
 
-	public static HexToRbgColorConverter of(final String hexColorValue) {
+	public static HexToRbgColorConverter of(String hexColorValue) {
 
-		return new HexToRbgColorConverter(
-			hexColorValue);
+		return new HexToRbgColorConverter(hexColorValue);
 	}
 
-	private static final int	RGB_MASK_VALUE		= 0xFF;
-	private static final int	HEX_VALUE_LENGTH	= 6;
+	private static final int HEX_VALUE_LENGTH = 6;
 
 	/**
 	 * Atrybut obiektu zawiera wartość reprezentująca kolor w systemie RGB
 	 */
-	private final int rgbColorValue;
+	private final RgbColorModel rgbColorModel;
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>RGBToHexColorConverter</code>
-	 *
+	 * 
 	 * @param hexColorValue
-	 *        Parametr wskazuje na wartość tekstową reprezentującą kolor w układzie RGB zapisanym w
-	 *        formacie szesnastkowym
+	 *            Parametr wskazuje na wartość tekstową reprezentującą kolor w układzie RGB zapisanym w
+	 *            formacie szesnastkowym
 	 */
-	private HexToRbgColorConverter(final String hexColorValue) {
+	private HexToRbgColorConverter(String hexColorValue) {
 
 		Objects.requireNonNull(hexColorValue);
 
-		if (hexColorValue.length() != HexToRbgColorConverter.HEX_VALUE_LENGTH)
+		if (hexColorValue.length() != HEX_VALUE_LENGTH)
 			throw new IllegalArgumentException();
 
-		this.rgbColorValue = Integer.decode("#" + hexColorValue);
+		this.rgbColorModel = RgbColorModel.of(hexColorValue);
 	}
 
 	/**
 	 * Właściwość określa wartość barwy czerwonej kodu RGB
-	 *
+	 * 
 	 * @return Wartość numeryczna 0-255
 	 */
-	public int getRedValue() {
+	public RgbColorModel getRgbColorModel() {
 
-		return (this.rgbColorValue >> 16) & HexToRbgColorConverter.RGB_MASK_VALUE;
-	}
-
-	/**
-	 * Właściwość określa wartość barwy zielonej kodu RGB
-	 *
-	 * @return Wartość numeryczna 0-255
-	 */
-	public int getGreenValue() {
-
-		return (this.rgbColorValue >> 8) & HexToRbgColorConverter.RGB_MASK_VALUE;
-	}
-
-	/**
-	 * Właściwość określa wartość barwy niebieskiej kodu RGB
-	 *
-	 * @return Wartość numeryczna 0-255
-	 */
-	public int getBlueValue() {
-
-		return (this.rgbColorValue) & HexToRbgColorConverter.RGB_MASK_VALUE;
+		return this.rgbColorModel;
 	}
 
 	@Override
 	public String toString() {
 
-		final String format = "RGB = (%d, %d, %d)";
-
-		return String.format(format, getRedValue(), getGreenValue(), getBlueValue());
+		return rgbColorModel.toString();
 	}
 }
