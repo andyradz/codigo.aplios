@@ -1,12 +1,40 @@
 package com.codigo.aplios.sdk.color;
 
+/**
+ * Klasa reprezentuje mechanizm konwertera modelu wartości koloru RGB na HSV
+ * 
+ * @author andrzej.radziszewski
+ * @version 1.0.0.0
+ * @since 2018
+ * @category converter
+ */
 public final class RgbToHsvColorConverter {
 
+	/**
+	 * Procedura fabrykująca instancję konwertera modelu kolory<code>RgbToHsvColorConverter</code> na
+	 * podstawie wartość składowych modelu RGB
+	 * 
+	 * @param rgbColor
+	 *            Wartość koloru w modelu RGB
+	 * @return Instancja konwertera koloru RgbToHsvColorConverter
+	 */
 	public static RgbToHsvColorConverter of(int rgbColor) {
 
 		return new RgbToHsvColorConverter(rgbColor);
 	}
 
+	/**
+	 * Procedura fabrykująca instancję konwertera modelu kolory<code>RgbToHsvColorConverter</code> na
+	 * podstawie wartość składowych modelu RGB
+	 * 
+	 * @param rgbRed
+	 *            Składowa barwy czerwonej modelu RGB
+	 * @param rgbGreen
+	 *            Składowa barwy zielonej modelu RGB
+	 * @param rgbBlue
+	 *            Składowa barwy niebieskiej modelu RGB
+	 * @return Instancja konwertera koloru RgbToHsvColorConverter
+	 */
 	public static RgbToHsvColorConverter of(int rgbRed, int rgbGreen, int rgbBlue) {
 
 		return new RgbToHsvColorConverter(rgbRed, rgbGreen, rgbBlue);
@@ -21,10 +49,11 @@ public final class RgbToHsvColorConverter {
 	private double maxOfRgbValue;
 	private double hue;
 	private double saturation;
-	private double lightness;
+	private double value;
+	private double delta;
 
 	/**
-	 * Podstawowy konstruktor obiektu klasy<code>RgbToCmykColorConverter</code>
+	 * Podstawowy konstruktor obiektu klas<code>RgbToHsvColorConverter</code>
 	 * 
 	 * @param rgbValue
 	 */
@@ -35,16 +64,16 @@ public final class RgbToHsvColorConverter {
 	}
 
 	/**
-	 * Podstawowy konstruktor obiektu klasy <code>RgbToHexColorConverter</code>
+	 * Podstawowy konstruktor obiektu klas<code>RgbToHsvColorConverter</code>
 	 * 
 	 * @param redValue
-	 *            Parametr określa wartość składowej barwy RED w notacji RGB
+	 *            Składowa barwy czerwonej modelu RGB
 	 * @param greenValue
-	 *            Parametr określa wartość składowej barwy GREEN w notacji RGB
+	 *            Składowa barwy zielonej modelu RGB
 	 * @param blueValue
-	 *            Parametr określa wartość składowej barwy BLUE w notacji RGB
+	 *            Składowa barwy niebieskiej modelu RGB
 	 */
-	public RgbToHsvColorConverter(int redValue, int greenValue, int blueValue) {
+	private RgbToHsvColorConverter(int redValue, int greenValue, int blueValue) {
 
 		if ((redValue < 0) && (redValue > RGB_MASK_VALUE))
 			throw new IllegalArgumentException();
@@ -72,42 +101,60 @@ public final class RgbToHsvColorConverter {
 		green /= RGB_MASK_VALUE;
 		blue /= RGB_MASK_VALUE;
 
-		minOfRgbValue = Math.min(blue, Math.min(red, green));
-		maxOfRgbValue = Math.max(blue, Math.max(red, green));
+		minOfRgbValue = Math.min(red, Math.min(green, blue));
+		maxOfRgbValue = Math.max(red, Math.max(green, blue));
+		delta = maxOfRgbValue - minOfRgbValue;
+		value = maxOfRgbValue;
 
-		lightness = (maxOfRgbValue + minOfRgbValue) / 2.0;
+		if (delta != 0.0) {
 
-		if (maxOfRgbValue != minOfRgbValue) {
-			final var d = maxOfRgbValue - minOfRgbValue;
+			saturation = delta / maxOfRgbValue;
+			var deltaRed = (((maxOfRgbValue - red) / 6.0) + (delta / 2.0)) / delta;
+			var deltaGreen = (((maxOfRgbValue - green) / 6.0) + (delta / 2.0)) / delta;
+			var deltaBlue = (((maxOfRgbValue - blue) / 6.0) + (delta / 2.0)) / delta;
 
-			saturation = lightness > 0.5 ? d / (2.0 - maxOfRgbValue - minOfRgbValue)
-					: d / (maxOfRgbValue + minOfRgbValue);
+			if (red == maxOfRgbValue)
+				hue = deltaBlue - deltaGreen;
+			else if (green == maxOfRgbValue)
+				hue = (1.0 / 3.0) + deltaRed - deltaBlue;
+			else if (blue == maxOfRgbValue)
+				hue = (2.0 / 3.0) + deltaGreen - deltaRed;
 
-			if (maxOfRgbValue == red)
-				hue = (green - blue) / d + (green < blue ? 6.0 : 0.0);
+			if (hue < 0.0)
+				hue += 1.0;
 
-			else if (maxOfRgbValue == green)
-				hue = (blue - red) / d + 2.0;
-
-			else if (maxOfRgbValue == blue)
-				hue = (red - green) / d + 4.0;
+			if (hue > 1.0)
+				hue -= 1.0;
 		}
-
 	}
 
+	/**
+	 * Właściwość określa składową odcienia światła w modelu HSV
+	 * 
+	 * @return Wartość odcienia światła
+	 */
 	public double getHue() {
 
-		return Math.round(hue * 60.0);
+		return Math.round(hue * 360.0);
 	}
 
+	/**
+	 * Właściwość określa składową nasycenia koloru w modelu HSV
+	 * 
+	 * @return Wartość nasycenia koloru
+	 */
 	public double getSaturation() {
 
 		return Math.round(saturation * 1E3) / 1E1;
 	}
 
-	public double getLightness() {
+	/**
+	 * Właściwość określa składową mocy światła białego(brightness) w modelu HSV
+	 * 
+	 * @return Wartość mocy światła białego
+	 */
+	public double getValue() {
 
-		return Math.round(lightness * 1E3) / 1E1;
+		return Math.round(value * 1E3) / 1E1;
 	}
-
 }
