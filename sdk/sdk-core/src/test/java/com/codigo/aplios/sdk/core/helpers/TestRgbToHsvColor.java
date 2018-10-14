@@ -1,68 +1,130 @@
-package com.codigo.aplios.sdk.color;
+package com.codigo.aplios.sdk.core.helpers;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-//https://pl.wikipedia.org/wiki/HSV_(grafika)
 
 @DisplayName("Testy konwersji wartości barwy zapisanej w RGB na HSV")
 public final class TestRgbToHsvColor {
 
 	@Test
-	public void test1() {
+	@DisplayName("Test konwersji wartości barwy white HEX na RGB")
+	public void shouldBeHsvWhiteColor() {
 
-		var red = 10.0;
-		var green = 128.0;
-		var blue = 155.0;
+		final var red = 255;
+		final var green = 255;
+		final var blue = 255;
 
-		red /= 255.0;
-		green /= 255.0;
-		blue /= 255.0;
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
 
-		var minVal = Math.min(red, Math.min(green, blue));
-		var maxVal = Math.max(red, Math.max(green, blue));
-		var delta = maxVal - minVal;
-
-		var value = maxVal;
-		var hue = 0.0;
-		var saturation = 0.0;
-
-		if (delta == 0.0) {
-			hue = 0.0;
-			saturation = 0.0;
-		} else {
-			saturation = delta / maxVal;
-			var del_R = (((maxVal - red) / 6.0) + (delta / 2.0)) / delta;
-			var del_G = (((maxVal - green) / 6.0) + (delta / 2.0)) / delta;
-			var del_B = (((maxVal - blue) / 6.0) + (delta / 2.0)) / delta;
-
-			if (red == maxVal) {
-				hue = del_B - del_G;
-			} else if (green == maxVal) {
-				hue = (1.0 / 3.0) + del_R - del_B;
-			} else if (blue == maxVal) {
-				hue = (2.0 / 3.0) + del_G - del_R;
-			}
-
-			if (hue < 0.0) {
-				hue += 1.0;
-			}
-			if (hue > 1.0) {
-				hue -= 1.0;
-			}
-		}
-
-		hue = Math.round(hue * 360.0);
-		saturation = Math.round(saturation * 1000.0) / 10.0;
-		value = Math.round(value * 1000.0) / 10.0;
-
-		assertThat(hue, is(191.0));
-		assertThat(saturation, is(93.5));
-		assertThat(value, is(60.8));
-
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(.0));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
 	}
 
+	@Test
+	@DisplayName("Test konwersji wartości barwy czarnej HEX na RGB")
+	public void shouldBeHsvBlackColor() {
+
+		final var red = 0;
+		final var green = 0;
+		final var blue = 0;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(.0));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(.0));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy czerwonej HEX na RGB")
+	public void shouldBeHsvRedColor() {
+
+		final var red = 255;
+		final var green = 0;
+		final var blue = 0;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy zielonej HEX na RGB")
+	public void shouldBeHsvGreenColor() {
+
+		final var red = 0;
+		final var green = 255;
+		final var blue = 0;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(120.));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy niebieskiej HEX na RGB")
+	public void shouldBeHsvBlueColor() {
+
+		final var red = 0;
+		final var green = 0;
+		final var blue = 255;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(240.));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy różowej HEX na RGB")
+	public void shouldBeHsvPinkColor() {
+
+		final var red = 255;
+		final var green = 192;
+		final var blue = 203;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(350.));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(24.7));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy pomarańczowej HEX na RGB")
+	public void shouldBeHsvCoralColor() {
+
+		final var red = 255;
+		final var green = 127;
+		final var blue = 80;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(16.));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(68.6));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(100.));
+	}
+
+	@Test
+	@DisplayName("Test konwersji wartości barwy siwej HEX na RGB")
+	public void shouldBeHsvGrayColor() {
+
+		final var red = 10;
+		final var green = 128;
+		final var blue = 155;
+
+		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+
+		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(191.0));
+		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(93.5));
+		MatcherAssert.assertThat(rgbToHsv.getValue(), CoreMatchers.is(60.8));
+	}
 }

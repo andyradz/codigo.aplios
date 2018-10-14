@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.color;
+package com.codigo.aplios.sdk.core.helpers;
 
 public class RgbToHslaColorConverter {
 
