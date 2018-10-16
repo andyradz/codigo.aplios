@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.color;
+package com.codigo.aplios.sdk.core.helpers;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -11,8 +11,8 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public class IsBetween<T extends Comparable<T>> extends TypeSafeMatcher<T> {
 
-	private final T from;
-	private final T to;
+	private final T	from;
+	private final T	to;
 
 	/**
 	 * Creates and instance of the matcher. Observe that <code>from</code> and <code>to</code> cannot be
@@ -41,7 +41,7 @@ public class IsBetween<T extends Comparable<T>> extends TypeSafeMatcher<T> {
 	 * <p>
 	 * <p>
 	 * <p>
-	 * 
+	 *
 	 * <pre>
 	 * assertThat(10, between(10, 11))
 	 * </pre>
@@ -49,30 +49,35 @@ public class IsBetween<T extends Comparable<T>> extends TypeSafeMatcher<T> {
 	 * will return false.
 	 */
 	public static <T extends Comparable<T>> Matcher<T> between(final T from, final T to) {
-		return new IsBetween<>(from, to);
+
+		return new IsBetween<>(
+			from, to);
 	}
 
 	@Override
 	protected boolean matchesSafely(final T t) {
-		return (t.compareTo(from) >= 0) && (t.compareTo(to) <= 0);
+
+		return (t.compareTo(this.from) >= 0) && (t.compareTo(this.to) <= 0);
 	}
 
 	@Override
 	protected void describeMismatchSafely(final T item, final Description mismatchDescription) {
+
 		mismatchDescription.appendValue(item)
 				.appendText(" is not between ")
-				.appendValue(from)
+				.appendValue(this.from)
 				.appendText(" and ")
-				.appendValue(to)
+				.appendValue(this.to)
 				.appendText(", both excluded");
 	}
 
 	@Override
 	public void describeTo(final Description description) {
+
 		description.appendText("a value between ")
-				.appendValue(from)
+				.appendValue(this.from)
 				.appendText(" and ")
-				.appendValue(to)
+				.appendValue(this.to)
 				.appendText(", both excluded");
 	}
 }

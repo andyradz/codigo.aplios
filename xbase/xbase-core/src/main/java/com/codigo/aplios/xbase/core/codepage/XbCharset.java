@@ -247,13 +247,4 @@ public enum XbCharset {
 				.findAny()
 				.orElse(ASCII).codepages[0];
 	}
-
-	public static void main(final String[] args) {
-		XbCharset.values();
-		final Charset w = XbCharset.ofCodepage(0xCB1);
-		final int c = XbCharset.ofCharset(Charset.forName("X-MACGREEK1"));
-		System.out.println(w);
-		System.out.println(c);
-	}
-
 }

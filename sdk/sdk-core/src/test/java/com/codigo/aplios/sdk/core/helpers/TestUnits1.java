@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.color;
+package com.codigo.aplios.sdk.core.helpers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -257,7 +257,8 @@ public class TestUnits1 {
 		try {
 			final InputStream input = TestUnits1.class.getClassLoader()
 					.getResourceAsStream("moneyinwords.properties");
-			final InputStreamReader reader = new InputStreamReader(input, "UTF-8");
+			final InputStreamReader reader = new InputStreamReader(
+				input, "UTF-8");
 
 			properties.load(reader);
 
@@ -275,7 +276,8 @@ public class TestUnits1 {
 
 			properties.forEach(biConsumer);
 
-		} catch (final IOException e) {
+		}
+		catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -285,31 +287,26 @@ public class TestUnits1 {
 	@Test
 	public void TesSign() {
 
-		double value0 = -.099;
-		double value1 = .099;
-		double value2 = -0;
-		double value3 = Double.NaN;
+		final double value0 = -.099;
+		final double value1 = .099;
+		final double value2 = -0;
+		final double value3 = Double.NaN;
 
-		double sign = Math.signum(value0);
-		sign = Math.signum(value1);
-		sign = Math.signum(value2);
-		sign = Math.signum(value3);
+		Math.signum(value0);
+		Math.signum(value1);
+		Math.signum(value2);
+		Math.signum(value3);
 
 	}
 
 	@Test
 	public void TestDivideNumber() {
 
-		double value = 200_324_199_201_316.15d;
-				
-		long number = (long)value;
-		long fractional = (long)Math.round((value - (long)value) * 100);
-		long temp = 0;
-		long range = 0;
-		
+		final double value = 200_324_199_201_316.15d;
+
+		long number = (long) value;
+		Math.round((value - (long) value) * 100);
 		while (number != 0) {
-			temp = number % 1000;
-			range +=1;
 			number /= 1E3;
 		}
 	}

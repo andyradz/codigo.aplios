@@ -20,10 +20,10 @@ import com.codigo.aplios.xbase.core.database.structure.column.XbDataColumn;
 public class XBaseReader {
 	// -----------------------------------------------------------------------------------------------------------------
 
-	private static final int FileDescriptorSize = 33; // 32bytes + terminator byte;
+	private static final int FILEDESCRIPTORSIZE = 33; // 32bytes + terminator byte;
 
 	// -----------------------------------------------------------------------------------------------------------------
-	private static final int ColumnDescriptorSize = 32;
+	private static final int COLUMNDESCRIPTORSIZE = 32;
 
 	// -----------------------------------------------------------------------------------------------------------------
 	public void readDbf() throws IOException {
@@ -35,7 +35,7 @@ public class XBaseReader {
 		view.readAttributes();
 
 		try (FileChannel fch = FileChannel.open(dbfPath, READ)) {
-			final ByteBuffer dbfBuffer = ByteBuffer.allocate(XBaseReader.FileDescriptorSize - 1);
+			final ByteBuffer dbfBuffer = ByteBuffer.allocate(XBaseReader.FILEDESCRIPTORSIZE - 1);
 
 			// XbFileHeader ff = new XbFileHeader();
 			dbfBuffer.order(ByteOrder.LITTLE_ENDIAN);
@@ -62,7 +62,7 @@ public class XBaseReader {
 			// extended
 			// functionality.
 			// ---------------------------------------------------------------------------------------------------------
-			final int nNumFields = (headBytes - XBaseReader.FileDescriptorSize) / XBaseReader.ColumnDescriptorSize;
+			final int nNumFields = (headBytes - XBaseReader.FILEDESCRIPTORSIZE) / XBaseReader.COLUMNDESCRIPTORSIZE;
 			// nNumFields += 2;
 			final List<XbDataColumn> columns = new ArrayList<>();
 
@@ -103,19 +103,11 @@ public class XBaseReader {
 				lineLen = 0;
 			}
 
-			fch.close();
 		}
 		catch (final Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 		finally {
-
 		}
 	}
-
-	public static void main(final String[] args) throws IOException {
-
-		new XBaseReader().readDbf();
-	}
-
 }

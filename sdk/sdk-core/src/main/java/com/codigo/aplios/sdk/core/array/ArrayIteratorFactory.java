@@ -1,17 +1,10 @@
 package com.codigo.aplios.sdk.core.array;
 
-import com.codigo.aplios.sdk.core.constants.Default;
-
 /**
  * @author andrzej.radziszewski
  *
  */
 public class ArrayIteratorFactory {
-
-	public static void main(final String[] args) {
-		System.out.println(Default.of(int.class));
-		System.out.println(Default.of(Integer.class));
-	}
 
 	/**
 	 * Procedura wytwarza iterator kolekcji elementów tablicy, na podstawie przekazanej kolekcji

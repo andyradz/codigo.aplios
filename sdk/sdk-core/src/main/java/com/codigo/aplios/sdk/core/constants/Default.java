@@ -3,7 +3,8 @@ package com.codigo.aplios.sdk.core.constants;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.impl.factory.Maps;
 
 /**
  * Klasa dostarcza wartości domyślne dla podstawowych typów klas dostępnych na platformie JVM.
@@ -18,7 +19,7 @@ public final class Default {
 	/**
 	 * Definicja domyślnych wartości dla typów klas platforny JVM.
 	 */
-	private static final UnifiedMap<Class<?>, Object> DEFAULTS;
+	private static final MutableMap<Class<?>, Object> DEFAULTS;
 
 	/**
 	 * Definicja domyślnego typu klasy Enum.
@@ -31,7 +32,7 @@ public final class Default {
 	 * Domyślny statyczny konstruktor obiektu klasy <code>Default</code>.
 	 */
 	static {
-		DEFAULTS = UnifiedMap.newMap();
+		DEFAULTS = Maps.mutable.empty();
 		Default.DEFAULTS.put(Boolean.class, false);
 		Default.DEFAULTS.put(boolean.class, false);
 		Default.DEFAULTS.put(Character.class, '\u0000');
