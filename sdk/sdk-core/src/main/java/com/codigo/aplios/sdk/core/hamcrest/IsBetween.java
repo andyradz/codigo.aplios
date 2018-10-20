@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

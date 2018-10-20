@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.hamcrest;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

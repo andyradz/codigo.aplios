@@ -1,15 +1,15 @@
-package com.codigo.aplios.sdk.hamcrest;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Is the value a number between two numbers, bounds inclusive?
+ * Is the value a number between two numbers, upper bound included?
  *
  * @since version 0.1 for JDK7
  */
-public class IsBetweenInclusive<T extends Comparable<T>> extends TypeSafeMatcher<T> {
+public class IsBetweenUpperBoundInclusive<T extends Comparable<T>> extends TypeSafeMatcher<T> {
 
 	private final T from;
 	private final T to;
@@ -19,7 +19,7 @@ public class IsBetweenInclusive<T extends Comparable<T>> extends TypeSafeMatcher
 	 * null and <code>
 	 * from.compareTo(to)</code> must be negative.
 	 */
-	public IsBetweenInclusive(final T from, final T to) {
+	public IsBetweenUpperBoundInclusive(final T from, final T to) {
 
 		// checkNotNull(from);
 		// checkNotNull(to);
@@ -44,19 +44,25 @@ public class IsBetweenInclusive<T extends Comparable<T>> extends TypeSafeMatcher
 	 * <p>
 	 * 
 	 * <pre>
-	 * assertThat(10, betweenInclusive(10, 11))
+	 * assertThat(11, betweenUpperBoundInclusive(10, 11))
 	 * </pre>
 	 *
-	 * will return true.
+	 * will return true. while:
+	 *
+	 * <pre>
+	 * assertThat(10, betweenUpperBoundInclusive(10, 11))
+	 * </pre>
+	 *
+	 * will return false.
 	 */
-	public static <T extends Comparable<T>> Matcher<T> betweenInclusive(final T from, final T to) {
-		
-		return new IsBetweenInclusive<T>(from, to);
+	public static <T extends Comparable<T>> Matcher<T> betweenUpperBoundInclusive(final T from, final T to) {
+
+		return new IsBetweenUpperBoundInclusive<T>(from, to);
 	}
 
 	@Override
 	protected boolean matchesSafely(final T t) {
-		return (t.compareTo(from) >= 0) && (t.compareTo(to) <= 0);
+		return (t.compareTo(from) > 0) && (t.compareTo(to) <= 0);
 	}
 
 	@Override
@@ -64,18 +70,18 @@ public class IsBetweenInclusive<T extends Comparable<T>> extends TypeSafeMatcher
 		mismatchDescription.appendValue(item)
 				.appendText(" is not between ")
 				.appendValue(from)
-				.appendText(" and ")
+				.appendText(" excluded and ")
 				.appendValue(to)
-				.appendText(", both included");
+				.appendText(" included");
 	}
 
 	@Override
 	public void describeTo(final Description description) {
 		description.appendText("a value between ")
 				.appendValue(from)
-				.appendText(" and ")
+				.appendText(" excluded and ")
 				.appendValue(to)
-				.appendText(", both included");
+				.appendText(" included");
 	}
 
 }

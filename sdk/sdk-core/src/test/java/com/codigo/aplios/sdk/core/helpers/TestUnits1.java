@@ -16,6 +16,8 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
+import com.codigo.aplios.sdk.core.hamcrest.IsBetween;
+
 public class TestUnits1 {
 
 	// ...jednostki
@@ -256,7 +258,7 @@ public class TestUnits1 {
 		final Map<String, String> map = new HashMap<>();
 		try {
 			final InputStream input = TestUnits1.class.getClassLoader()
-					.getResourceAsStream("moneyinwords.properties");
+					.getResourceAsStream("moneyinwordsPL.properties");
 			final InputStreamReader reader = new InputStreamReader(
 				input, "UTF-8");
 
@@ -306,8 +308,7 @@ public class TestUnits1 {
 
 		long number = (long) value;
 		Math.round((value - (long) value) * 100);
-		while (number != 0) {
+		while (number != 0)
 			number /= 1E3;
-		}
 	}
 }
