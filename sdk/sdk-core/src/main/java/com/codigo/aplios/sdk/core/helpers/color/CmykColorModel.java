@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 public final class CmykColorModel {
 
@@ -21,8 +21,8 @@ public final class CmykColorModel {
 	}
 
 	private static final int	RGB_MASK_VALUE	= 255;
-	private static final int	CMYK_FACTOR		= 1;
-	private static final int	ONE_HUNDRED		= 100;
+	private static final double	CMYK_FACTOR		= 1.;
+	private static final double	ONE_HUNDRED		= 100.;
 
 	private final RgbColorModel rgbColorModel;
 
@@ -46,46 +46,95 @@ public final class CmykColorModel {
 	 *
 	 * @return Wartość składowej barwy BLACK
 	 */
-	private double getBlackValue() {
+	public double getBlackFactor() {
 
 		return CmykColorModel.CMYK_FACTOR - getMaxOfRgbValue();
 	}
 
 	private int getMaxOfRgbValue() {
 
-		return Math.max(this.rgbColorModel.getRedValue(),
-				Math.max(this.rgbColorModel.getGreenValue(), this.rgbColorModel.getBlueValue()));
+		final var red = this.rgbColorModel.getRedValue() / CmykColorModel.RGB_MASK_VALUE;
+		final var green = this.rgbColorModel.getGreenValue() / CmykColorModel.RGB_MASK_VALUE;
+		final var blue = this.rgbColorModel.getBlueValue() / CmykColorModel.RGB_MASK_VALUE;
+
+		return Math.max(red, Math.max(green, blue));
+	}
+
+	/**
+	 * Właściwość określa współczynnik wartość składowej CYAN w notacji CMYK
+	 *
+	 * @return Wartość składowej barwy CYAN
+	 */
+	public double getCyanFactor() {
+
+		final var black = getBlackFactor();
+		final var red = this.rgbColorModel.getRedValue() / CmykColorModel.RGB_MASK_VALUE;
+
+		return black != CmykColorModel.CMYK_FACTOR
+				? (CmykColorModel.CMYK_FACTOR - red - black) / (CmykColorModel.CMYK_FACTOR - black)
+				: 0.0;
 	}
 
 	public int getCyanColor() {
 
-		final var black = getBlackValue();
+		final var black = getBlackFactor();
 		final var red = this.rgbColorModel.getRedValue() / CmykColorModel.RGB_MASK_VALUE;
 
-		var cyan = (int) (CmykColorModel.CMYK_FACTOR - red - black) / (CmykColorModel.CMYK_FACTOR - black);
+		var cyan = (CmykColorModel.CMYK_FACTOR - red - black) / (CmykColorModel.CMYK_FACTOR - black);
 		cyan = Math.round(CmykColorModel.ONE_HUNDRED * cyan);
 		return (int) cyan;
 	}
 
-	public int getMagnetaColor() {
+	/**
+	 * Właściwość określa współczynnik wartość składowej MAGNETA w notacji CMYK
+	 *
+	 * @return Wartość składowej barwy MAGNETA
+	 */
+	public double getMagnetaFactor() {
 
-		final var black = getBlackValue();
+		final var black = getBlackFactor();
 		final var green = this.rgbColorModel.getGreenValue() / CmykColorModel.RGB_MASK_VALUE;
 
-		return (int) (black != CmykColorModel.CMYK_FACTOR
+		return black != CmykColorModel.CMYK_FACTOR
 				? (CmykColorModel.CMYK_FACTOR - green - black) / (CmykColorModel.CMYK_FACTOR - black)
-				: 0);
+				: 0.0;
+	}
+
+	public int getMagnetaColor() {
+
+		final var black = getBlackFactor();
+		final var green = this.rgbColorModel.getGreenValue() / CmykColorModel.RGB_MASK_VALUE;
+
+		var magneta = (CmykColorModel.CMYK_FACTOR - green - black) / (CmykColorModel.CMYK_FACTOR - black);
+		magneta = Math.round(CmykColorModel.ONE_HUNDRED * magneta);
+
+		return (int) magneta;
+	}
+
+	/**
+	 * Właściwość określa współczynnik wartość składowej YELLOW w notacji CMYK
+	 *
+	 * @return Wartość składowej barwy YELLOW
+	 */
+	public double getYellowFactor() {
+
+		final var black = getBlackFactor();
+		final var blue = this.rgbColorModel.getBlueValue() / CmykColorModel.RGB_MASK_VALUE;
+
+		return black != CmykColorModel.CMYK_FACTOR
+				? (CmykColorModel.CMYK_FACTOR - blue - black) / (CmykColorModel.CMYK_FACTOR - black)
+				: 0.0;
 	}
 
 	public int getYellowColor() {
 
-		final var black = (CmykColorModel.CMYK_FACTOR - getMaxOfRgbValue());
+		final var black = getBlackFactor();
 		final var blue = this.rgbColorModel.getBlueValue() / CmykColorModel.RGB_MASK_VALUE;
 
 		var yellow = (CmykColorModel.CMYK_FACTOR - blue - black) / (CmykColorModel.CMYK_FACTOR - black);
 		yellow = Math.round(CmykColorModel.ONE_HUNDRED * yellow);
 
-		return yellow;
+		return (int) yellow;
 	}
 
 	public int getBlackColor() {
@@ -93,7 +142,7 @@ public final class CmykColorModel {
 		var black = (CmykColorModel.CMYK_FACTOR - getMaxOfRgbValue()) / CmykColorModel.RGB_MASK_VALUE;
 		black = Math.round(CmykColorModel.ONE_HUNDRED * black);
 
-		return black;
+		return (int) black;
 	}
 
 	@Override

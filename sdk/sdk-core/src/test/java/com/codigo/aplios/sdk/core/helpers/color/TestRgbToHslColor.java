@@ -1,9 +1,11 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.codigo.aplios.sdk.core.helpers.color.ColorConverter;
 
 @DisplayName("Testy konwersji wartości barwy zapisanej w RGB na HSL")
 public class TestRgbToHslColor {
@@ -16,7 +18,7 @@ public class TestRgbToHslColor {
 		final var green = 255;
 		final var blue = 255;
 
-		final var converter = RgbToHslColorConverter.of(red, green, blue);
+		final var converter = ColorConverter.ofRgbToHsl(red, green, blue);
 
 		MatcherAssert.assertThat(converter.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(converter.getSaturation(), CoreMatchers.is(.0));
@@ -31,7 +33,7 @@ public class TestRgbToHslColor {
 		final var green = 0;
 		final var blue = 0;
 
-		final var converter = RgbToHslColorConverter.of(red, green, blue);
+		final var converter = ColorConverter.ofRgbToHsl(red, green, blue);
 
 		MatcherAssert.assertThat(converter.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(converter.getSaturation(), CoreMatchers.is(.0));
@@ -46,7 +48,7 @@ public class TestRgbToHslColor {
 		final var green = 255;
 		final var blue = 0;
 
-		final var converter = RgbToHslColorConverter.of(red, green, blue);
+		final var converter = ColorConverter.ofRgbToHsl(red, green, blue);
 
 		MatcherAssert.assertThat(converter.getHue(), CoreMatchers.is(120.0));
 		MatcherAssert.assertThat(converter.getSaturation(), CoreMatchers.is(100.0));
@@ -61,7 +63,7 @@ public class TestRgbToHslColor {
 		final var green = 0;
 		final var blue = 255;
 
-		final var converter = RgbToHslColorConverter.of(red, green, blue);
+		final var converter = ColorConverter.ofRgbToHsl(red, green, blue);
 
 		MatcherAssert.assertThat(converter.getHue(), CoreMatchers.is(240.0));
 		MatcherAssert.assertThat(converter.getSaturation(), CoreMatchers.is(100.0));
@@ -77,7 +79,7 @@ public class TestRgbToHslColor {
 		final var green = 0;
 		final var blue = 0;
 
-		final var converter = RgbToHslColorConverter.of(red, green, blue);
+		final var converter = ColorConverter.ofRgbToHsl(red, green, blue);
 
 		MatcherAssert.assertThat(converter.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(converter.getSaturation(), CoreMatchers.is(100.0));

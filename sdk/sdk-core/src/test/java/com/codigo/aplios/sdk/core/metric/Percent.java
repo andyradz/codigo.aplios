@@ -1,11 +1,14 @@
 package com.codigo.aplios.sdk.core.metric;
 
+import java.util.Objects;
+
 //TODO Procent z liczby
 //TODO Liczba z procentu
 //DONE: Zamiana procentu na ułamek
 //DONE: Zamiana ułamka na procent
 //TODO dodać jedną wspólną funkcje zaaokrągajaca
 //TODO: ddowanie mnożenie dzielenie odejmowanie procentów i porównywanie
+<<<<<<< HEAD
 //TODO: dodać metode equals
 //TODO: ddac metodę hashCode
 /**
@@ -25,11 +28,39 @@ public final class Percent {
 
 		pe = Percent.Operator.F2.compute(per, 99);
 		System.out.println(pe);
+=======
+public final class Percent {
+
+	/**
+	 * Metoda wyznacza procent z przekazanej wartości ułamkowej.
+	 *
+	 * @param number
+	 *        Wartość liczbowa odpowiadającą postaci ułamkowej procentu.
+	 * @return
+	 */
+	public static Percent fromDecimal(final double number) {
+
+		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
+		return new Percent(
+			val);
+>>>>>>> colors
 	}
 
-	// *----------------------------------------------------------------------------------------------------------------
+	/**
+	 * Metoda wyznacza procent z przekazanej liczby całkowitej.
+	 *
+	 * @param number
+	 *        Wartość liczbowa odpowiadającą postaci całkowitej procentu.
+	 * @return
+	 */
+	public static Percent fromNumber(final long number) {
 
-	public static enum Operator {
+		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
+		return new Percent(
+			val);
+	}
+
+	public enum Operator {
 
 		F1// liczy procent z liczby
 		{// TODO: zmienić nazwę operacji
@@ -50,39 +81,48 @@ public final class Percent {
 		public abstract double compute(Percent percent, double number);
 	}
 
-	// *----------------------------------------------------------------------------------------------------------------
+	/**
+	 * Wartość tekstowa określająca symbol procentu.
+	 */
+	private static final String PERCENT_SYMBOL = "%";
 
 	/**
-	 * Metoda wyznacza procent z przekazanej wartości ułamkowej.
-	 *
-	 * @param number
-	 *        Wartość liczbowa odpowiadającą postaci ułamkowej procentu.
-	 * @return
+	 * Wartość liczbowa określająca podzielnik procentowy
 	 */
+<<<<<<< HEAD
 	public static Percent fromDecimal(final double number) {
 
 		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
 		return new Percent(
 			val);
 	}
-
-	// *----------------------------------------------------------------------------------------------------------------
+=======
+	private static final double PERCENT_DIVIDER = 1E2;
+>>>>>>> colors
 
 	/**
-	 * Metoda wyznacza procent z przekazanej liczby całkowitej.
-	 *
-	 * @param number
-	 *        Wartość liczbowa odpowiadającą postaci całkowitej procentu.
-	 * @return
+	 * Wartość liczbowa określająca mnożnik procentowy
 	 */
+	private static final double PERCENT_MULTIPLER = 1E2;
+
+	/**
+	 * Atrybut numeryczny reprezentująca wartość procentową.
+	 */
+<<<<<<< HEAD
 	public static Percent fromNumber(final long number) {
 
 		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
 		return new Percent(
 			val);
 	}
+=======
+	private final double percent;
+>>>>>>> colors
 
-	// *----------------------------------------------------------------------------------------------------------------
+	/**
+	 * Atrybut numeryczny podstawy procentu.
+	 */
+	private final double number;
 
 	/**
 	 * Właściwość podaje wartość procentu
@@ -94,8 +134,6 @@ public final class Percent {
 		return this.percent;
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
-
 	/**
 	 * Właściwość podaje wartość podstawy procentu
 	 *
@@ -106,6 +144,7 @@ public final class Percent {
 		return this.number;
 	}
 
+<<<<<<< HEAD
 	// -----------------------------------------------------------------------------------------------------------------
 
 	/**
@@ -121,6 +160,8 @@ public final class Percent {
 
 	// -----------------------------------------------------------------------------------------------------------------
 
+=======
+>>>>>>> colors
 	/**
 	 * Metoda wykonuje zamianę wartości procentowej na ułamek.
 	 *
@@ -130,8 +171,6 @@ public final class Percent {
 
 		return (this.percent / Percent.PERCENT_DIVIDER);
 	}
-
-	// -----------------------------------------------------------------------------------------------------------------
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy. Konstruktor prywatny.
@@ -145,8 +184,6 @@ public final class Percent {
 		this.percent = evalute();
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
-
 	/**
 	 * Metoda wykonuje przeliczenie wartości numerycznej na reprezentacje procentową.
 	 *
@@ -157,40 +194,46 @@ public final class Percent {
 		return (this.number / Percent.PERCENT_DIVIDER);
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(this.number, this.percent);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(final Object obj) {
+
+		if (this == obj)
+			return true;
+
+		if (obj == null)
+			return false;
+
+		if (!(obj instanceof Percent))
+			return false;
+
+		final Percent other = (Percent) obj;
+		return (Double.doubleToLongBits(this.number) == Double.doubleToLongBits(other.number))
+				&& (Double.doubleToLongBits(this.percent) == Double.doubleToLongBits(other.percent));
+	}
 
 	/**
-	 * Wartość tekstowa określająca symbol procentu.
+	 * Metoda przekształca obiekt do postaci łańcucha znaków. (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
 	 */
-	public static final String SYMBOL = "%";
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * Wartość liczbowa określająca podzielnik procentowy
-	 */
-	private static final double PERCENT_DIVIDER = 1E2;
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * Wartość liczbowa określająca mnożnik procentowy
-	 */
-	private static final double PERCENT_MULTIPLER = 1E2;
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * Atrybut numeryczny reprezentująca wartość procentową.
-	 */
-	private final double percent;
-
-	// -----------------------------------------------------------------------------------------------------------------
-
-	/**
-	 * Atrybut numeryczny podstawy procentu.
-	 */
-	private final double number;
-
-	// -----------------------------------------------------------------------------------------------------------------
+	@Override
+	public String toString() {
+		return this.percent + " " + Percent.PERCENT_SYMBOL;
+	}
 }

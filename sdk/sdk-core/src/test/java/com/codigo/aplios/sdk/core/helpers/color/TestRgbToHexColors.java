@@ -1,9 +1,11 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.codigo.aplios.sdk.core.helpers.color.RgbToHexColorConverter;
 
 @DisplayName("Testy konwersji wartości barwy zapisanej w RGB na HEX")
 public class TestRgbToHexColors {

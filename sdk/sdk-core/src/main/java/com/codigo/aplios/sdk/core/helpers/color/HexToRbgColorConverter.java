@@ -1,14 +1,8 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import java.util.Objects;
 
 final class HexToRbgColorConverter {
-
-	public static HexToRbgColorConverter of(final String hexColorValue) {
-
-		return new HexToRbgColorConverter(
-			hexColorValue);
-	}
 
 	private static final int HEX_VALUE_LENGTH = 6;
 
@@ -24,7 +18,7 @@ final class HexToRbgColorConverter {
 	 *        Parametr wskazuje na wartość tekstową reprezentującą kolor w układzie RGB zapisanym w
 	 *        formacie szesnastkowym
 	 */
-	private HexToRbgColorConverter(final String hexColorValue) {
+	HexToRbgColorConverter(final String hexColorValue) {
 
 		Objects.requireNonNull(hexColorValue);
 
