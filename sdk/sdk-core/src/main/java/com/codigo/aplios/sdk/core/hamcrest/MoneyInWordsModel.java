@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.money;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 import java.util.function.Consumer;
 

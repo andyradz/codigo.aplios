@@ -8,17 +8,22 @@ package com.codigo.aplios.sdk.core.metric;
 //TODO: ddowanie mnożenie dzielenie odejmowanie procentów i porównywanie
 //TODO: dodać metode equals
 //TODO: ddac metodę hashCode
+/**
+ * @author andrzej.radziszewski
+ *
+ */
 public final class Percent {
 
 	public static void main(final String[] args) {
-		final Percent per = Percent.fromNumber(10);
+
+		final Percent per = Percent.fromNumber(99);
 		double pe = per.percentValue();
 		System.out.println(per);
 
-		pe = Percent.Operator.F1.compute(per, 10);
+		pe = Percent.Operator.F1.compute(per, 99);
 		System.out.println(pe);
 
-		pe = Percent.Operator.F2.compute(per, 10);
+		pe = Percent.Operator.F2.compute(per, 99);
 		System.out.println(pe);
 	}
 
@@ -30,6 +35,7 @@ public final class Percent {
 		{// TODO: zmienić nazwę operacji
 			@Override
 			public double compute(final Percent percent, final double number) {
+
 				return StrictMath.nextUp(number * percent.toDecimal());
 			}
 		},
@@ -37,6 +43,7 @@ public final class Percent {
 		{// TODO: zmienić nazwę operacji
 			@Override
 			public double compute(final Percent percent, final double number) {
+
 				return StrictMath.nextUp(number * percent.toDecimal() * Percent.PERCENT_MULTIPLER);
 			}
 		};
@@ -53,6 +60,7 @@ public final class Percent {
 	 * @return
 	 */
 	public static Percent fromDecimal(final double number) {
+
 		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
 		return new Percent(
 			val);
@@ -68,6 +76,7 @@ public final class Percent {
 	 * @return
 	 */
 	public static Percent fromNumber(final long number) {
+
 		final long val = StrictMath.round(number * Percent.PERCENT_MULTIPLER);
 		return new Percent(
 			val);
@@ -81,6 +90,7 @@ public final class Percent {
 	 * @return Wartość numeryczna z przecinkiem.
 	 */
 	public double percentValue() {
+
 		return this.percent;
 	}
 
@@ -92,6 +102,7 @@ public final class Percent {
 	 * @return Wartość numeryczna z przecinkiem
 	 */
 	public double numberValue() {
+
 		return this.number;
 	}
 
@@ -104,6 +115,7 @@ public final class Percent {
 	 */
 	@Override
 	public String toString() {
+
 		return this.percent + " " + Percent.SYMBOL;
 	}
 
@@ -115,6 +127,7 @@ public final class Percent {
 	 * @return Wartość liczbowa z przecinkiem.
 	 */
 	public double toDecimal() {
+
 		return (this.percent / Percent.PERCENT_DIVIDER);
 	}
 
@@ -127,6 +140,7 @@ public final class Percent {
 	 *        Wartość numeryczna, która zamieniana jest na procent.
 	 */
 	private Percent(final double number) {
+
 		this.number = number;
 		this.percent = evalute();
 	}
@@ -139,6 +153,7 @@ public final class Percent {
 	 * @return Wartość numeryczna z przecinkiem.
 	 */
 	private double evalute() {
+
 		return (this.number / Percent.PERCENT_DIVIDER);
 	}
 

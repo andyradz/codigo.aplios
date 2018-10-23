@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.hamcrest;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 import static java.lang.Math.min;
 

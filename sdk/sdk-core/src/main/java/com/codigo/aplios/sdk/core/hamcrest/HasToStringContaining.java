@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.hamcrest;
+package com.codigo.aplios.sdk.core.hamcrest;
 
 /**
  * Is the value a number between two numbers?
