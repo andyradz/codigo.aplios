@@ -1,9 +1,9 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import java.util.Objects;
 
 /**
- * Klasa reprezentuje wartości skłądowe model koloru zapisanego wnotacji RGB
+ * Klasa reprezentuje wartości składowe model koloru zapisanego w notacji RGB
  *
  * @author andrzej.radziszewski
  * @version 1.0.0.0
@@ -164,6 +164,7 @@ public final class RgbColorModel {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
+
 		if (this == obj)
 			return true;
 

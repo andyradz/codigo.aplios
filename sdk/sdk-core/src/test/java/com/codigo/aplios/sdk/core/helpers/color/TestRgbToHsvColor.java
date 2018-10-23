@@ -1,9 +1,11 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.codigo.aplios.sdk.core.helpers.color.ColorConverter;
 
 @DisplayName("Testy konwersji wartości barwy zapisanej w RGB na HSV")
 public final class TestRgbToHsvColor {
@@ -16,7 +18,7 @@ public final class TestRgbToHsvColor {
 		final var green = 255;
 		final var blue = 255;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(.0));
@@ -31,7 +33,7 @@ public final class TestRgbToHsvColor {
 		final var green = 0;
 		final var blue = 0;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(.0));
@@ -46,7 +48,7 @@ public final class TestRgbToHsvColor {
 		final var green = 0;
 		final var blue = 0;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(.0));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
@@ -61,7 +63,7 @@ public final class TestRgbToHsvColor {
 		final var green = 255;
 		final var blue = 0;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(120.));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
@@ -76,7 +78,7 @@ public final class TestRgbToHsvColor {
 		final var green = 0;
 		final var blue = 255;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(240.));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(100.));
@@ -91,7 +93,7 @@ public final class TestRgbToHsvColor {
 		final var green = 192;
 		final var blue = 203;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(350.));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(24.7));
@@ -106,7 +108,7 @@ public final class TestRgbToHsvColor {
 		final var green = 127;
 		final var blue = 80;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(16.));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(68.6));
@@ -121,7 +123,7 @@ public final class TestRgbToHsvColor {
 		final var green = 128;
 		final var blue = 155;
 
-		final var rgbToHsv = RgbToHsvColorConverter.of(red, green, blue);
+		final var rgbToHsv = ColorConverter.ofRgbToHsv(red, green, blue);
 
 		MatcherAssert.assertThat(rgbToHsv.getHue(), CoreMatchers.is(191.0));
 		MatcherAssert.assertThat(rgbToHsv.getSaturation(), CoreMatchers.is(93.5));

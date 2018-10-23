@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 /**
  * Klasa reprezentuje mechanizm konwertera modelu wartości koloru RGB na HSV
@@ -9,38 +9,6 @@ package com.codigo.aplios.sdk.core.helpers;
  * @category converter
  */
 public final class RgbToHsvColorConverter {
-
-	/**
-	 * Procedura fabrykująca instancję konwertera modelu kolory<code>RgbToHsvColorConverter</code> na
-	 * podstawie wartość składowych modelu RGB
-	 *
-	 * @param rgbColor
-	 *        Wartość koloru w modelu RGB
-	 * @return Instancja konwertera koloru RgbToHsvColorConverter
-	 */
-	public static RgbToHsvColorConverter of(final int rgbColor) {
-
-		return new RgbToHsvColorConverter(
-			rgbColor);
-	}
-
-	/**
-	 * Procedura fabrykująca instancję konwertera modelu kolory<code>RgbToHsvColorConverter</code> na
-	 * podstawie wartość składowych modelu RGB
-	 *
-	 * @param rgbRed
-	 *        Składowa barwy czerwonej modelu RGB
-	 * @param rgbGreen
-	 *        Składowa barwy zielonej modelu RGB
-	 * @param rgbBlue
-	 *        Składowa barwy niebieskiej modelu RGB
-	 * @return Instancja konwertera koloru RgbToHsvColorConverter
-	 */
-	public static RgbToHsvColorConverter of(final int rgbRed, final int rgbGreen, final int rgbBlue) {
-
-		return new RgbToHsvColorConverter(
-			rgbRed, rgbGreen, rgbBlue);
-	}
 
 	private static final int	RGB_MASK_VALUE	= 0xFF;
 	private static final int	SHIFT_BY_2BYTES	= 16;
@@ -59,7 +27,7 @@ public final class RgbToHsvColorConverter {
 	 *
 	 * @param rgbValue
 	 */
-	private RgbToHsvColorConverter(final int rgbValue) {
+	RgbToHsvColorConverter(final int rgbValue) {
 
 		this((rgbValue >> RgbToHsvColorConverter.SHIFT_BY_2BYTES) & RgbToHsvColorConverter.RGB_MASK_VALUE,
 				(rgbValue >> RgbToHsvColorConverter.SHIFT_BY_1BYTES) & RgbToHsvColorConverter.RGB_MASK_VALUE,
@@ -76,7 +44,7 @@ public final class RgbToHsvColorConverter {
 	 * @param blueValue
 	 *        Składowa barwy niebieskiej modelu RGB
 	 */
-	private RgbToHsvColorConverter(final int redValue, final int greenValue, final int blueValue) {
+	RgbToHsvColorConverter(final int redValue, final int greenValue, final int blueValue) {
 
 		if ((redValue < 0) && (redValue > RgbToHsvColorConverter.RGB_MASK_VALUE))
 			throw new IllegalArgumentException();

@@ -1,18 +1,6 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 public final class RgbToHslColorConverter {
-
-	public static RgbToHslColorConverter of(final int rgbColor) {
-
-		return new RgbToHslColorConverter(
-			rgbColor);
-	}
-
-	public static RgbToHslColorConverter of(final int rgbRed, final int rgbGreen, final int rgbBlue) {
-
-		return new RgbToHslColorConverter(
-			rgbRed, rgbGreen, rgbBlue);
-	}
 
 	private static final int	RGB_MASK_VALUE	= 0xFF;
 	private static final int	SHIFT_BY_2BYTES	= 16;
@@ -30,7 +18,7 @@ public final class RgbToHslColorConverter {
 	 *
 	 * @param rgbValue
 	 */
-	private RgbToHslColorConverter(final int rgbValue) {
+	RgbToHslColorConverter(final int rgbValue) {
 
 		this((rgbValue >> RgbToHslColorConverter.SHIFT_BY_2BYTES) & RgbToHslColorConverter.RGB_MASK_VALUE,
 				(rgbValue >> RgbToHslColorConverter.SHIFT_BY_1BYTES) & RgbToHslColorConverter.RGB_MASK_VALUE,
@@ -47,7 +35,7 @@ public final class RgbToHslColorConverter {
 	 * @param blueValue
 	 *        Parametr określa wartość składowej barwy BLUE w notacji RGB
 	 */
-	private RgbToHslColorConverter(final int redValue, final int greenValue, final int blueValue) {
+	RgbToHslColorConverter(final int redValue, final int greenValue, final int blueValue) {
 
 		if ((redValue < 0) && (redValue > RgbToHslColorConverter.RGB_MASK_VALUE))
 			throw new IllegalArgumentException();

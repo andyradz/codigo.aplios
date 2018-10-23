@@ -1,9 +1,11 @@
-package com.codigo.aplios.sdk.core.helpers;
+package com.codigo.aplios.sdk.core.helpers.color;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.codigo.aplios.sdk.core.helpers.color.ColorConverter;
 
 @DisplayName("Testy konwersji wartości barwy zapisanej w RBG na CMYK")
 public class TestRgbToCmykColors {
@@ -16,7 +18,7 @@ public class TestRgbToCmykColors {
 	public void shouldBeCmykWhiteColor() {
 
 		final var rgbWhite = 0xFF_FF_FF;
-		final var cmykWhite = RgbToCmykColorConverter.of(rgbWhite);
+		final var cmykWhite = ColorConverter.ofRgbToCmyk(rgbWhite);
 		System.out.println("while " + cmykWhite);
 
 		MatcherAssert.assertThat(cmykWhite.getCyanColor(), CoreMatchers.is(0));
@@ -24,10 +26,10 @@ public class TestRgbToCmykColors {
 		MatcherAssert.assertThat(cmykWhite.getYellowColor(), CoreMatchers.is(0));
 		MatcherAssert.assertThat(cmykWhite.getBlackColor(), CoreMatchers.is(0));
 
-		MatcherAssert.assertThat(cmykWhite.getCyanValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykWhite.getMagnetaValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykWhite.getYellowValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykWhite.getBlackValue(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykWhite.getCyanFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykWhite.getMagnetaFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykWhite.getYellowFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykWhite.getBlackFactor(), CoreMatchers.is(0.0));
 	}
 
 	@Test
@@ -35,7 +37,7 @@ public class TestRgbToCmykColors {
 	public void shouldBeCmykRedColor() {
 
 		final var rgbRed = 0xFF_00_00;
-		final var cmykRed = RgbToCmykColorConverter.of(rgbRed);
+		final var cmykRed = ColorConverter.ofRgbToCmyk(rgbRed);
 		System.out.println("red " + cmykRed);
 
 		MatcherAssert.assertThat(cmykRed.getCyanColor(), CoreMatchers.is(0));
@@ -43,10 +45,10 @@ public class TestRgbToCmykColors {
 		MatcherAssert.assertThat(cmykRed.getYellowColor(), CoreMatchers.is(100));
 		MatcherAssert.assertThat(cmykRed.getBlackColor(), CoreMatchers.is(0));
 
-		MatcherAssert.assertThat(cmykRed.getCyanValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykRed.getMagnetaValue(), CoreMatchers.is(1.0));
-		MatcherAssert.assertThat(cmykRed.getYellowValue(), CoreMatchers.is(1.0));
-		MatcherAssert.assertThat(cmykRed.getBlackValue(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykRed.getCyanFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykRed.getMagnetaFactor(), CoreMatchers.is(1.0));
+		MatcherAssert.assertThat(cmykRed.getYellowFactor(), CoreMatchers.is(1.0));
+		MatcherAssert.assertThat(cmykRed.getBlackFactor(), CoreMatchers.is(0.0));
 	}
 
 	@Test
@@ -54,7 +56,7 @@ public class TestRgbToCmykColors {
 	public void shouldBeCmykLimeColor() {
 
 		final var rgbLime = 0x00_FF_00;
-		final var cmykLime = RgbToCmykColorConverter.of(rgbLime);
+		final var cmykLime = ColorConverter.ofRgbToCmyk(rgbLime);
 		System.out.println("lime " + cmykLime);
 
 		MatcherAssert.assertThat(cmykLime.getCyanColor(), CoreMatchers.is(100));
@@ -62,10 +64,10 @@ public class TestRgbToCmykColors {
 		MatcherAssert.assertThat(cmykLime.getYellowColor(), CoreMatchers.is(100));
 		MatcherAssert.assertThat(cmykLime.getBlackColor(), CoreMatchers.is(0));
 
-		MatcherAssert.assertThat(cmykLime.getCyanValue(), CoreMatchers.is(1.0));
-		MatcherAssert.assertThat(cmykLime.getMagnetaValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykLime.getYellowValue(), CoreMatchers.is(1.0));
-		MatcherAssert.assertThat(cmykLime.getBlackValue(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykLime.getCyanFactor(), CoreMatchers.is(1.0));
+		MatcherAssert.assertThat(cmykLime.getMagnetaFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykLime.getYellowFactor(), CoreMatchers.is(1.0));
+		MatcherAssert.assertThat(cmykLime.getBlackFactor(), CoreMatchers.is(0.0));
 	}
 
 	@Test
@@ -73,7 +75,7 @@ public class TestRgbToCmykColors {
 	public void shouldBeCmykBlackColor() {
 
 		final var rgbBlack = 0x00_00_00;
-		final var cmykBlack = RgbToCmykColorConverter.of(rgbBlack);
+		final var cmykBlack = ColorConverter.ofRgbToCmyk(rgbBlack);
 		System.out.println("black " + cmykBlack);
 
 		MatcherAssert.assertThat(cmykBlack.getCyanColor(), CoreMatchers.is(0));
@@ -81,10 +83,10 @@ public class TestRgbToCmykColors {
 		MatcherAssert.assertThat(cmykBlack.getYellowColor(), CoreMatchers.is(0));
 		MatcherAssert.assertThat(cmykBlack.getBlackColor(), CoreMatchers.is(0));
 
-		MatcherAssert.assertThat(cmykBlack.getCyanValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykBlack.getMagnetaValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykBlack.getYellowValue(), CoreMatchers.is(0.0));
-		MatcherAssert.assertThat(cmykBlack.getBlackValue(), CoreMatchers.is(1.0));
+		MatcherAssert.assertThat(cmykBlack.getCyanFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykBlack.getMagnetaFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykBlack.getYellowFactor(), CoreMatchers.is(0.0));
+		MatcherAssert.assertThat(cmykBlack.getBlackFactor(), CoreMatchers.is(1.0));
 	}
 
 }
