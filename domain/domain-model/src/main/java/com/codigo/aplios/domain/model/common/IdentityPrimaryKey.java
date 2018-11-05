@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import com.codigo.aplios.domain.model.catalog.ColumnPosition;
 
@@ -15,7 +14,7 @@ public class IdentityPrimaryKey implements Serializable {
 
 	private static final long serialVersionUID = -1528223225651711166L;
 
-	@Id
+	// @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	@ColumnPosition(position = 0)
@@ -33,7 +32,7 @@ public class IdentityPrimaryKey implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 
 		return super.equals(obj); // To change body of generated methods, choose Tools | Templates.
 	}

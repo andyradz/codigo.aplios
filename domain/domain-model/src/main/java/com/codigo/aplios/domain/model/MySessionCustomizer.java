@@ -1,4 +1,4 @@
-package data.mapping;
+package com.codigo.aplios.domain.model;
 
 import org.eclipse.persistence.config.SessionCustomizer;
 import org.eclipse.persistence.sessions.DatabaseLogin;
@@ -11,11 +11,11 @@ public class MySessionCustomizer implements SessionCustomizer {
 	}
 
 	@Override
-	public void customize(Session session) throws Exception {
+	public void customize(final Session session) throws Exception {
 
-		DatabaseLogin login = (DatabaseLogin) session.getDatasourceLogin();
+		final DatabaseLogin login = (DatabaseLogin) session.getDatasourceLogin();
 		// enable 'dirty' reads
 		login.setTransactionIsolation(DatabaseLogin.TRANSACTION_READ_COMMITTED);
-		//<property name="orSessionCustomizerClassName">some.java.package.MyORSessionCustomizer</property>
+		// <property name="orSessionCustomizerClassName">some.java.package.MyORSessionCustomizer</property>
 	}
 }

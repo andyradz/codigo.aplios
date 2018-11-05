@@ -1,29 +1,38 @@
 package com.codigo.aplios.repository.core.specyfication;
 
-// abstract class AbstractSpecification<T> implements Specification<T> {
-//
-// @Override
-// public boolean isSatisfiedBy(T t) {
-//
-// throw new NotImplementedException();
-// }
-//
-// @Override
-// public Predicate toPredicate(Root<T> poll, CriteriaBuilder cb) {
-//
-// throw new NotImplementedException();
-// }
-//
-// @Override
-// public Specification<T> and(Specification<T> other) {
-//
-// return new AndSpecification<>(this, other);
-// }
-//
-// @Override
-// public Class<T> getType() {
-//
-// ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
-// return (Class<T>) type.getActualTypeArguments()[0];
-// }
-// }
+import java.lang.reflect.ParameterizedType;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+abstract class AbstractSpecification<T> implements Specification<T> {
+
+	@Override
+	public boolean isSatisfiedBy(final T t) {
+
+		return false;
+		// throw new NotImplementedException();
+	}
+
+	@Override
+	public Predicate toPredicate(final Root<T> poll, final CriteriaBuilder cb) {
+
+		return cb.conjunction();
+	}
+
+	@Override
+	public Specification<T> and(final Specification<T> other) {
+
+		return new AndSpecification<>(
+			this, other);
+	}
+
+	@Override
+	public Class<T> getType() {
+
+		final ParameterizedType type = (ParameterizedType) this.getClass()
+				.getGenericSuperclass();
+		return (Class<T>) type.getActualTypeArguments()[0];
+	}
+}

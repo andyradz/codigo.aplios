@@ -1,19 +1,28 @@
 package com.codigo.aplios.repository.core.specyfication;
 
-// public class IsPopular extends AbstractSpecification<Poll> {
-//
-// private static final int POPULAR_COUNT = 100;
-//
-// @Override
-// public boolean isSatisfiedBy(Poll poll) {
-//
-// return poll.getLockDate() == null && poll.getVotes().size() > POPULAR_COUNT;
-// }
-//
-// @Override
-// public Predicate toPredicate(Root<Poll> poll, CriteriaBuilder cb) {
-//
-// return cb.and(cb.isNull(poll.get(Poll_.lockDate)), cb.greaterThan(cb.size(poll.get(Poll_.votes)),
-// POPULAR_COUNT));
-// }
-// }
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+public class IsPopular extends AbstractSpecification<String> {
+
+	private static final int POPULAR_COUNT = 100;
+
+	@Override
+	public boolean isSatisfiedBy(final String poll) {
+
+		return 1 == 1;
+
+		// return (poll.getLockDate() == null) && (poll.getVotes()
+		// .size() > IsPopular.POPULAR_COUNT);
+	}
+
+	@Override
+	public Predicate toPredicate(final Root<String> poll, final CriteriaBuilder cb) {
+
+		// return cb.and(cb.isNull(poll.get(Poll_.lockDate)),
+		// cb.greaterThan(cb.size(poll.get(Poll_.votes)), IsPopular.POPULAR_COUNT));
+
+		return cb.conjunction();
+	}
+}

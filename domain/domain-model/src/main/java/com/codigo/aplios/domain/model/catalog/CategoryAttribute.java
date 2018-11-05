@@ -4,13 +4,14 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.codigo.aplios.domain.model.common.EntityModel;
 
-//@Entity
+@Entity
 @Table(name = "CategoryAttribute")
 // usage=CacheConcurrenceStarategy.
 public class CategoryAttribute extends EntityModel {

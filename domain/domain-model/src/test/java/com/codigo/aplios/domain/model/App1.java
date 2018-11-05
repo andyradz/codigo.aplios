@@ -10,8 +10,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.checkerframework.checker.index.qual.Positive;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.common.value.qual.ArrayLen;
 
 import com.codigo.aplios.domain.model.calendar.Calendar;
@@ -28,19 +26,13 @@ import com.codigo.aplios.domain.model.contacts.Address;
  * @author dp0470
  *
  */
-public class App {
+public class App1 {
 
 	// private static final Logger log = Logger.getLogger(App.class);
 
 	private static @Positive @ArrayLen(12) int[] data = { -1, -2 };
 
-	public static void testValue(@NonNull final String[] args) {
-
-	}
-
-	public static void main(@Nullable final String[] args) {
-
-		App.testValue(args);
+	public static void main(final String[] args) {
 
 		final EntityManagerFactory emf = Persistence.createEntityManagerFactory("shopdb");
 		final EntityManager em = emf.createEntityManager();

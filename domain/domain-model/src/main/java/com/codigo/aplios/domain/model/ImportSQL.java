@@ -1,4 +1,4 @@
-package data.mapping;
+package com.codigo.aplios.domain.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,29 +18,29 @@ import org.eclipse.persistence.sessions.UnitOfWork;
 
 public class ImportSQL implements SessionCustomizer {
 
-	private void importSql(UnitOfWork unitOfWork, String fileName) {
+	private void importSql(final UnitOfWork unitOfWork, final String fileName) {
 
 		// Open file
 		// Execute each line, e.g.,
-		Path path = Paths.get("src/main/resources/" + fileName);
+		final Path path = Paths.get("src/main/resources/" + fileName);
 		try (BufferedReader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"))) {
 
 			String currentLine = null;
-			while ((currentLine = reader.readLine()) != null) {
-
+			while ((currentLine = reader.readLine()) != null)
 				System.out.println(currentLine);
-				///unitOfWork.executeNonSelectingSQL(currentLine);
-			}
-		} catch (IOException ex) {
+			/// unitOfWork.executeNonSelectingSQL(currentLine);
+		}
+		catch (final IOException ex) {
 
 			ex.printStackTrace();
-		} finally {
-			//unitOfWork.commit();
+		}
+		finally {
+			// unitOfWork.commit();
 		}
 	}
 
 	@Override
-	public void customize(Session session) throws Exception {
+	public void customize(final Session session) throws Exception {
 
 		((AbstractSession) session).setIsConcurrent(true);
 
@@ -48,12 +48,12 @@ public class ImportSQL implements SessionCustomizer {
 				.addListener(new SessionEventAdapter() {
 
 					@Override
-					public void postAcquireClientSession(SessionEvent event) {
+					public void postAcquireClientSession(final SessionEvent event) {
 
-						String fileName = (String) event.getSession()
+						final String fileName = (String) event.getSession()
 								.getProperty("import.sql.file");
 
-						UnitOfWork unitOfWork = event.getSession()
+						final UnitOfWork unitOfWork = event.getSession()
 								.acquireUnitOfWork();
 						importSql(unitOfWork, fileName);
 						unitOfWork.commit();

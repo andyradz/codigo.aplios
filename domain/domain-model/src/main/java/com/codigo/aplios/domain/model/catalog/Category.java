@@ -1,19 +1,15 @@
 package com.codigo.aplios.domain.model.catalog;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.Customizer;
 
 import com.codigo.aplios.domain.model.locale.Dictionary;
 
-//@Entity
+@Entity
 @Table(name = "Category")
-// , uniqueConstraints = {
-// @UniqueConstraint(columnNames =
-// {
-// "",
-// "" }) })
 @Customizer(EntityColumnPositionCustomizer.class)
 public class Category extends Dictionary { // sownik
 
@@ -28,10 +24,12 @@ public class Category extends Dictionary { // sownik
 	private String alias;
 
 	public String getName() {
+
 		return this.name;
 	}
 
 	public void setName(final String name) {
+
 		this.name = name;
 	}
 

@@ -1,4 +1,5 @@
-package com.codigo.aplios.domain.model.contacts;
+package com.codigo.aplios.domain.model;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

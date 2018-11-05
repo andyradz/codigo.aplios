@@ -1,7 +1,9 @@
 package com.codigo.aplios.domain.model.contacts;
 
+//@XmlEnum()
 public enum AddressType {
 
+	// @XmlEnumValue(name = "Business")
 	BUSINESS("Adres bazowy firmy"),
 	ADMINISTRATIVE("Adres administracyjny siedziby"),
 	OTHER("Inny adres "),
