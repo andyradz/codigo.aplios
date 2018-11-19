@@ -23,7 +23,7 @@ public final class EnumOperator {
 	 *        Klasa typu wyliczeniowego
 	 * @return Kolekcja elementów klasy typu wyliczeniowego
 	 */
-	public static List<Enum<?>> getItems(final Class<? extends Enum<?>> type) {
+	public static List<? extends Enum<?>> getItems(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
 				.collect(Collectors.toList());
@@ -39,7 +39,7 @@ public final class EnumOperator {
 	public static List<String> getNames(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.name())
+				.map(Enum::name)
 				.collect(Collectors.toList());
 	}
 
@@ -53,7 +53,7 @@ public final class EnumOperator {
 	public static long getOrdinalSum(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.ordinal())
+				.map(Enum::ordinal)
 				.collect(Collectors.summingLong(item -> item));
 	}
 
@@ -67,7 +67,7 @@ public final class EnumOperator {
 	public static double getOrdinalAvg(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.ordinal())
+				.map(Enum::ordinal)
 				.collect(Collectors.averagingDouble(item -> item));
 	}
 
@@ -81,7 +81,7 @@ public final class EnumOperator {
 	public static long getOrdinalMul(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.ordinal())
+				.map(Enum::ordinal)
 				.reduce((sum, p) -> sum == 0L ? 1 : p * sum)
 				.orElse(-1);
 	}
@@ -96,7 +96,7 @@ public final class EnumOperator {
 	public static int getFirstOrdinal(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.ordinal())
+				.map(Enum::ordinal)
 				.reduce((a, b) -> a)
 				.orElse(-1);
 	}
@@ -126,7 +126,7 @@ public final class EnumOperator {
 	public static String getFirstName(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.name())
+				.map(Enum::name)
 				.reduce((a, b) -> a)
 				.orElse("");
 	}
@@ -141,7 +141,7 @@ public final class EnumOperator {
 	public static String getLastName(final Class<? extends Enum<?>> type) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.name())
+				.map(Enum::name)
 				.reduce((a, b) -> b)
 				.orElse("");
 	}
@@ -160,7 +160,7 @@ public final class EnumOperator {
 	public static boolean isExists(final Class<? extends Enum<?>> type, final String name) {
 
 		return Stream.of(type.getEnumConstants())
-				.map(item -> item.name())
+				.map(Enum::name)
 				.anyMatch(item -> item.equalsIgnoreCase(name));
 	}
 

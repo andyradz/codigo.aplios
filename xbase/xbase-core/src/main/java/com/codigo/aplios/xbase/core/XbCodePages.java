@@ -37,14 +37,17 @@ public enum XbCodePages {
 	 * Domyślne kodowanie
 	 */
 	ASCII(Charset.forName("ASCII"), 0x00),
+
 	/**
 	 * U.S. MS-DOS
 	 */
 	IBM437(Charset.forName("IBM437"), 0x01),
+
 	/**
 	 * International MS-DOS
 	 */
 	IBM850(Charset.forName("IBM850"), 0x02),
+
 	/**
 	 * Windows ANSI
 	 *
@@ -52,26 +55,32 @@ public enum XbCodePages {
 	 * http://www.esricanada.com/english/support/faqs/arcview/avfaq21.asp
 	 */
 	WIN1252(Charset.forName("WINDOWS-1252"), 0x03, 0x57, 0x59),
+
 	/**
 	 * Standard Macintosh
 	 */
 	MACROMAN(Charset.forName("MACROMAN"), 0x04),
+
 	/**
 	 * Eastern European MS-DOS
 	 */
 	IBM852(Charset.forName("IBM852"), 0x64),
+
 	/**
 	 * Russian MS-DOS
 	 */
 	IBM866(Charset.forName("IBM866"), 0x65),
+
 	/**
 	 * Nordic MS-DOS
 	 */
 	IBM865(Charset.forName("IBM865"), 0x66),
+
 	/**
 	 * Icelandic MS-DOS
 	 */
 	IBM861(Charset.forName("IBM861"), 0x67),
+
 	/**
 	 * Kamenicky (Czech) MS-DOS
 	 */
@@ -86,6 +95,7 @@ public enum XbCodePages {
 	 * Greek MS-DOS (437G)
 	 */
 	XIBM737(Charset.forName("X-IBM737"), 0x6A),
+
 	/**
 	 * Turkish MS-DOS
 	 */
@@ -94,54 +104,67 @@ public enum XbCodePages {
 	 * Chinese (Hong Kong SAR, Taiwan) Windows
 	 */
 	WIN950(Charset.forName("WINDOWS-950"), 0x78),
+
 	/**
 	 * Korean Windows
 	 */
 	WIN949(Charset.forName("WINDOWS-949"), 0x79),
+
 	/**
 	 * Chinese (PRC, Singapore) Windows
 	 */
 	WINGBK(Charset.forName("GBK"), 0x7A),
+
 	/**
 	 * Japanese Windows
 	 */
 	WIN932(Charset.forName("WINDOWS-932"), 0x7B),
+
 	/**
 	 * Thai Windows
 	 */
 	WIN874(Charset.forName("WINDOWS-874"), 0x7C),
+
 	/**
 	 * Hebrew Windows
 	 */
 	WIN1255(Charset.forName("WINDOWS-1255"), 0x7D),
+
 	/**
 	 * Arabic Windows
 	 */
 	WIN1256(Charset.forName("WINDOWS-1256"), 0x7E),
+
 	/**
 	 * Russian Macintosh
 	 */
 	XMACCYRILLIC(Charset.forName("X-MACCYRILLIC"), 0x96),
+
 	/**
 	 * Macintosh EE
 	 */
 	XMACCENTRALEUROPE(Charset.forName("X-MACCENTRALEUROPE"), 0x97),
+
 	/**
 	 * Greek Macintosh
 	 */
 	XMACGREEK(Charset.forName("X-MACGREEK"), 0x98),
+
 	/**
 	 * Eastern European Windows
 	 */
 	WIN1250(Charset.forName("WINDOWS-1250"), 0xC8),
+
 	/**
 	 * Russian Windows
 	 */
 	WIN1251(Charset.forName("WINDOWS-1251"), 0xC9),
+
 	/**
 	 * Turkish Windows
 	 */
 	WIN1254(Charset.forName("WINDOWS-1254"), 0xCA),
+
 	/**
 	 * Greek Windows
 	 */

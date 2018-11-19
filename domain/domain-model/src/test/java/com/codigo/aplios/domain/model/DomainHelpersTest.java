@@ -14,6 +14,7 @@ public class DomainHelpersTest {
 	private final boolean	expected;
 
 	public DomainHelpersTest(final String domain, final boolean expected) {
+
 		this.domain = domain;
 		this.expected = expected;
 	}

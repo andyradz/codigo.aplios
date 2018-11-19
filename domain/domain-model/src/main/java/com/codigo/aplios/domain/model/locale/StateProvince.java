@@ -2,58 +2,54 @@ package com.codigo.aplios.domain.model.locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 import org.eclipse.persistence.annotations.Index;
 
-@Entity
-@Table(name = "DIC_STATEPROVINCE")
-public class StateProvince
-        extends Dictionary {
+public class StateProvince extends Dictionary {
 
-    private static final long serialVersionUID = 1769688424311131951L;
+	private static final long serialVersionUID = 1769688424311131951L;
 
-    @Column(name = "NAME", nullable = false)
-    @Index(name = "STATE_NAME_INDEX", columnNames = {"NAME"})
-    private String name;
+	@Column(name = "NAME", nullable = false)
+	@Index(name = "STATE_NAME_INDEX", columnNames = { "NAME" })
+	private String name;
 
-    @Column(name = "ABBREVIATION")
-    private String abbreviation;
+	@Column(name = "ABBREVIATION")
+	private String abbreviation;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "ID")
-    private Country country;
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+	@JoinColumn(name = "ID")
+	private Country country;
 
-    public String getName() {
+	public String getName() {
 
-        return this.name;
-    }
+		return this.name;
+	}
 
-    public void setName(String name) {
+	public void setName(final String name) {
 
-        this.name = name;
-    }
+		this.name = name;
+	}
 
-    public String getAbbreviation() {
+	public String getAbbreviation() {
 
-        return this.abbreviation;
-    }
+		return this.abbreviation;
+	}
 
-    public void setAbbreviation(String abbreviation) {
+	public void setAbbreviation(final String abbreviation) {
 
-        this.abbreviation = abbreviation;
-    }
+		this.abbreviation = abbreviation;
+	}
 
-    public Country getCountry() {
+	public Country getCountry() {
 
-        return this.country;
-    }
+		return this.country;
+	}
 
-    public void setCountry(Country country) {
+	public void setCountry(final Country country) {
 
-        this.country = country;
-    }
+		this.country = country;
+	}
 
 }

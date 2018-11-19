@@ -1,6 +1,9 @@
 package com.codigo.aplios.domain.model.common;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +13,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKey;
@@ -24,29 +29,31 @@ import com.codigo.aplios.domain.model.contacts.Address;
 @Table(name = "Person")
 public class Person implements Serializable {
 
+	private static final long serialVersionUID = 1692455830103410589L;
+
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "Id")
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PERSON_ID")
+	@JoinColumn(name = "PersonId")
 	private Set<Address> addresses = new HashSet<>();
 
-	@Column(name = "NAME", length = 50, nullable = false)
+	@Column(name = "Name", length = 50, nullable = false)
 	private String name;
 
-	@Column(name = "MIDDLENAME", length = 50, nullable = true)
+	@Column(name = "MiddleName", length = 50, nullable = true)
 	private String middleName;
 
-	@Column(name = "SURENAME", length = 100, nullable = false)
+	@Column(name = "SureName", length = 100, nullable = false)
 	private String sureName;
 
-	@Column(name = "BIRTHDATE", nullable = false)
+	@Column(name = "BirthDate", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 
-	@Column(name = "BIRTHTIME", nullable = false)
+	@Column(name = "BirthTime", nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date birthTIme;
 
@@ -208,4 +215,11 @@ public class Person implements Serializable {
 		this.customerAttributes = customerAttributes;
 	}
 
+	public int getAge() {
+
+		final LocalDate date = LocalDate.ofInstant(this.birthDate.toInstant(), ZoneId.systemDefault());
+
+		return Period.between(date, LocalDate.now())
+				.getYears();
+	}
 }

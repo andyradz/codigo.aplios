@@ -6,6 +6,6 @@ import javax.persistence.criteria.Root;
 
 public interface PredicateBuilder<T> {
 
-    Predicate build(CriteriaBuilder criteriaBuilder, Root<T> root);
+	Predicate build(CriteriaBuilder criteriaBuilder, Root<T> root);
 
 }

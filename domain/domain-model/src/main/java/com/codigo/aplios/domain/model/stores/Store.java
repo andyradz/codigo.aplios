@@ -5,80 +5,255 @@
  */
 package com.codigo.aplios.domain.model.stores;
 
-import com.codigo.aplios.domain.model.catalog.ColumnPosition;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.codigo.aplios.domain.model.common.EntityModel;
+import com.codigo.aplios.domain.model.contacts.Address;
+import com.codigo.aplios.domain.model.locale.Currency;
 
 /**
  *
  * @author andrzej.radziszewski
  */
-@Entity
-@Table(name = "Store")
-public class Store
-        extends com.codigo.aplios.domain.model.locale.Dictionary {
+// @Entity
+// @Table(name = "Store")
+// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region="blStandardElements")
+// @SQLDelete(sql="UPDATE BLC_STORE SET ARCHIVED = 'Y' WHERE STORE_ID = ?")
+// @Inheritance(strategy = InheritanceType.JOINED)
+public class Store extends EntityModel implements IStore {
 
-    private static final long serialVersionUID = 1182919069421994037L;
+	private static final long serialVersionUID = -2193687439440549282L;
 
-    @ColumnPosition(position = 1)
-    @Column(name = "Name", length = 400, unique = true, nullable = false)
-    private String name;
+	@Column(name = "Name", nullable = false)
+	protected String name;
 
-    @ColumnPosition(position = 2)
-    @Column(name = "Url", length = 400, nullable = false)
-    private String url;
+	@Column(name = "Number")
+	protected String number;
 
-    @ColumnPosition(position = 3)
-    @Column(name = "ContentDeliveryNetwork", length = 400, nullable = true)
-    private String contentDeliveryNetwork;
+	@Column(name = "Open")
+	protected Boolean open;
 
-    @ColumnPosition(position = 4)
-    @Column(name = "SecureUrl", length = 400, nullable = true)
-    private String secureUrl;
+	@Column(name = "Hours")
+	protected String hours;
 
-    @ColumnPosition(position = 5)
-    @Column(name = "Hosts", length = 1000, nullable = true)
-    private String hosts;
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Address.class)
+	@JoinColumn(name = "AddressId")
+	protected Address address;
 
-    public String getName() {
-        return this.name;
-    }
+	@Column(name = "Latitude")
+	protected Double latitude;
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+	@Column(name = "Longitude")
+	protected Double longitude;
 
-    public String getUrl() {
-        return this.url;
-    }
+	@Column(name = "Description")
+	protected String description;
 
-    public void setUrl(final String url) {
-        this.url = url;
-    }
+	@Column(name = "PrimaryStoreCurrency")
+	private Currency primaryStoreCurrency;
 
-    public String getContentDeliveryNetwork() {
-        return this.contentDeliveryNetwork;
-    }
+	@Column(name = "PrimaryExchangeRateCurrency")
+	private Currency primaryExchangeRateCurrency;
 
-    public void setContentDeliveryNetwork(final String contentDeliveryNetwork) {
-        this.contentDeliveryNetwork = contentDeliveryNetwork;
-    }
+	// @Embedded
+	// protected ArchiveStatus archiveStatus = new ArchiveStatus();
 
-    public String getSecureUrl() {
-        return this.secureUrl;
-    }
+	@Override
+	public String getName() {
 
-    public void setSecureUrl(final String secureUrl) {
-        this.secureUrl = secureUrl;
-    }
+		return this.name;
+	}
 
-    public String getHosts() {
-        return this.hosts;
-    }
+	@Override
+	public void setName(final String name) {
 
-    public void setHosts(final String hosts) {
-        this.hosts = hosts;
-    }
+		this.name = name;
+	}
+
+	@Override
+	public Address getAddress() {
+
+		return this.address;
+	}
+
+	@Override
+	public void setAddress(final Address address) {
+
+		this.address = address;
+	}
+
+	@Override
+	public Double getLongitude() {
+
+		return this.longitude;
+	}
+
+	@Override
+	public void setLongitude(final Double longitude) {
+
+		this.longitude = longitude;
+	}
+
+	@Override
+	public Double getLatitude() {
+
+		return this.latitude;
+	}
+
+	@Override
+	public void setLatitude(final Double latitude) {
+
+		this.latitude = latitude;
+	}
+
+	@Override
+	public String getStoreNumber() {
+
+		return this.number;
+	}
+
+	@Override
+	public void setStoreNumber(final String storeNumber) {
+
+		this.number = storeNumber;
+	}
+
+	@Override
+	public Boolean getOpen() {
+
+		return this.open;
+	}
+
+	@Override
+	public void setOpen(final Boolean open) {
+
+		this.open = open;
+	}
+
+	@Override
+	public String getStoreHours() {
+
+		return this.hours;
+	}
+
+	@Override
+	public void setStoreHours(final String storeHours) {
+
+		this.hours = storeHours;
+	}
+
+	// @Override
+	// public Character getArchived() {
+	//
+	// ArchiveStatus temp;
+	// if (archiveStatus == null) {
+	// temp = new ArchiveStatus();
+	// } else {
+	// temp = archiveStatus;
+	// }
+	// return temp.getArchived();
+	// }
+
+	// @Override
+	// public void setArchived(Character archived) {
+	//
+	// if (archiveStatus == null) {
+	// archiveStatus = new ArchiveStatus();
+	// }
+	// archiveStatus.setArchived(archived);
+	// }
+
+	// @Override
+	// public boolean isActive() {
+	//
+	// return 'Y' != getArchived();
+	// }
+
+	public static class Presentation {
+
+		public static class Tab {
+			public static class Name {
+				public static final String Advanced = "StoreImpl_Advanced_Tab";
+
+			}
+
+			public static class Order {
+				public static final int Advanced = 7000;
+			}
+		}
+
+		public static class Group {
+			public static class Name {
+				public static final String	General		= "General";
+				public static final String	Location	= "StoreImpl_Store_Location";
+				public static final String	Geocoding	= "StoreImpl_Store_Geocoding";
+			}
+
+			public static class Order {
+				public static final int	General		= 1000;
+				public static final int	Location	= 2000;
+				public static final int	Geocoding	= 3000;
+			}
+		}
+
+		public static class FieldOrder {
+			public static final int	NAME		= 1000;
+			public static final int	LATITUDE	= 9000;
+			public static final int	LONGITUDE	= 10000;
+		}
+	}
+
+	@Override
+	public String getDescription() {
+
+		return this.description;
+	}
+
+	@Override
+	public void setDescription(final String description) {
+
+		this.description = description;
+	}
+
+	/**
+	 * @return the primaryStoreCurrency
+	 */
+	@Override
+	public Currency getPrimaryStoreCurrency() {
+
+		return this.primaryStoreCurrency;
+	}
+
+	/**
+	 * @param primaryStoreCurrency
+	 *        the primaryStoreCurrency to set
+	 */
+	@Override
+	public void setPrimaryStoreCurrency(final Currency primaryStoreCurrency) {
+
+		this.primaryStoreCurrency = primaryStoreCurrency;
+	}
+
+	/**
+	 * @return the primaryExchangeRateCurrency
+	 */
+	@Override
+	public Currency getPrimaryExchangeRateCurrency() {
+
+		return this.primaryExchangeRateCurrency;
+	}
+
+	/**
+	 * @param primaryExchangeRateCurrency
+	 *        the primaryExchangeRateCurrency to set
+	 */
+	@Override
+	public void setPrimaryExchangeRateCurrency(final Currency primaryExchangeRateCurrency) {
+
+		this.primaryExchangeRateCurrency = primaryExchangeRateCurrency;
+	}
 
 }

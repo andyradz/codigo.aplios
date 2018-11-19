@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
 //@AssociationOverrides({
 //  @AssociationOverride(name = "location",
@@ -23,8 +24,8 @@ import javax.persistence.MappedSuperclass;
 @Entity
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-// @Table(name = "Customer")
-public abstract class Customer {
+@Table(name = "Customer")
+public class Customer {
 
 	@Id
 	@Column(name = "Id")

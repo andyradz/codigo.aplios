@@ -13,10 +13,12 @@ public abstract class Domain<PK extends Serializable> implements Serializable {
 	private Long version;
 
 	public Domain(final PK id, final Long version) {
+
 		this.version = version;
 	}
 
 	public Domain() {
+
 	}
 
 	public abstract PK getId();
