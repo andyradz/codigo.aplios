@@ -103,6 +103,7 @@ public class GarbageCollectionConcurrentMap<K, V> {
 		final ConcurrentMap<K, V>	map;
 
 		GarbageReference(final Object referent, final K key, final V value, final ConcurrentMap<K, V> map) {
+
 			super(referent, GarbageCollectionConcurrentMap.referenceQueue);
 			this.key = key;
 			this.value = value;
@@ -116,6 +117,7 @@ public class GarbageCollectionConcurrentMap<K, V> {
 	 */
 	static class CleanupThread extends Thread {
 		CleanupThread() {
+
 			setPriority(Thread.MAX_PRIORITY);
 			setName("GarbageCollectingConcurrentMap-cleanupthread");
 			setDaemon(true);

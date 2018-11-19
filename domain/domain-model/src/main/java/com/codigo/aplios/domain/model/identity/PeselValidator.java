@@ -1,11 +1,12 @@
 package com.codigo.aplios.domain.model.identity;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.eclipse.collections.impl.factory.Maps;
 
 /**
  * Klasa realizuje mechanizm validacji numeru Pesel. Implementuje domyślny model validacji standardu
@@ -18,7 +19,7 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class PeselValidator implements ConstraintValidator<PeselCheck, PeselIdentity> {
 
-	private final byte[] peselIdentity = new byte[11];
+	private final byte[] peselIdentity;
 
 	/**
 	 * Podstawowy konstruktor obiektu.
@@ -36,6 +37,8 @@ public class PeselValidator implements ConstraintValidator<PeselCheck, PeselIden
 				.length() != 11)
 			throw new IllegalArgumentException();
 
+		this.peselIdentity = new byte[11];
+
 		int arrIndex = 0;
 		for (final String item : peselIdentity.pesel()
 				.split(""))
@@ -45,7 +48,8 @@ public class PeselValidator implements ConstraintValidator<PeselCheck, PeselIden
 	@Override
 	public void initialize(final PeselCheck constraintAnnotation) {
 
-		final Map<String, Object> elements = new HashMap<>();
+		final Map<String, Object> elements = Maps.mutable.empty();
+
 		elements.put("message", constraintAnnotation.message());
 		elements.put("payload", constraintAnnotation.payload());
 		elements.put("groups", constraintAnnotation.groups());

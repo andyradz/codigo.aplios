@@ -61,6 +61,7 @@ public final class ArrayIterator<E> implements ArrayIterable<E>, Iterable<E> {
 	 */
 
 	ArrayIterator(final E[] array, final int count) {
+
 		this(array, ArrayIterable.ZERO_BASED_INDEX, count - 1);
 	}
 
@@ -191,6 +192,7 @@ public final class ArrayIterator<E> implements ArrayIterable<E>, Iterable<E> {
 	 */
 	@Override
 	public int getCountFromRange() {
+
 		return (this.lastIndex - this.beginIndex) + 1;
 	}
 
@@ -201,6 +203,7 @@ public final class ArrayIterator<E> implements ArrayIterable<E>, Iterable<E> {
 	 */
 	@Override
 	public int hashCode() {
+
 		final int prime = 31;
 		int result = 1;
 		result = (prime * result) + Arrays.hashCode(this.array);

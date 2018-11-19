@@ -1,111 +1,115 @@
 package com.codigo.aplios.domain.model.contacts;
 
-import com.codigo.aplios.domain.model.catalog.ColumnPosition;
-import com.codigo.aplios.domain.model.catalog.EntityColumnPositionCustomizer;
-import com.codigo.aplios.domain.model.common.EntityModel;
 import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+
 import org.eclipse.persistence.annotations.Customizer;
+
+import com.codigo.aplios.domain.model.catalog.ColumnPosition;
+import com.codigo.aplios.domain.model.catalog.EntityColumnPositionCustomizer;
+import com.codigo.aplios.domain.model.common.EntityModel;
 
 @Entity
 @Table(name = "Phone")
 @Customizer(EntityColumnPositionCustomizer.class)
-public class Phone
-        extends EntityModel {
+public class Phone extends EntityModel {
 
-    private static final long serialVersionUID = 6282306950384374334L;
+	private static final long serialVersionUID = 6282306950384374334L;
 
-    @ColumnPosition(position = 1)
-    @Column(name = "CountryCode")
-    private String countryCode;
+	@ColumnPosition(position = 1)
+	@Column(name = "CountryCode")
+	private String countryCode;
 
-    @ColumnPosition(position = 2)
-    @Column(name = "Extension")
-    private String extension;
+	@ColumnPosition(position = 2)
+	@Column(name = "Extension")
+	private String extension;
 
-    @ColumnPosition(position = 3)
-    @Column(name = "PhoneNumber", nullable = false)
-    private String phoneNumber;
+	@ColumnPosition(position = 3)
+	@Column(name = "PhoneNumber", nullable = false)
+	private String phoneNumber;
 
-    @ColumnPosition(position = 4)
-    @Enumerated(EnumType.STRING)
-    @Column(name = "PhoneType")
-    private PhoneType phoneType;
+	@ColumnPosition(position = 4)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "PhoneType")
+	private PhoneType phoneType;
 
-    @ColumnPosition(position = 5)
-    @Column(name = "IsDefault")
-    private boolean isDefault;
+	@ColumnPosition(position = 5)
+	@Column(name = "IsDefault")
+	private boolean isDefault;
 
-    @ColumnPosition(position = 6)
-    @Column(name = "IsActive")
-    private boolean isActive;
+	@ColumnPosition(position = 6)
+	@Column(name = "IsActive")
+	private boolean isActive;
 
-    public String getCountryCode() {
+	public String getCountryCode() {
 
-        return this.countryCode;
-    }
+		return this.countryCode;
+	}
 
-    public void setCountryCode(final String countryCode) {
+	public void setCountryCode(final String countryCode) {
 
-        this.countryCode = countryCode;
-    }
+		this.countryCode = countryCode;
+	}
 
-    public String getPhoneNumber() {
+	public String getPhoneNumber() {
 
-        return this.phoneNumber;
-    }
+		return this.phoneNumber;
+	}
 
-    public void setPhoneNumber(final String phoneNumber) {
+	public void setPhoneNumber(final String phoneNumber) {
 
-        this.phoneNumber = phoneNumber;
-    }
+		this.phoneNumber = phoneNumber;
+	}
 
-    public PhoneType getPhoneType() {
-        return this.phoneType;
-    }
+	public PhoneType getPhoneType() {
 
-    public void setPhoneType(final PhoneType phoneType) {
-        this.phoneType = phoneType;
-    }
+		return this.phoneType;
+	}
 
-    public String getExtension() {
+	public void setPhoneType(final PhoneType phoneType) {
 
-        return this.extension;
-    }
+		this.phoneType = phoneType;
+	}
 
-    public void setExtension(final String extension) {
+	public String getExtension() {
 
-        this.extension = extension;
-    }
+		return this.extension;
+	}
 
-    public boolean isDefault() {
+	public void setExtension(final String extension) {
 
-        return this.isDefault;
-    }
+		this.extension = extension;
+	}
 
-    public void setDefault(final boolean isDefault) {
+	public boolean isDefault() {
 
-        this.isDefault = isDefault;
-    }
+		return this.isDefault;
+	}
 
-    public boolean isActive() {
+	public void setDefault(final boolean isDefault) {
 
-        return this.isActive;
-    }
+		this.isDefault = isDefault;
+	}
 
-    public void setActive(final boolean isActive) {
+	public boolean isActive() {
 
-        this.isActive = isActive;
-    }
+		return this.isActive;
+	}
 
-    @Override
-    public int hashCode() {
+	public void setActive(final boolean isActive) {
 
-        return Objects.hash(this.isActive, this.isDefault, this.countryCode, this.phoneNumber, this.extension);
-    }
+		this.isActive = isActive;
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(this.isActive, this.isDefault, this.countryCode, this.phoneNumber, this.extension);
+	}
 
 }

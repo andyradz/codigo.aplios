@@ -8,17 +8,19 @@ package com.codigo.aplios.domain.model.catalog.product;
  */
 public enum ProductType {
 
-    /**
-     * Simple product
-     */
-    SIMPLE_PRODUCT,
-    /**
-     * Grouped product
-     */
-    GROUPED_PRODUCT,
-    /**
-     * Bundled product
-     */
-    BundledProduct;
+	/**
+	 * Simple product
+	 */
+	SIMPLE_PRODUCT,
+
+	/**
+	 * Grouped product
+	 */
+	GROUPED_PRODUCT,
+
+	/**
+	 * Bundled product
+	 */
+	BUNDLED_PRODUCT;
 
 }

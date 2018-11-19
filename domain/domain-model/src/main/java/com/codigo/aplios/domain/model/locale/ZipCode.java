@@ -10,79 +10,107 @@ import org.eclipse.persistence.annotations.Index;
 
 import com.codigo.aplios.domain.model.common.EntityModel;
 
+// TODO: dodać jeszcze powiat,gmina, województwo
+
 @Entity
-@Table(name = "BLC_ZIP_CODE")
-public class ZipCode extends EntityModel implements Serializable {
+@Table(name = "ZipCode")
+public class ZipCode extends EntityModel implements Serializable, IZipCode {
 
 	private static final long serialVersionUID = 4072853729370151441L;
 
-	@Column(name = "ZIPCODE", insertable = false, updatable = false)
-	private String zipCode;
+	@Column(name = "Code", insertable = false, updatable = false)
+	@Index(name = "ZIPCODE_ZIP_INDEX", columnNames = { "Code" })
+	private Integer zipcode;
 
-	@Column(name = "ZIPSTATE", insertable = false, updatable = false)
+	@Column(name = "State", insertable = false, updatable = false)
+	@Index(name = "ZIPCODE_STATE_INDEX", columnNames = { "State" })
 	private String zipState;
 
-	@Column(name = "ZIPCITY")
+	@Column(name = "City")
+	@Index(name = "ZIPCODE_CITY_INDEX", columnNames = { "City" })
 	private String zipCity;
 
-	// długośc geograficzna
-	@Column(name = "ZIP_LONGITUDE")
-	@Index(name = "ZIPCODE_LONGITUDE_INDEX", columnNames = { "ZIP_LONGITUDE" })
+	@Column(name = "Longitude")
+	@Index(name = "ZIPCODE_LONGITUDE_INDEX", columnNames = { "Longitude" })
 	private double zipLongitude;
 
-	// szerokość geograficzna
-	@Column(name = "ZIP_LATITUDE")
-	@Index(name = "ZIPCODE_LATITUDE_INDEX", columnNames = { "ZIP_LATITUDE" })
+	@Column(name = "Latitude")
+	@Index(name = "ZIPCODE_LATITUDE_INDEX", columnNames = { "Latitude" })
 	private double zipLatitude;
 
-	public String getZipCode() {
+	@Column(name = "Street")
+	@Index(name = "ZIPCODE_STREET_INDEX", columnNames = { "Street" })
+	private String street;
 
-		return this.zipCode;
+	@Override
+	public Integer getZipcode() {
+
+		return this.zipcode;
 	}
 
-	public void setZipCode(final String zipCode) {
+	@Override
+	public void setZipcode(final Integer zipcode) {
 
-		this.zipCode = zipCode;
+		this.zipcode = zipcode;
 	}
 
+	@Override
 	public String getZipState() {
 
 		return this.zipState;
 	}
 
+	@Override
 	public void setZipState(final String zipState) {
 
 		this.zipState = zipState;
 	}
 
+	@Override
 	public String getZipCity() {
 
 		return this.zipCity;
 	}
 
+	@Override
 	public void setZipCity(final String zipCity) {
 
 		this.zipCity = zipCity;
 	}
 
+	@Override
 	public double getZipLongitude() {
 
 		return this.zipLongitude;
 	}
 
+	@Override
 	public void setZipLongitude(final double zipLongitude) {
 
 		this.zipLongitude = zipLongitude;
 	}
 
+	@Override
 	public double getZipLatitude() {
 
 		return this.zipLatitude;
 	}
 
+	@Override
 	public void setZipLatitude(final double zipLatitude) {
 
 		this.zipLatitude = zipLatitude;
 	}
 
+	@Override
+	public String getZipStreet() {
+
+		return this.street;
+	}
+
+	@Override
+	public void setZipStreet(final String zipStreet) {
+
+		this.street = zipStreet;
+	}
 }

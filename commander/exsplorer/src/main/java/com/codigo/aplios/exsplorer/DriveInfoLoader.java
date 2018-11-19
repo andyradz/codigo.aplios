@@ -9,58 +9,60 @@ import java.util.stream.Stream;
  *
  * @author andrzej.radziszewski
  */
-public class DriveInfoLoader
-        implements IFileCommand {
+public class DriveInfoLoader implements IFileCommand {
 
-    public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-        DriveInfoLoader d = new DriveInfoLoader();
-        d.execute();
-    }
+		final DriveInfoLoader d = new DriveInfoLoader();
+		d.execute();
+	}
 
-    // TODO: daoać odcztwanie w innym wątku aby przerwać
-    private final List<IDriveInfo> driveInfo;
+	// TODO: daoać odcztwanie w innym wątku aby przerwać
+	private final List<IDriveInfo> driveInfo;
 
-    // dodać filtry
-    public DriveInfoLoader() {
+	// dodać filtry
+	public DriveInfoLoader() {
 
-        this.driveInfo = new ArrayList<>();
-    }
+		this.driveInfo = new ArrayList<>();
+	}
 
-    @Override
-    public void execute() {
+	@Override
+	public void execute() {
 
-        this.process();
-    }
+		process();
+	}
 
-    @Override
-    public void cancel() {
+	@Override
+	public void cancel() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public void restart() {
+	@Override
+	public void restart() {
 
-        this.driveInfo.clear();
-    }
+		this.driveInfo.clear();
+	}
 
-    @Override
-    public void result() {
+	@Override
+	public void result() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    private void process() {
+	private void process() {
 
-        File[] drives = File.listRoots();
-        Stream.of(drives)
-                .forEach(drive -> {
-                    // todo tutaj automatyczna wstrzykiwanie implementacji obiektu
-                    this.driveInfo.add(new DriveInfo(drive));
-                });
-    }
+		final File[] drives = File.listRoots();
+		Stream.of(drives)
+				.forEach(drive -> {
+					// todo tutaj automatyczna wstrzykiwanie implementacji obiektu
+					this.driveInfo.add(new DriveInfo(
+						drive));
+				});
+	}
 
 }

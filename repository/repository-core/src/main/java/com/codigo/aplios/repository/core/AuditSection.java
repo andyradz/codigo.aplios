@@ -2,59 +2,60 @@ package com.codigo.aplios.repository.core;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Embeddable
-public class AuditSection
-        implements Serializable {
+public class AuditSection implements Serializable {
 
-    private static final long serialVersionUID = -1934446958975060889L;
+	private static final long serialVersionUID = -1934446958975060889L;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DATE_CREATED")
-    private Date dateCreated;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_CREATED")
+	private Date dateCreated;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DATE_MODIFIED")
-    private Date dateModified;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_MODIFIED")
+	private Date dateModified;
 
-    @Column(name = "UPDT_ID", length = 20)
-    private String modifiedBy;
+	@Column(name = "UPDT_ID", length = 20)
+	private String modifiedBy;
 
-    public AuditSection() {
-    }
+	public AuditSection() {
 
-    public Date getDateCreated() {
+	}
 
-        return dateCreated;
-    }
+	public Date getDateCreated() {
 
-    public void setDateCreated(Date dateCreated) {
+		return this.dateCreated;
+	}
 
-        this.dateCreated = dateCreated;
-    }
+	public void setDateCreated(final Date dateCreated) {
 
-    public Date getDateModified() {
+		this.dateCreated = dateCreated;
+	}
 
-        return dateModified;
-    }
+	public Date getDateModified() {
 
-    public void setDateModified(Date dateModified) {
+		return this.dateModified;
+	}
 
-        this.dateModified = dateModified;
-    }
+	public void setDateModified(final Date dateModified) {
 
-    public String getModifiedBy() {
+		this.dateModified = dateModified;
+	}
 
-        return modifiedBy;
-    }
+	public String getModifiedBy() {
 
-    public void setModifiedBy(String modifiedBy) {
+		return this.modifiedBy;
+	}
 
-        this.modifiedBy = modifiedBy;
-    }
+	public void setModifiedBy(final String modifiedBy) {
+
+		this.modifiedBy = modifiedBy;
+	}
 
 }

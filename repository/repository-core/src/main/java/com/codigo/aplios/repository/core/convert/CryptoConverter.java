@@ -2,36 +2,43 @@ package com.codigo.aplios.repository.core.convert;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class CryptoConverter
-        implements AttributeConverter<String, String> {
+public class CryptoConverter implements AttributeConverter<String, String> {
 
-    @Override
-    public String convertToDatabaseColumn(String ccNumber) {
+	@Override
+	public String convertToDatabaseColumn(final String ccNumber) {
 
-        try {
-            byte[] encodedBytes = new byte[1024];
-            encodedBytes = Base64.getDecoder().decode(ccNumber.getBytes("UTF-8"));
+		try {
+			final byte[] encodedBytes = Base64.getDecoder()
+					.decode(ccNumber.getBytes("UTF-8"));
 
-            return new String(encodedBytes);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+			return new String(
+				encodedBytes);
+		}
+		catch (final UnsupportedEncodingException e) {
+			throw new RuntimeException(
+				e);
+		}
+	}
 
-    @Override
-    public String convertToEntityAttribute(String dbData) {
+	@Override
+	public String convertToEntityAttribute(final String dbData) {
 
-        try {
+		try {
 
-            byte[] encodedBytes = Base64.getEncoder().encode(dbData.getBytes("UTF-8"));
-            return new String(encodedBytes);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+			final byte[] encodedBytes = Base64.getEncoder()
+					.encode(dbData.getBytes("UTF-8"));
+			return new String(
+				encodedBytes);
+		}
+		catch (final UnsupportedEncodingException e) {
+			throw new RuntimeException(
+				e);
+		}
+	}
 
 }

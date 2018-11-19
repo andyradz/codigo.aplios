@@ -10,17 +10,24 @@ package com.codigo.aplios.domain.model.contacts;
  */
 public enum PhoneType {
 
-    /**
-     * Numer telefonu domowego
-     */
-    HOME_PHONE,
-    /**
-     * Numer telefonu służbowego
-     */
-    WORK_PHONE,
-    /**
-     * Numer telefonu osobistego
-     */
-    PERSONAL_PHONE;
+	/**
+	 * Numer telefonu domowego
+	 */
+	HOME_PHONE,
+
+	/**
+	 * Numer telefonu służbowego
+	 */
+	WORK_PHONE,
+
+	/**
+	 * Numer telefonu osobistego
+	 */
+	PERSONAL_PHONE,
+
+	/**
+	 * Numer telefonu komórkowego
+	 */
+	MOBILE_PHONE;
 
 }

@@ -36,7 +36,7 @@ public class EnumHelperTests {
 	@Test
 	public void sholudReturnEightEnumItems() {
 
-		final List<Enum<?>> items = EnumOperator.getItems(Empty.class);
+		final List<? extends Enum<?>> items = EnumOperator.getItems(Empty.class);
 		Assertions.assertEquals(EnumHelperTests.Empty.values().length, items.size());
 	}
 
@@ -57,7 +57,7 @@ public class EnumHelperTests {
 	@Test
 	public void sholudReturnZeroEnumItems() {
 
-		final List<Enum<?>> items = EnumOperator.getItems(Empty.class);
+		final List<? extends Enum<?>> items = EnumOperator.getItems(Empty.class);
 		Assertions.assertEquals(EnumHelperTests.Empty.values().length, items.size());
 	}
 

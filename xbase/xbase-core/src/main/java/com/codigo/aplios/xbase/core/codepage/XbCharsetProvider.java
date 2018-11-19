@@ -29,51 +29,51 @@ public final class XbCharsetProvider extends CharsetProvider {
 	 */
 	private enum XbCharsets {
 
-	/**
-	 * ISO 8859-2 lub bardziej formalnie ISO/IEC 8859-2, również znane jako ISO Latin-2, bądź
-	 * "środkowo–" i "wschodnioeuropejskie", jest drugą częścią standardu kodowania znaków
-	 * zdefiniowanego przez organizację ISO. Składa się ze 191 znaków łacińskiego pisma, z czego każdy
-	 * jest zapisywany przy pomocy ośmiu bitów. Na jego podstawie została utworzona Polska Norma
-	 * (PN-T-42118:1993) opisująca kodowanie polskich liter diakrytyzowanych w kodach 8 bitowych.
-	 */
-	LATIN2("LATIN2", "CP-852", "852"),
-	/**
-	 * Sposób kodowania koduje wyłącznie cyfry.
-	 */
-	ROT5("ROT5"),
-	/**
-	 * ROT13 – prosty szyfr przesuwający, którego działanie polega na zamianie każdego znaku alfabetu
-	 * łacińskiego na znak występujący 13 pozycji po nim, przy czym wielkość liter nie ma przy
-	 * przekształcaniu znaczenia. ROT13 jest przykładem szyfru Cezara, opracowanego w Starożytnym
-	 * Rzymie.
-	 */
-	ROT13("ROT13"),
-	/**
-	 * ROT47 – kodowanie przesuwające, zamieniające każdy znak ASCII z przedziału 33-126 na znak
-	 * znajdujący się 47 pozycji dalej, ale nie dalej niż do 126 pozycji. Podobnie jak ROT13 jest on
-	 * samoodwracalny.
-	 */
-	ROT47("ROT47"),
-	/**
-	 * Mazovia – 8-bitowe kodowanie znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
-	 * kompatybilnych. Powstało na potrzeby projektowanego polskiego komputera klasy IBM PC o nazwie
-	 * handlowej Mazovia. Z inicjatywy Andrzeja Gecowa otrzymało ono od 1.IX.1992 status Normy
-	 * Zakładowej ZN-92 Przetwarzanie informacji. Zestaw znaków graficznych w jednobajtowym kodzie
-	 * 8-bitowym — tzw. kod MAZOVIA w Spółce Akcyjnej „Mikrokomputery”[1].
-	 */
-	MAZOVIA("MAZOVIA", "CP-896", "CP-896", "CP-620", "CP-620", "CP790", "CP-790"),
-	/**
-	 * kodowanie 8-bitowe znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
-	 * kompatybilnych. Zostało stworzone przez braci Kamenickich z Czechosłowacji, by umożliwić
-	 * stosowanie czeskich i słowackich liter na komputerach osobistych. Mimo wejścia na rynek systemu
-	 * operacyjnego MS-DOS w wersji 5.0, posiadającego natywną obsługę języków Europy Środkowej (w
-	 * postaci strony kodowej CP852), a następnie Windows 3.x (używającego strony kodowej CP1250),
-	 * kodowanie Kamenický dalej było powszechnie stosowane. Dopiero od czasu rozpowszechnienia się
-	 * systemów operacyjnych Windows 95 i Windows NT 4.0, wykorzystujących kodowanie Windows-1250 i (w
-	 * różnym stopniu) unikod, znaczenie tego kodowania zaczęło bardzo szybko maleć, choć wciąż można
-	 * spotkać aplikacje wykorzystujące to kodowanie.
-	 */
-	KAMENICKY("KAMENICKY", "437", "895");
+		/**
+		 * ISO 8859-2 lub bardziej formalnie ISO/IEC 8859-2, również znane jako ISO Latin-2, bądź
+		 * "środkowo–" i "wschodnioeuropejskie", jest drugą częścią standardu kodowania znaków
+		 * zdefiniowanego przez organizację ISO. Składa się ze 191 znaków łacińskiego pisma, z czego każdy
+		 * jest zapisywany przy pomocy ośmiu bitów. Na jego podstawie została utworzona Polska Norma
+		 * (PN-T-42118:1993) opisująca kodowanie polskich liter diakrytyzowanych w kodach 8 bitowych.
+		 */
+		LATIN2("LATIN2", "CP-852", "852"),
+		/**
+		 * Sposób kodowania koduje wyłącznie cyfry.
+		 */
+		ROT5("ROT5"),
+		/**
+		 * ROT13 – prosty szyfr przesuwający, którego działanie polega na zamianie każdego znaku alfabetu
+		 * łacińskiego na znak występujący 13 pozycji po nim, przy czym wielkość liter nie ma przy
+		 * przekształcaniu znaczenia. ROT13 jest przykładem szyfru Cezara, opracowanego w Starożytnym
+		 * Rzymie.
+		 */
+		ROT13("ROT13"),
+		/**
+		 * ROT47 – kodowanie przesuwające, zamieniające każdy znak ASCII z przedziału 33-126 na znak
+		 * znajdujący się 47 pozycji dalej, ale nie dalej niż do 126 pozycji. Podobnie jak ROT13 jest on
+		 * samoodwracalny.
+		 */
+		ROT47("ROT47"),
+		/**
+		 * Mazovia – 8-bitowe kodowanie znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
+		 * kompatybilnych. Powstało na potrzeby projektowanego polskiego komputera klasy IBM PC o nazwie
+		 * handlowej Mazovia. Z inicjatywy Andrzeja Gecowa otrzymało ono od 1.IX.1992 status Normy
+		 * Zakładowej ZN-92 Przetwarzanie informacji. Zestaw znaków graficznych w jednobajtowym kodzie
+		 * 8-bitowym — tzw. kod MAZOVIA w Spółce Akcyjnej „Mikrokomputery”[1].
+		 */
+		MAZOVIA("MAZOVIA", "CP-896", "CP-896", "CP-620", "CP-620", "CP790", "CP-790"),
+		/**
+		 * kodowanie 8-bitowe znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
+		 * kompatybilnych. Zostało stworzone przez braci Kamenickich z Czechosłowacji, by umożliwić
+		 * stosowanie czeskich i słowackich liter na komputerach osobistych. Mimo wejścia na rynek systemu
+		 * operacyjnego MS-DOS w wersji 5.0, posiadającego natywną obsługę języków Europy Środkowej (w
+		 * postaci strony kodowej CP852), a następnie Windows 3.x (używającego strony kodowej CP1250),
+		 * kodowanie Kamenický dalej było powszechnie stosowane. Dopiero od czasu rozpowszechnienia się
+		 * systemów operacyjnych Windows 95 i Windows NT 4.0, wykorzystujących kodowanie Windows-1250 i (w
+		 * różnym stopniu) unikod, znaczenie tego kodowania zaczęło bardzo szybko maleć, choć wciąż można
+		 * spotkać aplikacje wykorzystujące to kodowanie.
+		 */
+		KAMENICKY("KAMENICKY", "437", "895");
 
 		/**
 		 * Atrybut reprezentuje aliasy nazw dla standardu kodowanych znaków

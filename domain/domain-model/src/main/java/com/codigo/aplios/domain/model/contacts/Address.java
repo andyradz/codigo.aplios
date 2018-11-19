@@ -214,6 +214,23 @@ public class Address extends EntityModel {
 	}
 
 	/**
+	 * @return the county
+	 */
+	public String getCounty() {
+
+		return this.county;
+	}
+
+	/**
+	 * @param county
+	 *        the county to set
+	 */
+	public void setCounty(final String county) {
+
+		this.county = county;
+	}
+
+	/**
 	 * @param postName
 	 *        the postName to set
 	 */

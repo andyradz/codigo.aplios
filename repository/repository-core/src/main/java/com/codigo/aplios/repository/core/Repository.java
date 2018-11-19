@@ -1,6 +1,5 @@
 package com.codigo.aplios.repository.core;
 
-import com.codigo.aplios.domain.model.common.EntityModel;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,106 +10,109 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.codigo.aplios.domain.model.common.EntityModel;
+
 public interface Repository<T extends EntityModel> {
 
-    default Optional<T> get(Integer key) {
+	default Optional<T> get(final Integer key) {
 
-        return this.get().
-                stream().
-                filter(entity -> entity.getId().
-                        equals(key)).
-                findAny();
-    }
+		return this.get()
+				.stream()
+				.filter(entity -> entity.getId()
+						.equals(key))
+				.findAny();
+	}
 
-    default Optional<T> get(int key) {
+	default Optional<T> get(final int key) {
 
-        return this.get().
-                stream().
-                filter(entity -> entity.getId().
-                        equals(Integer.valueOf(key))).
-                findAny();
-    }
+		return this.get()
+				.stream()
+				.filter(entity -> entity.getId()
+						.equals(Integer.valueOf(key)))
+				.findAny();
+	}
 
-    default Set<T> get(Predicate<T> predicate) {
+	default Set<T> get(final Predicate<T> predicate) {
 
-        return this.get().
-                stream().
-                filter(predicate).
-                collect(Collectors.toSet());
-    }
+		return this.get()
+				.stream()
+				.filter(predicate)
+				.collect(Collectors.toSet());
+	}
 
-    Set<T> get();
+	Set<T> get();
 
-    void save(T entity);
+	void save(T entity);
 
-    default void persist(T... entities) {
+	default void persist(final T... entities) {
 
-        this.persist(Arrays.asList(entities));
-    }
+		this.persist(Arrays.asList(entities));
+	}
 
-    default void persist(Collection<T> entities) {
+	default void persist(final Collection<T> entities) {
 
-        entities.forEach(this::save);
-    }
+		entities.forEach(this::save);
+	}
 
-    void merge(T entity);
+	void merge(T entity);
 
-    default void merge(T... entities) {
+	default void merge(final T... entities) {
 
-        this.update(Arrays.asList(entities));
-    }
+		this.update(Arrays.asList(entities));
+	}
 
-    default void update(Collection<T> entities) {
+	default void update(final Collection<T> entities) {
 
-        entities.forEach(this::merge);
-    }
+		entities.forEach(this::merge);
+	}
 
-    void remove(T entity);
+	void remove(T entity);
 
-    default void remove(Iterator<T> entities) {
+	default void remove(final Iterator<T> entities) {
 
-        entities.forEachRemaining(this::remove);
-    }
+		entities.forEachRemaining(this::remove);
+	}
 
-    default void remove(Integer keyId) {
+	default void remove(final Integer keyId) {
 
-        this.remove(entity -> entity.getId().
-                equals(keyId));
-    }
+		this.remove(entity -> entity.getId()
+				.equals(keyId));
+	}
 
-    default void remove(Predicate<T> predicate) {
+	default void remove(final Predicate<T> predicate) {
 
-        this.get().
-                forEach(this::remove);
-    }
+		this.get()
+				.forEach(this::remove);
+	}
 
-    default void remove(Collection<T> entities) {
+	default void remove(final Collection<T> entities) {
 
-        entities.forEach(this::remove);
-    }
+		entities.forEach(this::remove);
+	}
 
-    default void delete(final T... entities) {
+	default void delete(final T... entities) {
 
-        this.remove(Arrays.asList(entities));
-    }
+		this.remove(Arrays.asList(entities));
+	}
 
-    default long count() {
+	default long count() {
 
-        return this.get().
-                stream().
-                count();
-    }
+		return this.get()
+				.stream()
+				.count();
+	}
 
-    default Long countAsync() throws InterruptedException, ExecutionException {
+	default Long countAsync() throws InterruptedException, ExecutionException {
 
-        CompletableFuture<Long> completableFuture = CompletableFuture.supplyAsync(() -> this.get().
-                stream().
-                count());
-        return completableFuture.get();
-    }
+		final CompletableFuture<Long> completableFuture = CompletableFuture.supplyAsync(() -> this.get()
+				.stream()
+				.count());
 
-    long removeAll();
+		return completableFuture.get();
+	}
 
-    boolean isAutoCommit();
+	long removeAll();
+
+	boolean isAutoCommit();
 
 }
