@@ -1,10 +1,7 @@
-package com.codigo.aplios.sdk.controls.calendar;
+package com.codigo.aplios.gui.control.calendar;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -12,7 +9,7 @@ public class FXCalendarCell {
 
 	/**
 	 * AbstractCell
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
@@ -38,14 +35,14 @@ public class FXCalendarCell {
 		 */
 		public Text getTxt() {
 
-			return txt;
+			return this.txt;
 		}
 
 		/**
 		 * @param txt
-		 *            the txt to set
+		 *        the txt to set
 		 */
-		public void setTxt(Text txt) {
+		public void setTxt(final Text txt) {
 
 			this.txt = txt;
 		}
@@ -54,19 +51,19 @@ public class FXCalendarCell {
 
 	/**
 	 * DateCell
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class DateCell extends AbstractCell {
 
-		private SimpleIntegerProperty cellDate = new SimpleIntegerProperty();
-		private SimpleIntegerProperty cellMonth = new SimpleIntegerProperty();
-		private SimpleIntegerProperty cellYear = new SimpleIntegerProperty();
-		private boolean previousState = false;
-		private boolean weekNumCell = false;
+		private final SimpleIntegerProperty	cellDate		= new SimpleIntegerProperty();
+		private final SimpleIntegerProperty	cellMonth		= new SimpleIntegerProperty();
+		private final SimpleIntegerProperty	cellYear		= new SimpleIntegerProperty();
+		private boolean						previousState	= false;
+		private boolean						weekNumCell		= false;
 
-		public DateCell(String id, double width, double height) {
+		public DateCell(final String id, final double width, final double height) {
 
 			super();
 			setCellId(id);
@@ -75,60 +72,49 @@ public class FXCalendarCell {
 			getStyleClass().add("fx-calendar-basic-datecell");
 
 			super.txt = new Text();
-			txt.getStyleClass()
+			this.txt.getStyleClass()
 					.add("fx-calendar-datetext");
-			getChildren().add(txt);
+			getChildren().add(this.txt);
 
-			setOnMouseEntered(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent arg0) {
+			setOnMouseEntered(arg0 -> {
 
-					previousState = txt.isDisable();
-					txt.setDisable(false);
-				}
+				DateCell.this.previousState = DateCell.this.txt.isDisable();
+				DateCell.this.txt.setDisable(false);
 			});
 
-			setOnMouseExited(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent arg0) {
-
-					txt.setDisable(previousState);
-				}
-			});
+			setOnMouseExited(arg0 -> DateCell.this.txt.setDisable(DateCell.this.previousState));
 			// Disabling the cell and clearing the text if the date is below 01/01/01.
-			cellYearProperty().addListener(new InvalidationListener() {
-				@Override
-				public void invalidated(Observable paramObservable) {
+			cellYearProperty().addListener((InvalidationListener) paramObservable -> {
 
-					if (getCellYear() < 1) {
-						txt.setText("");
-						DateCell.this.setDisable(true);
-					} else {
-						DateCell.this.setDisable(false);
-					}
+				if (getCellYear() < 1) {
+					DateCell.this.txt.setText("");
+					DateCell.this.setDisable(true);
 				}
+				else
+					DateCell.this.setDisable(false);
 			});
 		}
 
 		@Override
-		public void setCellId(String id) {
+		public void setCellId(final String id) {
 
 			super.setId(id);
 		}
 
 		@Override
-		public void setCellWidth(double width) {
+		public void setCellWidth(final double width) {
 
 			super.setPrefWidth(width);
 		}
 
 		@Override
-		public void setCellHeight(double height) {
+		public void setCellHeight(final double height) {
 
 			super.setPrefHeight(height);
 		}
 
-		public void setCellStyle(String styleClass) {
+		@Override
+		public void setCellStyle(final String styleClass) {
 
 			getStyleClass().add(styleClass);
 		}
@@ -138,7 +124,7 @@ public class FXCalendarCell {
 		 */
 		public SimpleIntegerProperty cellDateProperty() {
 
-			return cellDate;
+			return this.cellDate;
 		}
 
 		/**
@@ -146,14 +132,14 @@ public class FXCalendarCell {
 		 */
 		public Integer getCellDate() {
 
-			return cellDate.getValue();
+			return this.cellDate.getValue();
 		}
 
 		/**
 		 * @param cellDate
-		 *            the cellDate to set
+		 *        the cellDate to set
 		 */
-		public void setCellDate(Integer cellDate) {
+		public void setCellDate(final Integer cellDate) {
 
 			this.cellDate.set(cellDate);
 		}
@@ -163,7 +149,7 @@ public class FXCalendarCell {
 		 */
 		public SimpleIntegerProperty cellMonthProperty() {
 
-			return cellMonth;
+			return this.cellMonth;
 		}
 
 		/**
@@ -171,14 +157,14 @@ public class FXCalendarCell {
 		 */
 		public Integer getCellMonth() {
 
-			return cellMonth.getValue();
+			return this.cellMonth.getValue();
 		}
 
 		/**
 		 * @param cellMonth
-		 *            the cellMonth to set
+		 *        the cellMonth to set
 		 */
-		public void setCellMonth(Integer cellMonth) {
+		public void setCellMonth(final Integer cellMonth) {
 
 			this.cellMonth.set(cellMonth);
 		}
@@ -188,7 +174,7 @@ public class FXCalendarCell {
 		 */
 		public SimpleIntegerProperty cellYearProperty() {
 
-			return cellYear;
+			return this.cellYear;
 		}
 
 		/**
@@ -196,14 +182,14 @@ public class FXCalendarCell {
 		 */
 		public Integer getCellYear() {
 
-			return cellYear.getValue();
+			return this.cellYear.getValue();
 		}
 
 		/**
 		 * @param cellYear
-		 *            the cellYear to set
+		 *        the cellYear to set
 		 */
-		public void setCellYear(Integer cellYear) {
+		public void setCellYear(final Integer cellYear) {
 
 			this.cellYear.set(cellYear);
 		}
@@ -213,19 +199,19 @@ public class FXCalendarCell {
 		 */
 		public boolean isWeekNumCell() {
 
-			return weekNumCell;
+			return this.weekNumCell;
 		}
 
 		/**
 		 * @param weekNumCell
-		 *            the weekNumCell to set
+		 *        the weekNumCell to set
 		 */
-		public void setWeekNumCell(boolean weekNumCell) {
+		public void setWeekNumCell(final boolean weekNumCell) {
 
 			this.weekNumCell = weekNumCell;
 		}
 
-		public void setCellFocused(boolean b) {
+		public void setCellFocused(final boolean b) {
 
 			super.setFocused(b);
 		}
@@ -238,49 +224,51 @@ public class FXCalendarCell {
 
 	/**
 	 * WeekCell
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class WeekCell extends AbstractCell {
 
-		public WeekCell(String id, String content, double width, double height) {
+		public WeekCell(final String id, final String content, final double width, final double height) {
 
 			super();
 			setCellId(id);
 			setCellWidth(width - 1);
 			setCellHeight(height);
 
-			super.txt = new Text(content);
-			txt.getStyleClass()
+			super.txt = new Text(
+				content);
+			this.txt.getStyleClass()
 					.add("fx-calendar-weektext");
-			getChildren().add(txt);
+			getChildren().add(this.txt);
 		}
 
-		public void setContent(String str) {
+		public void setContent(final String str) {
 
 			super.txt.setText(str);
 		}
 
 		@Override
-		public void setCellId(String id) {
+		public void setCellId(final String id) {
 
 			super.setId(id);
 		}
 
 		@Override
-		public void setCellWidth(double width) {
+		public void setCellWidth(final double width) {
 
 			super.setPrefWidth(width);
 		}
 
 		@Override
-		public void setCellHeight(double height) {
+		public void setCellHeight(final double height) {
 
 			super.setPrefHeight(height);
 		}
 
-		public void setCellStyle(String styleClass) {
+		@Override
+		public void setCellStyle(final String styleClass) {
 
 			getStyleClass().add(styleClass);
 		}

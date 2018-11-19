@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.controls.spinner;
+package com.codigo.aplios.gui.control.spinner;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -7,7 +7,6 @@ import java.text.ParseException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
@@ -20,22 +19,22 @@ import javafx.scene.control.TextField;
  */
 public class NumberTextField extends TextField {
 
-	private final NumberFormat nf;
-	private ObjectProperty<BigDecimal> number = new SimpleObjectProperty<>();
+	private final NumberFormat					nf;
+	private final ObjectProperty<BigDecimal>	number	= new SimpleObjectProperty<>();
 
 	public final BigDecimal getNumber() {
-		
-		return number.get();
+
+		return this.number.get();
 	}
 
-	public final void setNumber(BigDecimal value) {
+	public final void setNumber(final BigDecimal value) {
 
-		number.set(value);
+		this.number.set(value);
 	}
 
 	public ObjectProperty<BigDecimal> numberProperty() {
 
-		return number;
+		return this.number;
 	}
 
 	public NumberTextField() {
@@ -43,17 +42,17 @@ public class NumberTextField extends TextField {
 		this(BigDecimal.ZERO);
 	}
 
-	public NumberTextField(BigDecimal value) {
+	public NumberTextField(final BigDecimal value) {
 
 		this(value, NumberFormat.getInstance());
 		initHandlers();
 	}
 
-	public NumberTextField(BigDecimal value, NumberFormat nf) {
+	public NumberTextField(final BigDecimal value, final NumberFormat nf) {
 
 		super();
 		this.nf = nf;
-		this.setEditable(false);
+		setEditable(false);
 		initHandlers();
 		setNumber(value);
 	}
@@ -65,27 +64,15 @@ public class NumberTextField extends TextField {
 		// try to parse when focus is lost or RETURN is hit
 		setOnAction(handler);
 
-		focusedProperty().addListener(new ChangeListener<Boolean>() {
+		focusedProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-				if (!newValue.booleanValue()) {
-					parseAndFormatInput();
-				}
-			}
+			if (!newValue.booleanValue())
+				parseAndFormatInput();
 		});
 
 		// Set text in field if BigDecimal property is changed from outside.
-		numberProperty().addListener(new ChangeListener<BigDecimal>() {
-
-			@Override
-			public void changed(ObservableValue<? extends BigDecimal> obserable, BigDecimal oldValue,
-					BigDecimal newValue) {
-
-				setText(nf.format(newValue));
-			}
-		});
+		numberProperty().addListener((ChangeListener<BigDecimal>) (obserable, oldValue,
+				newValue) -> setText(NumberTextField.this.nf.format(newValue)));
 	}
 
 	/**
@@ -94,20 +81,22 @@ public class NumberTextField extends TextField {
 	private void parseAndFormatInput() {
 
 		try {
-			
+
 			final String input = getText();
-			
-			if (input == null || input.length() == 0) 
+
+			if ((input == null) || (input.length() == 0))
 				return;
-						
-			Number parsedNumber = nf.parse(input);
-			BigDecimal newValue = new BigDecimal(parsedNumber.toString());
+
+			final Number parsedNumber = this.nf.parse(input);
+			final BigDecimal newValue = new BigDecimal(
+				parsedNumber.toString());
 			setNumber(newValue);
 			selectAll();
-			
-		} catch (ParseException ex) {
+
+		}
+		catch (final ParseException ex) {
 			// If parsing fails keep old number
-			setText(nf.format(number.get()));
+			setText(this.nf.format(this.number.get()));
 		}
 	}
 }

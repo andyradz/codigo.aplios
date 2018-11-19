@@ -1,14 +1,11 @@
-package com.codigo.aplios.sdk.controls.calendar;
+package com.codigo.aplios.gui.control.calendar;
 
 import java.util.Locale;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,12 +23,12 @@ import javafx.stage.Stage;
 
 public class FXCalendarDemo extends Application {
 
-	private Stage stage;
-	private Scene scene;
-	private BorderPane root;
-	private VBox center;
+	private Stage		stage;
+	private Scene		scene;
+	private BorderPane	root;
+	private VBox		center;
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		Application.launch(args);
 	}
@@ -57,28 +54,29 @@ public class FXCalendarDemo extends Application {
 
 	private void configureStage() {
 
-		stage.setTitle("FX Calendar Demo");
-		stage.setX(0);
-		stage.setY(0);
-		stage.setWidth(Screen.getPrimary()
+		this.stage.setTitle("FX Calendar Demo");
+		this.stage.setX(0);
+		this.stage.setY(0);
+		this.stage.setWidth(Screen.getPrimary()
 				.getVisualBounds()
 				.getWidth());
-		stage.setHeight(Screen.getPrimary()
+		this.stage.setHeight(Screen.getPrimary()
 				.getVisualBounds()
 				.getHeight());
-		stage.setScene(this.scene);
-		stage.show();
+		this.stage.setScene(this.scene);
+		this.stage.show();
 	}
 
 	private void configureScene() {
 
-		root = new BorderPane();
-		root.autosize();
-		this.scene = new Scene(root, Color.LINEN);
-		loadStyleSheet(scene);
+		this.root = new BorderPane();
+		this.root.autosize();
+		this.scene = new Scene(
+			this.root, Color.LINEN);
+		loadStyleSheet(this.scene);
 	}
 
-	private final void loadStyleSheet(Scene scene) {
+	private final void loadStyleSheet(final Scene scene) {
 
 		scene.getStylesheets()
 				.add(FXCalendarDemo.class
@@ -88,13 +86,14 @@ public class FXCalendarDemo extends Application {
 
 	private void configureHeader() {
 
-		StackPane sp = new StackPane();
+		final StackPane sp = new StackPane();
 		sp.setPrefHeight(100);
 		sp.setAlignment(Pos.TOP_LEFT);
 		sp.setStyle(
 				"-fx-background-color: linear-gradient(to bottom, #7A7A7A 0%, #333333 100%);-fx-opacity:.8;-fx-border-width: 0 0 2px 0;-fx-border-color: #868686;");
 
-		Label header = new Label("JavaFX 2 .0 Calendar");
+		final Label header = new Label(
+			"JavaFX 2 .0 Calendar");
 		header.setTextFill(Color.BEIGE);
 		header.setTranslateX(10);
 		header.setStyle("-fx-font-size:40;");
@@ -102,188 +101,196 @@ public class FXCalendarDemo extends Application {
 
 		sp.getChildren()
 				.addAll(header);
-		root.setTop(sp);
+		this.root.setTop(sp);
 	}
 
 	private void configureFooter() {
 
-		StackPane sp = new StackPane();
+		final StackPane sp = new StackPane();
 		sp.setPrefHeight(20);
 		sp.setAlignment(Pos.CENTER);
 		sp.setStyle(
 				"-fx-background-color: linear-gradient(to bottom, #7A7A7A 0%, #333333 100%);-fx-opacity:.8;-fx-border-width: 2px 0 0 0;-fx-border-color: #6D6B69;");
 
-		root.setBottom(sp);
+		this.root.setBottom(sp);
 	}
 
 	private void configureCenter() {
 
-		ScrollPane sp = new ScrollPane();
+		final ScrollPane sp = new ScrollPane();
 		sp.getStyleClass()
 				.add("centerBG");
-		center = new VBox();
-		center.setPadding(new Insets(10));
-		center.setSpacing(25);
+		this.center = new VBox();
+		this.center.setPadding(new Insets(
+			10));
+		this.center.setSpacing(25);
 
-		sp.setContent(center);
-		root.setCenter(sp);
+		sp.setContent(this.center);
+		this.root.setCenter(sp);
 	}
 
-	private void configureSimpleDate(int i) {
+	private void configureSimpleDate(final int i) {
 
-		VBox vb = new VBox();
+		final VBox vb = new VBox();
 		vb.setSpacing(10);
-		FeatureHeader header = new FeatureHeader("#" + i + " : Simple Calendar Control");
-		FeatureLabel lbl = new FeatureLabel("Select the date : ");
+		final FeatureHeader header = new FeatureHeader(
+			"#" + i + " : Simple Calendar Control");
+		final FeatureLabel lbl = new FeatureLabel(
+			"Select the date : ");
 
-		HBox hb = new HBox();
+		final HBox hb = new HBox();
 		hb.setSpacing(10);
 		hb.getChildren()
 				.addAll(lbl, new FXCalendar());
 
 		vb.getChildren()
 				.addAll(header, hb);
-		center.getChildren()
+		this.center.getChildren()
 				.add(vb);
 	}
 
-	private void configureDefaultDate(int i) {
+	private void configureDefaultDate(final int i) {
 
-		VBox vb = new VBox();
+		final VBox vb = new VBox();
 		vb.setSpacing(10);
-		FeatureHeader header = new FeatureHeader("#" + i + " : Calendar Control with Default date and Custom width");
-		FeatureLabel lbl = new FeatureLabel("Select the date : ");
+		final FeatureHeader header = new FeatureHeader(
+			"#" + i + " : Calendar Control with Default date and Custom width");
+		final FeatureLabel lbl = new FeatureLabel(
+			"Select the date : ");
 		final FXCalendar calendar = new FXCalendar();
 		calendar.setValue(new FXCalendarUtility().convertStringtoDate("02/02/2001"));
 
-		HBox hb = new HBox();
+		final HBox hb = new HBox();
 		hb.setSpacing(10);
 		hb.getChildren()
 				.addAll(lbl, calendar);
 
-		final FeatureLabel lbl2 = new FeatureLabel("");
-		Button btn = new Button("Show Selected date");
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
+		final FeatureLabel lbl2 = new FeatureLabel(
+			"");
+		final Button btn = new Button(
+			"Show Selected date");
+		btn.setOnAction(arg0 -> lbl2.setText(calendar.getValue()
+				.toString()));
 
-				lbl2.setText(calendar.getValue()
-						.toString());
-			}
-		});
-
-		HBox hb1 = new HBox();
+		final HBox hb1 = new HBox();
 		hb1.setSpacing(10);
 		hb1.getChildren()
 				.addAll(btn, lbl2);
 
 		vb.getChildren()
 				.addAll(header, hb, hb1);
-		center.getChildren()
+		this.center.getChildren()
 				.add(vb);
 	}
 
-	private void configureWeekNumber(int i) {
+	private void configureWeekNumber(final int i) {
 
-		VBox vb = new VBox();
+		final VBox vb = new VBox();
 		vb.setSpacing(10);
-		FeatureHeader header = new FeatureHeader("#" + i + " : Calendar Control with Week Number display");
-		FeatureLabel lbl = new FeatureLabel("Select the date : ");
-		FXCalendar calendar = new FXCalendar();
+		final FeatureHeader header = new FeatureHeader(
+			"#" + i + " : Calendar Control with Week Number display");
+		final FeatureLabel lbl = new FeatureLabel(
+			"Select the date : ");
+		final FXCalendar calendar = new FXCalendar();
 		calendar.setShowWeekNumber(true);
 		calendar.setValue(new FXCalendarUtility().convertStringtoDate("02/02/0001"));
-		HBox hb = new HBox();
+		final HBox hb = new HBox();
 		hb.setSpacing(10);
 		hb.getChildren()
 				.addAll(lbl, calendar);
 
 		vb.getChildren()
 				.addAll(header, hb);
-		center.getChildren()
+		this.center.getChildren()
 				.add(vb);
 	}
 
-	private void configureLocaleCalendar(int i) {
+	private void configureLocaleCalendar(final int i) {
 
-		VBox vb = new VBox();
+		final VBox vb = new VBox();
 		vb.setSpacing(10);
-		FeatureHeader header = new FeatureHeader("#" + i + " : Calendar Control with Locale specific");
-		FeatureLabel lbl1 = new FeatureLabel("Select the language : ");
-		FeatureLabel lbl2 = new FeatureLabel("Select the date : ");
+		final FeatureHeader header = new FeatureHeader(
+			"#" + i + " : Calendar Control with Locale specific");
+		final FeatureLabel lbl1 = new FeatureLabel(
+			"Select the language : ");
+		final FeatureLabel lbl2 = new FeatureLabel(
+			"Select the date : ");
 		final FXCalendar calendar = new FXCalendar();
 		calendar.setLocale(Locale.ENGLISH);
 
-		ObservableList<String> list = FXCollections.observableArrayList("English", "French", "Dutch", "Polish");
-		final ChoiceBox<String> cb = new ChoiceBox<>(list);
+		final ObservableList<String> list = FXCollections.observableArrayList("English", "French", "Dutch", "Polish");
+		final ChoiceBox<String> cb = new ChoiceBox<>(
+			list);
 		cb.getSelectionModel()
 				.select(0);
 		cb.getSelectionModel()
 				.selectedIndexProperty()
-				.addListener(new ChangeListener<Number>() {
-					@Override
-					public void changed(ObservableValue arg0, Number arg1, Number arg2) {
+				.addListener((ChangeListener<Number>) (arg0, arg1, arg2) -> {
 
-						if (arg2.intValue() == 0) {
-							calendar.setLocale(Locale.ENGLISH);
-						} else if (arg2.intValue() == 1) {
-							calendar.setLocale(Locale.FRENCH);
-						} else if (arg2.intValue() == 3) {
-							calendar.setLocale(new Locale("pl"));	
-						} else {
-							calendar.setLocale(new Locale("nl", "BE"));
-						}
-					}
+					if (arg2.intValue() == 0)
+						calendar.setLocale(Locale.ENGLISH);
+					else if (arg2.intValue() == 1)
+						calendar.setLocale(Locale.FRENCH);
+					else if (arg2.intValue() == 3)
+						calendar.setLocale(new Locale(
+							"pl"));
+					else
+						calendar.setLocale(new Locale(
+							"nl", "BE"));
 				});
-		HBox hb = new HBox();
+		final HBox hb = new HBox();
 		hb.setSpacing(10);
 		hb.getChildren()
 				.addAll(lbl1, cb);
 
-		HBox hb1 = new HBox();
+		final HBox hb1 = new HBox();
 		hb1.setSpacing(10);
 		hb1.getChildren()
 				.addAll(lbl2, calendar);
 
 		vb.getChildren()
 				.addAll(header, hb, hb1);
-		center.getChildren()
+		this.center.getChildren()
 				.add(vb);
 	}
 
-	private void configureCalendarTheme(int i) {
+	private void configureCalendarTheme(final int i) {
 
-		VBox vb = new VBox();
+		final VBox vb = new VBox();
 		vb.setSpacing(10);
-		FeatureHeader header = new FeatureHeader("#" + i + " : Calendar Control with different Themes");
+		final FeatureHeader header = new FeatureHeader(
+			"#" + i + " : Calendar Control with different Themes");
 
-		FeatureLabel lbl1 = new FeatureLabel("Select the language ( Red Theme ): ");
+		final FeatureLabel lbl1 = new FeatureLabel(
+			"Select the language ( Red Theme ): ");
 		final FXCalendar calendar1 = new FXCalendar();
 		calendar1.setBaseColor(Color.web("#940C02"));
 
-		HBox hb = new HBox();
+		final HBox hb = new HBox();
 		hb.setSpacing(10);
 		hb.getChildren()
 				.addAll(lbl1, calendar1);
 
-		FeatureLabel lbl2 = new FeatureLabel("Select the date ( Black Theme ) : ");
+		final FeatureLabel lbl2 = new FeatureLabel(
+			"Select the date ( Black Theme ) : ");
 		final FXCalendar calendar2 = new FXCalendar();
 		calendar2.setBaseColor(Color.BLACK);
 
-		HBox hb1 = new HBox();
+		final HBox hb1 = new HBox();
 		hb1.setSpacing(10);
 		hb1.getChildren()
 				.addAll(lbl2, calendar2);
 
 		vb.getChildren()
 				.addAll(header, hb, hb1);
-		center.getChildren()
+		this.center.getChildren()
 				.add(vb);
 	}
 
 }
 
 class FeatureHeader extends Label {
-	public FeatureHeader(String str) {
+	public FeatureHeader(final String str) {
 
 		super(str);
 		setStyle(
@@ -292,7 +299,7 @@ class FeatureHeader extends Label {
 }
 
 class FeatureLabel extends Label {
-	public FeatureLabel(String str) {
+	public FeatureLabel(final String str) {
 
 		super(str);
 		setStyle("-fx-font-size: 12px;-fx-font-family: verdana,arial,helvetica,tahoma,sans-serif;");

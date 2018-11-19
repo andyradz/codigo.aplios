@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.controls.calendar;
+package com.codigo.aplios.gui.control.calendar;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Side;
@@ -14,19 +14,19 @@ public class FXCalendarControls {
 
 	/**
 	 * Arrow Control
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class Arrow extends StackPane {
-		private SimpleObjectProperty<Color> fillColor = new SimpleObjectProperty<>();
+		private final SimpleObjectProperty<Color> fillColor = new SimpleObjectProperty<>();
 
 		public Arrow() {
 
 			this(Side.BOTTOM);
 		}
 
-		public Arrow(Side side) {
+		public Arrow(final Side side) {
 
 			getStyleClass().add("fx-calendar-arrow");
 			setFillColor(Color.WHITE);
@@ -52,7 +52,7 @@ public class FXCalendarControls {
 		 */
 		public SimpleObjectProperty<Color> fillColorProperty() {
 
-			return fillColor;
+			return this.fillColor;
 		}
 
 		/**
@@ -60,14 +60,14 @@ public class FXCalendarControls {
 		 */
 		public Color getFillColor() {
 
-			return fillColor.get();
+			return this.fillColor.get();
 		}
 
 		/**
 		 * @param fillColor
-		 *            the fillColor to set
+		 *        the fillColor to set
 		 */
-		public void setFillColor(Color fillColor) {
+		public void setFillColor(final Color fillColor) {
 
 			this.fillColor.set(fillColor);
 			setStyle("-fx-background-color: " + FXCalendarUtility.rgbToHex(fillColor) + ";");
@@ -77,32 +77,35 @@ public class FXCalendarControls {
 
 	/**
 	 * BaseNavigatorArrowButton
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class BaseNavigatorArrowButton extends Group {
 
-		public BaseNavigatorArrowButton(Side side, Color baseColor) {
+		public BaseNavigatorArrowButton(final Side side, final Color baseColor) {
 
-			StackPane sp = new StackPane();
+			final StackPane sp = new StackPane();
 			FXCalendarUtility.setBaseColorToNode(this, baseColor);
 			sp.setPrefHeight(16);
 			sp.setPrefWidth(16);
 
-			Rectangle rect = new Rectangle(15, 15);
+			final Rectangle rect = new Rectangle(
+				15, 15);
 			FXCalendarUtility.setBaseColorToNode(rect, baseColor);
 			rect.getStyleClass()
 					.add("fx-calendar-navigator-btn");
 			Arrow arrow;
-			Group gp = new Group();
+			final Group gp = new Group();
 			switch (side) {
 			case LEFT:
-				arrow = new Arrow(Side.LEFT);
+				arrow = new Arrow(
+					Side.LEFT);
 				gp.setTranslateX(-2);
 				break;
 			default:
-				arrow = new Arrow(Side.RIGHT);
+				arrow = new Arrow(
+					Side.RIGHT);
 				gp.setTranslateX(2);
 			}
 
@@ -117,47 +120,48 @@ public class FXCalendarControls {
 
 	/**
 	 * CalendarToggleButton
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class CalendarToggleButton extends StackPane {
-		private Text txt;
-		private StackPane sp;
+		private final Text		txt;
+		private final StackPane	sp;
 
-		public CalendarToggleButton(String text, Object userData) {
+		public CalendarToggleButton(final String text, final Object userData) {
 
 			setUserData(userData);
 			setPrefHeight(18);
 			setPrefWidth(44);
 
-			sp = new StackPane();
-			sp.getStyleClass()
+			this.sp = new StackPane();
+			this.sp.getStyleClass()
 					.add("fx-calendar-toggleButton");
-			sp.setPrefHeight(16);
-			sp.setPrefWidth(44);
+			this.sp.setPrefHeight(16);
+			this.sp.setPrefWidth(44);
 
-			txt = new Text(text);
-			txt.getStyleClass()
+			this.txt = new Text(
+				text);
+			this.txt.getStyleClass()
 					.add("fx-calendar-toggleButton-txt");
-			sp.getChildren()
-					.add(txt);
+			this.sp.getChildren()
+					.add(this.txt);
 
-			getChildren().add(sp);
+			getChildren().add(this.sp);
 		}
 
-		public void setBaseColor(Color color) {
+		public void setBaseColor(final Color color) {
 
-			FXCalendarUtility.setBaseColorToNode(sp, color);
-			FXCalendarUtility.setBaseColorToNode(txt, color);
+			FXCalendarUtility.setBaseColorToNode(this.sp, color);
+			FXCalendarUtility.setBaseColorToNode(this.txt, color);
 		}
 
-		public void setText(String text) {
+		public void setText(final String text) {
 
-			txt.setText(text);
+			this.txt.setText(text);
 		}
 
-		public void setData(Object obj) {
+		public void setData(final Object obj) {
 
 			setUserData(obj);
 		}
@@ -166,48 +170,52 @@ public class FXCalendarControls {
 
 	/**
 	 * NormalButton
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class NormalButton extends Button {
-		public NormalButton(String txt) {
+		public NormalButton(final String txt) {
 
 			super(txt);
 			// getStyleClass().add("calendarButton");
-			super.setSkin(new ButtonSkin(this));
+			super.setSkin(new ButtonSkin(
+				this));
 		}
 	}
 
 	/**
 	 * YearNavigatorArrowButton
-	 * 
+	 *
 	 * @author Sai.Dandem
 	 *
 	 */
 	class YearNavigatorArrowButton extends Group {
 
-		public YearNavigatorArrowButton(Side side, Color baseColor) {
+		public YearNavigatorArrowButton(final Side side, final Color baseColor) {
 
-			StackPane sp = new StackPane();
+			final StackPane sp = new StackPane();
 			FXCalendarUtility.setBaseColorToNode(this, baseColor);
 			sp.setPrefHeight(16);
 			sp.setPrefWidth(16);
 
-			Rectangle rect = new Rectangle(15, 15);
+			final Rectangle rect = new Rectangle(
+				15, 15);
 			FXCalendarUtility.setBaseColorToNode(rect, baseColor);
 			rect.getStyleClass()
 					.add("fx-calendar-year-navigator-btn");
 
 			Arrow arrow;
-			Group gp = new Group();
+			final Group gp = new Group();
 			switch (side) {
 			case LEFT:
-				arrow = new Arrow(Side.LEFT);
+				arrow = new Arrow(
+					Side.LEFT);
 				gp.setTranslateX(-1);
 				break;
 			default:
-				arrow = new Arrow(Side.RIGHT);
+				arrow = new Arrow(
+					Side.RIGHT);
 				gp.setTranslateX(1);
 			}
 			arrow.setFillColor(baseColor);

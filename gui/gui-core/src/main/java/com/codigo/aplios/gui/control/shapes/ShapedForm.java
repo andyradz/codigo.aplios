@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.controls.shapes;
+package com.codigo.aplios.gui.control.shapes;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -17,34 +17,39 @@ import javafx.stage.StageStyle;
 
 public class ShapedForm extends Application {
 
-	private Double intx;
-	private Double inty;
+	private Double	intx;
+	private Double	inty;
 
 	@Override
 	public void start(final Stage stage) {
 
 		stage.initStyle(StageStyle.TRANSPARENT);
-		Text text = new Text("Transparent STAGE");
-		Circle dragger = new Circle(400, 400, 400, Color.CADETBLUE);
-		text.setFont(new Font(40));
+		final Text text = new Text(
+			"Transparent STAGE");
+		final Circle dragger = new Circle(
+			400, 400, 400, Color.CADETBLUE);
+		text.setFont(new Font(
+			40));
 		dragger.setStroke(Color.RED);
-		
-		Group g = new Group();
-		Button min = new Button("-");
+
+		final Group g = new Group();
+		final Button min = new Button(
+			"-");
 		min.setOnAction(event -> stage.setIconified(true));
 
-		Button close = new Button("X");
+		final Button close = new Button(
+			"X");
 		close.setOnAction(event -> stage.close());
 
 		dragger.setOnMousePressed(event -> {
-			intx = (event.getScreenX() - stage.getX());
-			inty = event.getScreenY() - stage.getY();
+			this.intx = (event.getScreenX() - stage.getX());
+			this.inty = event.getScreenY() - stage.getY();
 		});
 
 		// when screen is dragged, translate it accordingly
 		dragger.setOnMouseDragged(event -> {
-			stage.setX(event.getScreenX() - intx);
-			stage.setY(event.getScreenY() - inty);
+			stage.setX(event.getScreenX() - this.intx);
+			stage.setY(event.getScreenY() - this.inty);
 		});
 
 		dragger.setOnMouseClicked(mouseEvent -> {
@@ -58,16 +63,18 @@ public class ShapedForm extends Application {
 					stage.setMaximized(true);
 
 		});
-		HBox hBox = new HBox();
+		final HBox hBox = new HBox();
 		hBox.setSpacing(10);
-		hBox.setPadding(new Insets(25, 0, 0, 60));
+		hBox.setPadding(new Insets(
+			25, 0, 0, 60));
 		hBox.setAlignment(Pos.TOP_CENTER);
 		hBox.getChildren()
 				.addAll(min, close);
 
 		g.getChildren()
 				.addAll(dragger, hBox);
-		final Scene scene = new Scene(g, 800, 600);
+		final Scene scene = new Scene(
+			g, 800, 600);
 		scene.setFill(Color.TRANSPARENT);
 		dragger.setStroke(Color.RED);
 		stage.setScene(scene);
@@ -75,8 +82,8 @@ public class ShapedForm extends Application {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-		launch(args);
+		Application.launch(args);
 	}
 }

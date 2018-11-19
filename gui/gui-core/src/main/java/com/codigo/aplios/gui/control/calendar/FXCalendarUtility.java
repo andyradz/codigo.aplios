@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.controls.calendar;
+package com.codigo.aplios.gui.control.calendar;
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -18,246 +18,284 @@ import javafx.scene.shape.Line;
 
 public class FXCalendarUtility {
 
-	private static int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
-	private static  SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yy");
-	private SimpleDateFormat DISPLAY_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-	
-	private String[] SHORTEST_WEEK_DAYS ;  // {"","S","M","T","W","T","F","S"}
-	private String[] SHORT_WEEK_DAYS ;     // {"","Sun","Mon","Tue","Wed","Thu","Fri","Sat"}
-	private String[] WEEK_DAYS ;           // {"","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
-	private String[] SHORT_MONTHS ;        // {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""}
-	private String[] MONTHS ;              // {"January","February","March","April","May","June","July","August","September","October","November","December",""}
-	private static final Logger LOG = Logger.getLogger(FXCalendarUtility.class.getCanonicalName());
-	public static Calendar getCalendar(){
+	private static int				MILLIS_IN_DAY		= 1000 * 60 * 60 * 24;
+	private static SimpleDateFormat	DATE_FORMAT			= new SimpleDateFormat(
+		"dd/MM/yy");
+	private final SimpleDateFormat	DISPLAY_DATE_FORMAT	= new SimpleDateFormat(
+		"dd/MM/yyyy");
+
+	private String[]			SHORTEST_WEEK_DAYS;													// {"","S","M","T","W","T","F","S"}
+	private String[]			SHORT_WEEK_DAYS;													// {"","Sun","Mon","Tue","Wed","Thu","Fri","Sat"}
+	private String[]			WEEK_DAYS;															// {"","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"}
+	private String[]			SHORT_MONTHS;														// {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""}
+	private String[]			MONTHS;																// {"January","February","March","April","May","June","July","August","September","October","November","December",""}
+	private static final Logger	LOG	= Logger.getLogger(FXCalendarUtility.class.getCanonicalName());
+
+	public static Calendar getCalendar() {
+
 		return Calendar.getInstance();
 	}
-	
-	public static Date getCurrentDate(){
+
+	public static Date getCurrentDate() {
+
 		return new Date();
 	}
-	public static Calendar getCurrentDateCalendar(){
-		Calendar c =Calendar.getInstance();
+
+	public static Calendar getCurrentDateCalendar() {
+
+		final Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		return c;
 	}
-	public static Calendar getDateCalendar(Date date){
-		Calendar c =Calendar.getInstance();
+
+	public static Calendar getDateCalendar(final Date date) {
+
+		final Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		return c;
 	}
-	
-	public static long getCurrentTime(){
+
+	public static long getCurrentTime() {
+
 		return (new Date()).getTime();
 	}
-	
-	public static String getCurrentFormattedDate(){
-		   return DATE_FORMAT.format(getCurrentTime());
+
+	public static String getCurrentFormattedDate() {
+
+		return FXCalendarUtility.DATE_FORMAT.format(FXCalendarUtility.getCurrentTime());
 	}
-	
-	public static String getPreviousDate(){
-		   return DATE_FORMAT.format(getCurrentTime() - MILLIS_IN_DAY);
+
+	public static String getPreviousDate() {
+
+		return FXCalendarUtility.DATE_FORMAT
+				.format(FXCalendarUtility.getCurrentTime() - FXCalendarUtility.MILLIS_IN_DAY);
 	}
-	
-	public static String getNextDate(){
-		 return DATE_FORMAT.format(getCurrentTime() + MILLIS_IN_DAY);
+
+	public static String getNextDate() {
+
+		return FXCalendarUtility.DATE_FORMAT
+				.format(FXCalendarUtility.getCurrentTime() + FXCalendarUtility.MILLIS_IN_DAY);
 	}
-	
-	public static Calendar getDate(Integer day, Integer month, Integer year) {
-		 try {  
-			 String str_date=day+"/"+(month+1)+"/"+year;
-		     Date date = (Date)DATE_FORMAT.parse(str_date);  
-		     Calendar c = getCalendar();
-		     c.setTime(date);
-		     return c;
-		 } catch (ParseException e){
-			 LOG.fine(e.getMessage());
-		 }  
-		 return null;
-	}
-	
-	public String convertDatetoString(Date date) {
-		 return DISPLAY_DATE_FORMAT.format(date);
-	}
-	
-	public Date convertStringtoDate(String str){
+
+	public static Calendar getDate(final Integer day, final Integer month, final Integer year) {
+
 		try {
-			return DISPLAY_DATE_FORMAT.parse(str);
-		} catch (ParseException e) {
-			LOG.severe(e.getMessage());
+			final String str_date = day + "/" + (month + 1) + "/" + year;
+			final Date date = FXCalendarUtility.DATE_FORMAT.parse(str_date);
+			final Calendar c = FXCalendarUtility.getCalendar();
+			c.setTime(date);
+			return c;
+		}
+		catch (final ParseException e) {
+			FXCalendarUtility.LOG.fine(e.getMessage());
+		}
+		return null;
+	}
+
+	public String convertDatetoString(final Date date) {
+
+		return this.DISPLAY_DATE_FORMAT.format(date);
+	}
+
+	public Date convertStringtoDate(final String str) {
+
+		try {
+			return this.DISPLAY_DATE_FORMAT.parse(str);
+		}
+		catch (final ParseException e) {
+			FXCalendarUtility.LOG.severe(e.getMessage());
 			return null;
 		}
 	}
-	
-	public String getFormattedDate(Integer day, Integer month, Integer year) {
-		 try {  
-			 String str_date=day+"/"+(month+1)+"/"+year;
-		     Date date = (Date)DATE_FORMAT.parse(str_date);  
-		     return DISPLAY_DATE_FORMAT.format(date);
-		 } catch (ParseException e){
-			 LOG.fine(e.getMessage());
-		 }  
-		 return null;
+
+	public String getFormattedDate(final Integer day, final Integer month, final Integer year) {
+
+		try {
+			final String str_date = day + "/" + (month + 1) + "/" + year;
+			final Date date = FXCalendarUtility.DATE_FORMAT.parse(str_date);
+			return this.DISPLAY_DATE_FORMAT.format(date);
+		}
+		catch (final ParseException e) {
+			FXCalendarUtility.LOG.fine(e.getMessage());
+		}
+		return null;
 	}
-	
-	
-	public void resetShortestWeekDays(Locale locale){
-		SHORTEST_WEEK_DAYS=null;
-		getShortestWeekDays( locale);
+
+	public void resetShortestWeekDays(final Locale locale) {
+
+		this.SHORTEST_WEEK_DAYS = null;
+		getShortestWeekDays(locale);
 	}
-	
-	public String[] getShortestWeekDays(Locale locale){
-		if(SHORTEST_WEEK_DAYS==null || SHORTEST_WEEK_DAYS.length==0){
-			SHORTEST_WEEK_DAYS = getDayNames("xs",locale);
+
+	public String[] getShortestWeekDays(final Locale locale) {
+
+		if ((this.SHORTEST_WEEK_DAYS == null) || (this.SHORTEST_WEEK_DAYS.length == 0)) {
+			this.SHORTEST_WEEK_DAYS = getDayNames("xs", locale);
 			// If Monday is first day of week.
-			if(Calendar.getInstance(locale).getFirstDayOfWeek()==2){
-				String dum = SHORTEST_WEEK_DAYS[1];
-				for(int i=1;i<7;i++){
-					SHORTEST_WEEK_DAYS[i] = SHORTEST_WEEK_DAYS[i+1];
-				}
-				SHORTEST_WEEK_DAYS[7] = dum;
+			if (Calendar.getInstance(locale)
+					.getFirstDayOfWeek() == 2) {
+				final String dum = this.SHORTEST_WEEK_DAYS[1];
+				for (int i = 1; i < 7; i++)
+					this.SHORTEST_WEEK_DAYS[i] = this.SHORTEST_WEEK_DAYS[i + 1];
+				this.SHORTEST_WEEK_DAYS[7] = dum;
 			}
 		}
-		return SHORTEST_WEEK_DAYS;
+		return this.SHORTEST_WEEK_DAYS;
 	}
-	
-	public String[] getShortWeekDays(Locale locale){
-		if(SHORT_WEEK_DAYS==null || SHORT_WEEK_DAYS.length==0){
-			SHORT_WEEK_DAYS = getDayNames("s",locale);
-		}
+
+	public String[] getShortWeekDays(final Locale locale) {
+
+		if ((this.SHORT_WEEK_DAYS == null) || (this.SHORT_WEEK_DAYS.length == 0))
+			this.SHORT_WEEK_DAYS = getDayNames("s", locale);
 		// If Monday is first day of week.
-		if(Calendar.getInstance(locale).getFirstDayOfWeek()==2){
-			String dum = SHORT_WEEK_DAYS[1];
-			for(int i=1;i<7;i++){
-				SHORT_WEEK_DAYS[i] = SHORT_WEEK_DAYS[i+1];
-			}
-			SHORT_WEEK_DAYS[7] = dum;
+		if (Calendar.getInstance(locale)
+				.getFirstDayOfWeek() == 2) {
+			final String dum = this.SHORT_WEEK_DAYS[1];
+			for (int i = 1; i < 7; i++)
+				this.SHORT_WEEK_DAYS[i] = this.SHORT_WEEK_DAYS[i + 1];
+			this.SHORT_WEEK_DAYS[7] = dum;
 		}
-		return SHORT_WEEK_DAYS;
+		return this.SHORT_WEEK_DAYS;
 	}
-	
-	public String[] getWeekDays(Locale locale){
-		if(WEEK_DAYS==null || WEEK_DAYS.length==0){
-			WEEK_DAYS = getDayNames(null,locale);
-		}
+
+	public String[] getWeekDays(final Locale locale) {
+
+		if ((this.WEEK_DAYS == null) || (this.WEEK_DAYS.length == 0))
+			this.WEEK_DAYS = getDayNames(null, locale);
 		// If Monday is first day of week.
-		if(Calendar.getInstance(locale).getFirstDayOfWeek()==2){
-			String dum = WEEK_DAYS[1];
-			for(int i=1;i<7;i++){
-				WEEK_DAYS[i] = WEEK_DAYS[i+1];
-			}
-			WEEK_DAYS[7] = dum;
+		if (Calendar.getInstance(locale)
+				.getFirstDayOfWeek() == 2) {
+			final String dum = this.WEEK_DAYS[1];
+			for (int i = 1; i < 7; i++)
+				this.WEEK_DAYS[i] = this.WEEK_DAYS[i + 1];
+			this.WEEK_DAYS[7] = dum;
 		}
-		return WEEK_DAYS;
+		return this.WEEK_DAYS;
 	}
-	
-	public void resetShortMonths(Locale locale){
-		SHORT_MONTHS=null;
-		getShortMonths( locale);
+
+	public void resetShortMonths(final Locale locale) {
+
+		this.SHORT_MONTHS = null;
+		getShortMonths(locale);
 	}
-	
-	public String[] getShortMonths(Locale locale){
-		if(SHORT_MONTHS==null || SHORT_MONTHS.length==0){
-			SHORT_MONTHS = getMonthNames("s",locale);
-		}
-		return SHORT_MONTHS;
+
+	public String[] getShortMonths(final Locale locale) {
+
+		if ((this.SHORT_MONTHS == null) || (this.SHORT_MONTHS.length == 0))
+			this.SHORT_MONTHS = getMonthNames("s", locale);
+		return this.SHORT_MONTHS;
 	}
-	
-	public void resetMonths(Locale locale){
-		MONTHS=null;
-		getMonths( locale);
+
+	public void resetMonths(final Locale locale) {
+
+		this.MONTHS = null;
+		getMonths(locale);
 	}
-	
-	public String[] getMonths(Locale locale){
-		if(MONTHS==null || MONTHS.length==0){
-			MONTHS = getMonthNames(null,locale);
-		}
-		return MONTHS;
+
+	public String[] getMonths(final Locale locale) {
+
+		if ((this.MONTHS == null) || (this.MONTHS.length == 0))
+			this.MONTHS = getMonthNames(null, locale);
+		return this.MONTHS;
 	}
-	
-	private String[] getDayNames(String type, Locale locale){
-		if(type!=null && type.equalsIgnoreCase("xs")){
-			String[] days =  new DateFormatSymbols(locale).getShortWeekdays();
-			String[] xsDays = new String[days.length];
-			for (int i=0;i<days.length;i++) {
-				xsDays[i] = (String) ((days[i].equals("")) ? days[i] : days[i].charAt(0)+"");
-			}
+
+	private String[] getDayNames(final String type, final Locale locale) {
+
+		if ((type != null) && type.equalsIgnoreCase("xs")) {
+			final String[] days = new DateFormatSymbols(
+				locale).getShortWeekdays();
+			final String[] xsDays = new String[days.length];
+			for (int i = 0; i < days.length; i++)
+				xsDays[i] = (days[i].equals("")) ? days[i] : days[i].charAt(0) + "";
 			return xsDays;
-		}if(type!=null && type.equalsIgnoreCase("s")){
-			return new DateFormatSymbols(locale).getShortWeekdays();
-		}else{
-			return new DateFormatSymbols(locale).getWeekdays();
 		}
+		if ((type != null) && type.equalsIgnoreCase("s"))
+			return new DateFormatSymbols(
+				locale).getShortWeekdays();
+		else
+			return new DateFormatSymbols(
+				locale).getWeekdays();
 	}
-	
-	private String[] getMonthNames(String type, Locale locale){
-		if(type!=null && type.equalsIgnoreCase("s")){
-			return new DateFormatSymbols(locale).getShortMonths();
-		}else{
-			return new DateFormatSymbols(locale).getMonths();
-		}
+
+	private String[] getMonthNames(final String type, final Locale locale) {
+
+		if ((type != null) && type.equalsIgnoreCase("s"))
+			return new DateFormatSymbols(
+				locale).getShortMonths();
+		else
+			return new DateFormatSymbols(
+				locale).getMonths();
 	}
-	
-	
-	public static void setBaseColorToNode(Node node,Color baseColor){
-		node.setStyle("-fx-base:"+rgbToHex(baseColor)+";");
+
+	public static void setBaseColorToNode(final Node node, final Color baseColor) {
+
+		node.setStyle("-fx-base:" + FXCalendarUtility.rgbToHex(baseColor) + ";");
 	}
-	
-	public static String rgbToHex(Color color) {
-		int i = (int)Math.round((double)color.getRed() * 255D);
-        int j = (int)Math.round((double)color.getGreen() * 255D);
-        int k = (int)Math.round((double)color.getBlue() * 255D);
-    	return "#"+toHex(i)+toHex(j)+toHex(k) ; 
+
+	public static String rgbToHex(final Color color) {
+
+		final int i = (int) Math.round(color.getRed() * 255D);
+		final int j = (int) Math.round(color.getGreen() * 255D);
+		final int k = (int) Math.round(color.getBlue() * 255D);
+		return "#" + FXCalendarUtility.toHex(i) + FXCalendarUtility.toHex(j) + FXCalendarUtility.toHex(k);
 	}
-	
-	private static String toHex(int code){
-		String str ="0123456789ABCDEF";
-		return str.charAt(code/16)+""+str.charAt(code%16);
+
+	private static String toHex(final int code) {
+
+		final String str = "0123456789ABCDEF";
+		return str.charAt(code / 16) + "" + str.charAt(code % 16);
 	}
-	
-	public static Group getDateImage(){
-		Group gp = new Group();
-		StackPane img = new StackPane();
-		double imgSize = 15.0;
-		double imgSizeQuar = imgSize/4;
+
+	public static Group getDateImage() {
+
+		final Group gp = new Group();
+		final StackPane img = new StackPane();
+		final double imgSize = 15.0;
+		final double imgSizeQuar = imgSize / 4;
 		img.setPrefSize(imgSize, imgSize);
-		img.getStyleClass().add("calendar-image");
+		img.getStyleClass()
+				.add("calendar-image");
 		img.setAlignment(Pos.TOP_LEFT);
-		
+
 		/* Vertical Lines */
-		Line l = getLine(0, 0, 0, imgSize, imgSizeQuar, 0);
-        Line l1 = getLine(0, 0, 0, imgSize, imgSizeQuar*2, 0);
-        Line l2 = getLine(0, 0, 0, imgSize, imgSizeQuar*3, 0);
-        /* Horizontal Lines */
-        Line l3 = getLine(0, 0, imgSize, 0, 0, imgSizeQuar);
-        Line l4 = getLine(0, 0, imgSize, 0, 0, imgSizeQuar*2);
-        Line l5 = getLine(0, 0, imgSize, 0, 0, imgSizeQuar*3);
-        /* Circle */
-        Circle c = new Circle();
-        c.getStyleClass().add("calendar-image-circle");
-        c.setRadius(imgSizeQuar/2);
-        c.setTranslateX(imgSizeQuar*3);
-        c.setTranslateY(imgSizeQuar);
-        img.getChildren().addAll(l,l1,l2,l3,l4,l5,c);
-        
-        gp.getChildren().add(img);
-        gp.setTranslateX(5);
-        gp.setTranslateY(1);
-        return gp;
+		final Line l = FXCalendarUtility.getLine(0, 0, 0, imgSize, imgSizeQuar, 0);
+		final Line l1 = FXCalendarUtility.getLine(0, 0, 0, imgSize, imgSizeQuar * 2, 0);
+		final Line l2 = FXCalendarUtility.getLine(0, 0, 0, imgSize, imgSizeQuar * 3, 0);
+		/* Horizontal Lines */
+		final Line l3 = FXCalendarUtility.getLine(0, 0, imgSize, 0, 0, imgSizeQuar);
+		final Line l4 = FXCalendarUtility.getLine(0, 0, imgSize, 0, 0, imgSizeQuar * 2);
+		final Line l5 = FXCalendarUtility.getLine(0, 0, imgSize, 0, 0, imgSizeQuar * 3);
+		/* Circle */
+		final Circle c = new Circle();
+		c.getStyleClass()
+				.add("calendar-image-circle");
+		c.setRadius(imgSizeQuar / 2);
+		c.setTranslateX(imgSizeQuar * 3);
+		c.setTranslateY(imgSizeQuar);
+		img.getChildren()
+				.addAll(l, l1, l2, l3, l4, l5, c);
+
+		gp.getChildren()
+				.add(img);
+		gp.setTranslateX(5);
+		gp.setTranslateY(1);
+		return gp;
 	}
-	
-	private static Line getLine(double startX, double startY, double endX, double endY, double translateX, double translateY){
-		Line l = new Line();
-		l.getStyleClass().add("calendar-image-line");
+
+	private static Line getLine(final double startX, final double startY, final double endX, final double endY,
+			final double translateX, final double translateY) {
+
+		final Line l = new Line();
+		l.getStyleClass()
+				.add("calendar-image-line");
 		l.setStartX(startX);
-        l.setStartY(startY);
-        l.setEndX(endX);
-        l.setEndY(endY);
-        l.setSmooth(true);
-        l.setTranslateX(translateX);
-        l.setTranslateY(translateY);
-        return l;
+		l.setStartY(startY);
+		l.setEndX(endX);
+		l.setEndY(endY);
+		l.setSmooth(true);
+		l.setTranslateX(translateX);
+		l.setTranslateY(translateY);
+		return l;
 	}
-	
+
 }
-
-

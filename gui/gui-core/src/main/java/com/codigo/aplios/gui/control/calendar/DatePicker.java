@@ -1,4 +1,4 @@
-package com.codigo.aplios.sdk.controls.calendar;
+package com.codigo.aplios.gui.control.calendar;
 
 import java.util.Locale;
 
@@ -10,29 +10,32 @@ import javafx.scene.paint.Color;
 
 public class DatePicker extends StackPane {
 
-	private SimpleIntegerProperty selectedDate = new SimpleIntegerProperty();
-	private SimpleIntegerProperty selectedMonth = new SimpleIntegerProperty();
-	private SimpleIntegerProperty selectedYear = new SimpleIntegerProperty();
-	private Rectangle2D calendarBounds = new Rectangle2D(100, 100, 205, 196);
-	private FXCalendar fxCalendar;
-	private BasePane basePane;
-	private TopPane topPane;
+	private final SimpleIntegerProperty	selectedDate	= new SimpleIntegerProperty();
+	private final SimpleIntegerProperty	selectedMonth	= new SimpleIntegerProperty();
+	private final SimpleIntegerProperty	selectedYear	= new SimpleIntegerProperty();
+	private final Rectangle2D			calendarBounds	= new Rectangle2D(
+		100, 100, 205, 196);
+	private final FXCalendar			fxCalendar;
+	private final BasePane				basePane;
+	private final TopPane				topPane;
 
-	public DatePicker(FXCalendar fxCalendar) {
+	public DatePicker(final FXCalendar fxCalendar) {
 
 		super();
 		this.fxCalendar = fxCalendar;
-		selectedDate.set(fxCalendar.getSelectedDate());
-		selectedMonth.set(fxCalendar.getSelectedMonth());
-		selectedYear.set(fxCalendar.getSelectedYear());
+		this.selectedDate.set(fxCalendar.getSelectedDate());
+		this.selectedMonth.set(fxCalendar.getSelectedMonth());
+		this.selectedYear.set(fxCalendar.getSelectedYear());
 		fxCalendar.setLocale(Locale.ENGLISH);
-		setPrefHeight(calendarBounds.getHeight());
-		setPrefWidth(calendarBounds.getWidth());
+		setPrefHeight(this.calendarBounds.getHeight());
+		setPrefWidth(this.calendarBounds.getWidth());
 		setAlignment(Pos.TOP_LEFT);
 		FXCalendarUtility.setBaseColorToNode(this, fxCalendar.getBaseColor());
-		basePane = new BasePane(this);
-		topPane = new TopPane(this);
-		getChildren().addAll(basePane, topPane);
+		this.basePane = new BasePane(
+			this);
+		this.topPane = new TopPane(
+			this);
+		getChildren().addAll(this.basePane, this.topPane);
 		showBasePane();
 	}
 
@@ -64,100 +67,100 @@ public class DatePicker extends StackPane {
 
 	public int getSelectedDate() {
 
-		return selectedDate.get();
+		return this.selectedDate.get();
 	}
 
 	public int getSelectedMonth() {
 
-		return selectedMonth.get();
+		return this.selectedMonth.get();
 	}
 
 	public int getSelectedYear() {
 
-		return selectedYear.get();
+		return this.selectedYear.get();
 	}
 
-	public void setSelectedDate(int selectedDate) {
+	public void setSelectedDate(final int selectedDate) {
 
 		this.selectedDate.set(selectedDate);
 	}
 
-	public void setSelectedMonth(int selectedMonth) {
+	public void setSelectedMonth(final int selectedMonth) {
 
 		this.selectedMonth.set(selectedMonth);
 	}
 
-	public void setSelectedYear(int selectedYear) {
+	public void setSelectedYear(final int selectedYear) {
 
 		this.selectedYear.set(selectedYear);
 	}
 
 	public SimpleIntegerProperty selectedDateProperty() {
 
-		return selectedDate;
+		return this.selectedDate;
 	}
 
 	public SimpleIntegerProperty selectedMonthProperty() {
 
-		return selectedMonth;
+		return this.selectedMonth;
 	}
 
 	public SimpleIntegerProperty selectedYearProperty() {
 
-		return selectedYear;
+		return this.selectedYear;
 	}
 
 	/* GETTER'S FROM DATEPICKER * */
 	public Rectangle2D getBounds() {
 
-		return calendarBounds;
+		return this.calendarBounds;
 	}
 
 	public BasePane getBasePane() {
 
-		return basePane;
+		return this.basePane;
 	}
 
 	public TopPane getTopPane() {
 
-		return topPane;
+		return this.topPane;
 	}
 
 	public void showBasePane() {
 
-		basePane.setVisible(true);
-		topPane.setVisible(false);
+		this.basePane.setVisible(true);
+		this.topPane.setVisible(false);
 	}
 
 	public void showTopPane() {
 
-		topPane.resetYearButtons();
-		basePane.setVisible(false);
-		topPane.setVisible(true);
+		this.topPane.resetYearButtons();
+		this.basePane.setVisible(false);
+		this.topPane.setVisible(true);
 	}
 
 	public void incrementMonth() {
 
-		int currentMonth = this.selectedMonth.get();
-		if (currentMonth >= (fxCalendar.getFXCalendarUtility()
-				.getMonths(this.getLocale()).length - 2)) {
+		final int currentMonth = this.selectedMonth.get();
+		if (currentMonth >= (this.fxCalendar.getFXCalendarUtility()
+				.getMonths(getLocale()).length - 2)) {
 			this.selectedMonth.set(0);
 			this.selectedYear.set(this.selectedYear.get() + 1);
-		} else {
-			this.selectedMonth.set(currentMonth + 1);
 		}
+		else
+			this.selectedMonth.set(currentMonth + 1);
 	}
 
 	public void decrementMonth() {
 
-		int currentMonth = this.selectedMonth.get();
+		final int currentMonth = this.selectedMonth.get();
 		if (currentMonth <= 0) {
-			this.selectedMonth.set(fxCalendar.getFXCalendarUtility()
-					.getMonths(this.getLocale()).length - 2);
+			this.selectedMonth.set(this.fxCalendar.getFXCalendarUtility()
+					.getMonths(getLocale()).length - 2);
 			this.selectedYear.set(this.selectedYear.get() - 1);
-		} else {
-			this.selectedMonth.set(currentMonth - 1);
 		}
+		else
+			this.selectedMonth.set(currentMonth - 1);
 	}
 
 }
