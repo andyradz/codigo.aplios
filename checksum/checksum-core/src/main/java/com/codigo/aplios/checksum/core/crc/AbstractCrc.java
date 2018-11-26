@@ -10,6 +10,7 @@ import java.util.zip.Checksum;
 public abstract class AbstractCrc implements Checksum {
 
 	public static void main(final String[] args) {
+
 		AbstractCrc.longToBinary(Byte.MAX_VALUE, 8);
 	}
 
@@ -30,6 +31,7 @@ public abstract class AbstractCrc implements Checksum {
 	}
 
 	public final int[] getLookupTable() {
+
 		return this.lookupTable;
 		// return new Iterator<Integer>() {
 		//
@@ -74,6 +76,7 @@ public abstract class AbstractCrc implements Checksum {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
+	@Override
 	public void update(final byte[] buffer) {
 
 		this.update(buffer, 0, buffer.length);
@@ -184,6 +187,7 @@ public abstract class AbstractCrc implements Checksum {
 	 * @return Wartość liczbowa przedstawiona w systemie binarnym (dwójkowym)
 	 */
 	public static String longToBinary(final long number, final int numberOfGroups) {
+
 		final StringBuilder bitsOutput = new StringBuilder();
 		final int sizeOfLong = Long.SIZE - 1;
 

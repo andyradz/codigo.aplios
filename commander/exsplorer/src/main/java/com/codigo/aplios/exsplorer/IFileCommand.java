@@ -6,46 +6,49 @@ package com.codigo.aplios.exsplorer;
  */
 public interface IFileCommand {
 
-    void execute();
+	void execute();
 
-    void cancel();
+	void cancel();
 
-    void restart();
+	void restart();
 
-    void result();
+	void result();
 
 }
 
-class FileLoader
-        implements IFileCommand {
+class FileLoader implements IFileCommand {
 
-    @Override
-    public void execute() {
+	@Override
+	public void execute() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public void cancel() {
+	@Override
+	public void cancel() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public void restart() {
+	@Override
+	public void restart() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public void result() {
+	@Override
+	public void result() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
 }
 
@@ -54,22 +57,21 @@ class FileLoader
  */
 class FileCommander {
 
-    // TODO:dodać miernik czasu tutaj
-    private final IFileCommand fileCommand;
+	// TODO:dodać miernik czasu tutaj
+	private final IFileCommand fileCommand;
 
-    public FileCommander(IFileCommand fileCommand) {
+	public FileCommander(final IFileCommand fileCommand) {
 
-        this.fileCommand = fileCommand;
-    }
+		this.fileCommand = fileCommand;
+	}
 
-    public void run() {
+	public void run() {
 
-        this.fileCommand.execute();
-    }
+		this.fileCommand.execute();
+	}
 
-    public void end() {
+	public void end() {
 
-        this.fileCommand.cancel();
-    }
-
+		this.fileCommand.cancel();
+	}
 }

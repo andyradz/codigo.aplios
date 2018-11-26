@@ -11,92 +11,99 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-public class ClaimProductTypeCollector<T extends Claim>
-        implements Collector<T, Map, Map> {
+public class ClaimProductTypeCollector<T extends Claim> implements Collector<T, Map, Map> {
 
-    public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-        Set<Claim> claims = new HashSet<>();
-        claims.add(new Claim(Claim.PRODUCT_TYPE.MOTOR));
-        claims.add(new Claim(Claim.PRODUCT_TYPE.MOTOR));
-        claims.add(new Claim(Claim.PRODUCT_TYPE.MOTOR));
+		final Set<Claim> claims = new HashSet<>();
+		claims.add(new Claim(
+			Claim.PRODUCT_TYPE.MOTOR));
+		claims.add(new Claim(
+			Claim.PRODUCT_TYPE.MOTOR));
+		claims.add(new Claim(
+			Claim.PRODUCT_TYPE.MOTOR));
 
-        claims.add(new Claim(Claim.PRODUCT_TYPE.HOUSEHOLD));
-        claims.add(new Claim(Claim.PRODUCT_TYPE.HOUSEHOLD));
+		claims.add(new Claim(
+			Claim.PRODUCT_TYPE.HOUSEHOLD));
+		claims.add(new Claim(
+			Claim.PRODUCT_TYPE.HOUSEHOLD));
 
-        ClaimProductTypeCollector<Claim> claimProductTypeCollector = new ClaimProductTypeCollector<>();
-        claimProductTypeCollector.getRequiredTypes().add(Claim.PRODUCT_TYPE.MOTOR);
-        claimProductTypeCollector.getRequiredTypes().add(Claim.PRODUCT_TYPE.HOUSEHOLD);
-        Map oneClaimPerProductType = claims.stream().collect(claimProductTypeCollector);
+		final ClaimProductTypeCollector<Claim> claimProductTypeCollector = new ClaimProductTypeCollector<>();
+		claimProductTypeCollector.getRequiredTypes()
+				.add(Claim.PRODUCT_TYPE.MOTOR);
+		claimProductTypeCollector.getRequiredTypes()
+				.add(Claim.PRODUCT_TYPE.HOUSEHOLD);
+		claims.stream()
+				.collect(claimProductTypeCollector);
 
-        int gg = 0;
+	}
 
-    }
+	private final Set<Claim.PRODUCT_TYPE> requiredTypes = new HashSet<>();
 
-    private final Set<Claim.PRODUCT_TYPE> requiredTypes = new HashSet<>();
+	public Set<Claim.PRODUCT_TYPE> getRequiredTypes() {
 
-    public Set<Claim.PRODUCT_TYPE> getRequiredTypes() {
+		return this.requiredTypes;
+	}
 
-        return this.requiredTypes;
-    }
+	@Override
+	public Supplier<Map> supplier() {
 
-    @Override
-    public Supplier<Map> supplier() {
+		return HashMap::new;
+	}
 
-        return HashMap::new;
-    }
+	@Override
+	public BiConsumer<Map, T> accumulator() {
 
-    @Override
-    public BiConsumer<Map, T> accumulator() {
+		return (map, claim) -> {
+			if (map.get(claim.getProductType()) == null)
+				map.put(claim.getProductType(), claim);
+		};
+	}
 
-        return (map, claim) -> {
-            if (map.get(claim.getProductType()) == null)
-                map.put(claim.getProductType(), claim);
-        };
-    }
+	@Override
+	public Function<Map, Map> finisher() {
 
-    @Override
-    public Function<Map, Map> finisher() {
+		return Function.identity();
+	}
 
-        return Function.identity();
-    }
+	@Override
+	public BinaryOperator<Map> combiner() {
 
-    @Override
-    public BinaryOperator<Map> combiner() {
+		return null;
+	}
 
-        return null;
-    }
+	@Override
+	public Set<Characteristics> characteristics() {
 
-    @Override
-    public Set<Characteristics> characteristics() {
-
-        return Collections.singleton(Characteristics.IDENTITY_FINISH);
-    }
+		return Collections.singleton(Characteristics.IDENTITY_FINISH);
+	}
 
 }
 
 class Claim {
 
-    public enum PRODUCT_TYPE {
-        MOTOR, HOUSEHOLD, TRAVEL
+	public enum PRODUCT_TYPE {
+		MOTOR,
+		HOUSEHOLD,
+		TRAVEL
 
-    }
+	}
 
-    private PRODUCT_TYPE productType;
+	private PRODUCT_TYPE productType;
 
-    public Claim(PRODUCT_TYPE productType) {
+	public Claim(final PRODUCT_TYPE productType) {
 
-        this.productType = productType;
-    }
+		this.productType = productType;
+	}
 
-    public PRODUCT_TYPE getProductType() {
+	public PRODUCT_TYPE getProductType() {
 
-        return this.productType;
-    }
+		return this.productType;
+	}
 
-    public void setProductType(PRODUCT_TYPE productType) {
+	public void setProductType(final PRODUCT_TYPE productType) {
 
-        this.productType = productType;
-    }
+		this.productType = productType;
+	}
 
 }

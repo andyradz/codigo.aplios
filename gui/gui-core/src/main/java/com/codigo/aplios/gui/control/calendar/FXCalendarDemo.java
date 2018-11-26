@@ -80,7 +80,7 @@ public class FXCalendarDemo extends Application {
 
 		scene.getStylesheets()
 				.add(FXCalendarDemo.class
-						.getResource("/com/codigo/aplios/sdk/controls/calendar/styles/calendar_styles.css")
+						.getResource("/com/codigo/aplios/gui/control/calendar/styles/calendar_styles.css")
 						.toExternalForm());
 	}
 
@@ -305,3 +305,56 @@ class FeatureLabel extends Label {
 		setStyle("-fx-font-size: 12px;-fx-font-family: verdana,arial,helvetica,tahoma,sans-serif;");
 	}
 }
+
+/*
+ * http://www.anglozof.com/angielski/questions-pytania.htm Inwersja zadawania pytań po angielsku. to
+ * to have
+ *
+ * W czasie Present Simple - Have you got time? - Is She at home? - Has She got a house? - Are they
+ * start? - Am I tall?
+ *
+ * W czasie Past Simple - Was he in New York last year? -Were tkay at school yester? - Had he really
+ * a job when he was 16?
+ *
+ * W czasie Present Continous to be jako czasownik poiłkowy Is she commingto the party?
+ *
+ * W czasie Present perfect -Have you completed the assignment yet?
+ *
+ * Czasowniki modalne will, should, would, may,
+ *
+ * Will you go there in the summer?
+ *
+ * Should I go there and talk to him?
+ *
+ * May I open window?
+ *
+ * Can you swim?
+ *
+ * Would you like some ice cream
+ *
+ * Czasownik posiłkowy DO, DOES, DID
+ *
+ * Present Simple Do you like me?
+ *
+ * Do you like us?
+ *
+ * Does she do her homework ever day?
+ *
+ * Past Simple
+ *
+ * Did they see you at this game?
+ *
+ * Did he pack his suitcase?
+ *
+ * Who came to the party?
+ *
+ * Which book is yours?
+ *
+ * Who won the game?
+ *
+ * Pytania Question tags
+ *
+ * You are very cleaver, arent you? This is not going to happen, is it?
+ *
+ * She is not coming, is she?
+ */

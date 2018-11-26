@@ -5,9 +5,9 @@
  */
 package com.codigo.aplios.data.sort;
 
-import com.codigo.aplios.data.sort.ISortable.SortingAlgorithm;
-import static com.codigo.aplios.data.sort.ISortable.SortingAlgorithm.INSERTSORT;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.codigo.aplios.data.sort.ISortable.SortingAlgorithm;
 
 /**
  * Wzorzec prostej fabryki obiektów klasy <code>ISortable</code>
@@ -16,23 +16,24 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class SorterFactory1 {
 
-    private final @NonNull
-    SortingAlgorithm algorithm;
+	private final @NonNull SortingAlgorithm algorithm;
 
-    public SorterFactory1(@NonNull SortingAlgorithm algorithm) {
-        this.algorithm = algorithm;
-    }
+	public SorterFactory1(@NonNull final SortingAlgorithm algorithm) {
 
-    public ISortable build() {
-        ISortable sortable;
+		this.algorithm = algorithm;
+	}
 
-        switch (this.algorithm) {
-            case INSERTSORT:
-                return new InsertionSorter(null);
+	public ISortable<?> build() {
 
-            default:
-                return new QuickSorter(null);
-        }
-    }
+		@NonNull
+		final SortingAlgorithm algorithm = this.algorithm;
 
+		if (algorithm == SortingAlgorithm.INSERTSORT)
+			return new InsertionSorter<String>(
+				null);
+
+		else
+			return new QuickSorter<String>(
+				null);
+	}
 }
