@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="customer.xsd">
+    <records>
+        <record>
+            <title>Brand New Eyes</title>
+            <artist>Paramore</artist>
+            <genre>Punk Rock</genre>
+            <year>2011</year>
+        </record>
+        <record>
+            <title>My Yahho</title>
+            <artist>Various Artist</artist>
+            <genre>Rock</genre>
+            <year>2013</year>
+        </record>
+        <record>
+            <title>Scorpions</title>
+            <artist>Rock Group</artist>
+            <genre>Havy Metal</genre>
+            <year>1991</year>
+        </record>
+        <record>
+            <title>Limpbizkit</title>
+            <artist>Pop Group</artist>
+            <genre>Testeroble</genre>
+            <year>2001</year>
+        </record>
+    </records>
+</root>

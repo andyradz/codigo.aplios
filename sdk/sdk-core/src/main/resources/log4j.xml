@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration
+	xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<!-- console appender -->
+	<appender name="console"
+		class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{dd.MM.yyyy HH:mm:ss,SSS} %d{Z} [%t] %-5p (%F:%L) - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelMatchFilter">
+			<param name="LevelToMatch" value="INFO" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+		<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+
+
+	<!-- rolling file appender -->
+	<appender name="file"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/main.log" />
+		<param name="Append" value="true" />
+		<param name="ImmediateFlush" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="5" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{dd.MM.yyyy HH:mm:ss,SSS} %d{Z} [%t] %-5p (%F:%L) - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="ASYNC"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/main.log" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="debug" />
+		<appendToFile value="true" />
+		<param name="DatePattern" value="'.'yyyy_MM_dd_HH_mm" />
+		<rollingPolicy
+			class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="fileNamePattern"
+				value="./applogs/logger_%d{ddMMMyyyy HH:mm:ss}.log" />
+			<param name="rollOver" value="TRUE" />
+		</rollingPolicy>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{ddMMMyyyy HH:mm:ss,SSS}^[%X{l4j_mdc_key}]^[%c{1}]^ %-5p %m%n" />
+		</layout>
+	</appender>
+
+	<!-- <appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">
+		<param name="url"
+			value="jdbc:sqlserver://DESKTOP-GOT05ET\APLIOS:65188;databaseName=BITSHOP;integratedSecurity=true;" />
+		<param name="driver"
+			value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<param name="user" value="andrzej.radziszewski" />
+		<param name="password" value="  Codigo9791#0000?" />
+		<param name="sql"
+			value="INSERT INTO LOGS VALUES('%x','%d','%C','%p','%m')" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+		</layout>
+	</appender> -->
+
+	<logger name="com.journaldev.log4j" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="DB" /> -->
+	</logger>
+
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>

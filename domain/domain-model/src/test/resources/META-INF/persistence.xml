@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+
+
+	<persistence-unit name="bitshop"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.codigo.aplios.domain.model.AdministrativeDivisionType</class>
+		<class>com.codigo.aplios.domain.model.calendar.Calendar</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarData</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarDay</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.catalog.Category</class>
+		<class>com.codigo.aplios.domain.model.catalog.CategoryAttribute</class>
+		<class>com.codigo.aplios.domain.model.catalog.Dimension</class>
+		<class>com.codigo.aplios.domain.model.catalog.EntityDateTime</class>
+		<class>com.codigo.aplios.domain.model.catalog.EntityLifeState</class>
+		<class>com.codigo.aplios.domain.model.catalog.Manufacturer</class>
+		<class>com.codigo.aplios.domain.model.catalog.Product</class>
+		<class>com.codigo.aplios.domain.model.common.EntityCreatedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.EntityModel</class>
+		<class>com.codigo.aplios.domain.model.common.EntityPublishedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.EntityUpdatedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.GuidPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.common.IdentityPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.common.Person</class>
+		<class>com.codigo.aplios.domain.model.common.PersonAttributeImpl</class>
+		<class>com.codigo.aplios.domain.model.common.PersonName</class>
+		<class>com.codigo.aplios.domain.model.common.Picture</class>
+		<class>com.codigo.aplios.domain.model.common.TaxOffice</class>
+		<class>com.codigo.aplios.domain.model.contacts.Address</class>
+		<class>com.codigo.aplios.domain.model.contacts.Phone</class>
+		<class>com.codigo.aplios.domain.model.customers.Customer</class>
+		<class>com.codigo.aplios.domain.model.customers.CustomerRole</class>
+		<class>com.codigo.aplios.domain.model.customers.CutomerName</class>
+		<class>com.codigo.aplios.domain.model.evidence.CreditCard</class>
+		<class>com.codigo.aplios.domain.model.locale.Country</class>
+		<class>com.codigo.aplios.domain.model.locale.Currency</class>
+		<class>com.codigo.aplios.domain.model.locale.Dictionary</class>
+		<class>com.codigo.aplios.domain.model.locale.ZipCode</class>
+		<class>com.codigo.aplios.domain.model.locale.ZipCodeShortcut</class>
+		<class>com.codigo.aplios.domain.model.orders.Order</class>
+		<class>com.codigo.aplios.domain.model.orders.OrderVersion</class>
+		<class>com.codigo.aplios.domain.model.orders.VersionHistory</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:sqlserver://DESKTOP-GOT05ET\APLIOS:65188;databaseName=BITSHOP;integratedSecurity=true;" />
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="none" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.cache.size.default" value="5000" />
+			<property name="eclipselink.flush-clear.cache" value="drop" />
+			<property name="eclipselink.jdbc.native-sql" value="true" />
+			<property name="eclipselink.jdbc.cache-statements"
+				value="true" />
+			<property name="eclipselink.jdbc.cache-statements.size"
+				value="100" />
+			<property name="eclipselink.ddl-generation"
+				value="create-or-extend-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+		</properties>
+	</persistence-unit>
+
+
+	<persistence-unit name="hsqldb-eclipselink"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.codigo.aplios.domain.model.AdministrativeDivisionType</class>
+		<class>com.codigo.aplios.domain.model.calendar.Calendar</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarData</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarDay</class>
+		<class>com.codigo.aplios.domain.model.calendar.CalendarPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.catalog.Category</class>
+		<class>com.codigo.aplios.domain.model.catalog.CategoryAttribute</class>
+		<class>com.codigo.aplios.domain.model.catalog.Dimension</class>
+		<class>com.codigo.aplios.domain.model.catalog.EntityDateTime</class>
+		<class>com.codigo.aplios.domain.model.catalog.EntityLifeState</class>
+		<class>com.codigo.aplios.domain.model.catalog.Manufacturer</class>
+		<class>com.codigo.aplios.domain.model.catalog.Product</class>
+		<class>com.codigo.aplios.domain.model.common.EntityCreatedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.EntityModel</class>
+		<class>com.codigo.aplios.domain.model.common.EntityPublishedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.EntityUpdatedInfo</class>
+		<class>com.codigo.aplios.domain.model.common.GuidPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.common.IdentityPrimaryKey</class>
+		<class>com.codigo.aplios.domain.model.common.Person</class>
+		<class>com.codigo.aplios.domain.model.common.PersonAttributeImpl</class>
+		<class>com.codigo.aplios.domain.model.common.PersonName</class>
+		<class>com.codigo.aplios.domain.model.common.Picture</class>
+		<class>com.codigo.aplios.domain.model.common.TaxOffice</class>
+		<class>com.codigo.aplios.domain.model.contacts.Address</class>
+		<class>com.codigo.aplios.domain.model.contacts.Phone</class>
+		<class>com.codigo.aplios.domain.model.customers.Customer</class>
+		<class>com.codigo.aplios.domain.model.customers.CustomerRole</class>
+		<class>com.codigo.aplios.domain.model.customers.CutomerName</class>
+		<class>com.codigo.aplios.domain.model.evidence.CreditCard</class>
+		<class>com.codigo.aplios.domain.model.locale.Country</class>
+		<class>com.codigo.aplios.domain.model.locale.Currency</class>
+		<class>com.codigo.aplios.domain.model.locale.Dictionary</class>
+		<class>com.codigo.aplios.domain.model.locale.ZipCode</class>
+		<class>com.codigo.aplios.domain.model.locale.ZipCodeShortcut</class>
+		<class>com.codigo.aplios.domain.model.orders.Order</class>
+		<class>com.codigo.aplios.domain.model.orders.OrderVersion</class>
+		<class>com.codigo.aplios.domain.model.orders.VersionHistory</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="useUnicode" value="true" />
+			<property name="characterEncoding" value="UTF-8" />
+			<property name="javax.persistence.jdbc.driver"
+				value="org.hsqldb.jdbcDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:hsqldb:file:d:\kdpw.zbiory\testdb2;shutdown=true;ifexist=true;characterEncoding=UTF-8" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<!-- <prop key=eclipselink.ddl-generation.table-creation-suffix>DEFAULT 
+				CHARSET=utf8</prop> -->
+			<!-- <property name="eclipselink.ddl-generation" value="create-or-extend-tables" 
+				/> -->
+			<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+			<property name="eclipselink.persistence-context.flush-mode"
+				value="commit" />
+			<property name="eclipselink.jdbc.cache-statements"
+				value="false" />
+			<property name="eclipselink.jdbc.exclusive-connection.mode"
+				value="Transactional" />
+			<property name="eclipselink.logging.level.ddl"
+				value="WARNING" />
+			<!-- Optimization #9 - statement caching -->
+			<property name="eclipselink.jdbc.cache-statements"
+				value="true" />
+			<!-- Optimization #10 - batch writing -->
+			<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+			<property name="eclipselink.jdbc.batch-writing.size"
+				value="1000" />
+			<!-- Optimization #11 - disable caching for batch insert (caching only 
+				improves reads, so only adds overhead for inserts) -->
+			<!-- <property name="eclipselink.cache.shared.default" value="false" /> -->
+			<!-- Except for Customer which is shared by orders -->
+			<!-- <property name="eclipselink.cache.shared.Customer" value="true" /> -->
+			<!-- Optimization #12 - turn logging off -->
+			<!-- property name="eclipselink.logging.level" value="FINE" / -->
+			<property name="eclipselink.logging.level" value="fine" />
+			<!-- Optimization #13 - close EntityManager on commit, to avoid cost of 
+				resume -->
+			<property
+				name="eclipselink.persistence-context.close-on-commit" value="true" />
+			<!-- Optimization #14 - avoid auto flush cost on query execution -->
+			<property name="eclipselink.persistence-context.flush-mode"
+				value="commit" />
+			<!-- Optimization #15 - avoid cost of persist on commit -->
+			<property
+				name="eclipselink.persistence-context.persist-on-commit"
+				value="true" />
+			<!-- <property name="eclipselink.logging.level" value="FINE" /> -->
+
+			<property
+				name="javax.persistence.schema-generation.scripts.create-target"
+				value="create.sql" />
+			<property
+				name="javax.persistence.schema-generation.scripts.drop-target"
+				value="drop.sql" />
+		</properties>
+	</persistence-unit>
+
+
+	<persistence-unit name="shopdb">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.hsqldb.jdbcDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:hsqldb:d:\zbiory\eksman\;shutdown=false;ifexists=false" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.weaving" value="static"></property>
+			<property name="eclipselink.ddl-generation" value="none" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+			<property name="eclipselink.cache.size.default" value="5000" />
+			<property name="eclipselink.flush-clear.cache" value="drop" />
+			<property name="eclipselink.jdbc.native-sql" value="true" />
+			<property name="eclipselink.jdbc.cache-statements"
+				value="true" />
+			<property name="eclipselink.jdbc.cache-statements.size"
+				value="100" />
+			<property name="eclipselink.ddl-generation" value="none" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+			<property name="eclipselink.target-database" value="HSQL" />
+			<property
+				name="javax.persistence.schema-generation.create-database-schemas"
+				value="true" />
+			<!-- <property name="eclipselink.profiler" value="PerformanceProfiler" 
+				/> -->
+		</properties>
+	</persistence-unit>
+
+	<!-- derby -->
+
+	<persistence-unit name="derby">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="com.mysema.query.jpa.support.ExtendedDerbyDialect" />
+			<property name="hibernate.connection.driver_class"
+				value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:derby:target/derbydb;create=true" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="derby-eclipselink"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:derby:target/derbydb2;create=true" />
+			<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="derby-openjpa"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:derby:target/derbydb3;create=true" />
+			<property name="openjpa.RuntimeUnenhancedClasses"
+				value="supported" />
+			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" 
+				/> <property name="eclipselink.ddl-generation.output-mode" value="database" 
+				/> -->
+		</properties>
+	</persistence-unit>
+
+	<!-- hsqldb -->
+
+	<persistence-unit name="hsqldb">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="com.mysema.query.jpa.support.ExtendedHSQLDialect" />
+			<property name="hibernate.connection.driver_class"
+				value="org.hsqldb.jdbcDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:hsqldb:file:target/testdb;shutdown=true" />
+			<property name="hibernate.connection.user" value="sa" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<!-- h2 -->
+
+	<persistence-unit name="h2"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.connection.driver_class"
+				value="org.h2.Driver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:h2:target/h2-1" />
+			<property name="hibernate.connection.user" value="sa" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="h2-eclipselink"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:h2:target/h2-2" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="h2-openjpa"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:h2:target/h2-3" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="openjpa.RuntimeUnenhancedClasses"
+				value="supported" />
+			<!-- <property name="eclipselink.ddl-generation" value="drop-and-create-tables" 
+				/> <property name="eclipselink.ddl-generation.output-mode" value="database" 
+				/> -->
+		</properties>
+	</persistence-unit>
+
+	<!-- mysql -->
+
+	<persistence-unit name="mysql">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLInnoDBDialect" />
+			<property name="hibernate.connection.driver_class"
+				value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:mysql://localhost:3306/querydsl" />
+			<property name="hibernate.connection.username"
+				value="querydsl" />
+			<property name="hibernate.connection.password"
+				value="querydsl" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="mysql-eclipselink"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/querydsl" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+		</properties>
+	</persistence-unit>
+
+	<!-- postgres -->
+
+	<persistence-unit name="postgres">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.connection.driver_class"
+				value="org.postgresql.Driver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:postgresql://localhost:5432/querydsl" />
+			<property name="hibernate.connection.username"
+				value="querydsl" />
+			<property name="hibernate.connection.password"
+				value="querydsl" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<!-- oracle -->
+
+	<persistence-unit name="oracle">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.archive.autodetection"
+				value="class" />
+			<property name="hibernate.dialect"
+				value="com.mysema.query.jpa.support.ExtendedOracleDialect" />
+			<property name="hibernate.connection.driver_class"
+				value="oracle.jdbc.driver.OracleDriver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:oracle:thin:@localhost:1521:xe" />
+			<property name="hibernate.connection.username"
+				value="querydsl" />
+			<property name="hibernate.connection.password"
+				value="querydsl" />
+			<!-- <property name="hibernate.show_sql" value="true"/> <property name="hibernate.flushMode" 
+				value="FLUSH_AUTO" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+</persistence>
+
