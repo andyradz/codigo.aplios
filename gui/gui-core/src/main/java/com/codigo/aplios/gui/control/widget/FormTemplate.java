@@ -244,16 +244,8 @@ public class FormTemplate {
 			new DefaultTableModel(
 				new Object[][] {
 						{ "Id", null, "Data" },
-						{
-								new Integer(
-									1),
-								null,
-								null },
-						{
-								new Integer(
-									2),
-								null,
-								null },
+						{ Integer.valueOf(1), null, null },
+						{ Integer.valueOf(2), null, null },
 						{ null, null, null },
 						{ null, null, null },
 						{ null, null, null },
@@ -264,7 +256,11 @@ public class FormTemplate {
 						{ null, null, null }, },
 				new String[] { "Id", "Name", "Data" }) {
 
-				boolean[] columnEditables = new boolean[] { true, false, true };
+				/**
+					 *
+					 */
+				private static final long serialVersionUID	= 3637414077259048241L;
+				boolean[]				columnEditables		= new boolean[] { true, false, true };
 
 				@Override
 				public boolean isCellEditable(final int row, final int column) {
@@ -285,7 +281,7 @@ public class FormTemplate {
 		this.table.getSelectionModel()
 				.addSelectionInterval(0, 2);
 
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<?> comboBox = new JComboBox<>();
 		comboBox.setEditable(true);
 		final GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;

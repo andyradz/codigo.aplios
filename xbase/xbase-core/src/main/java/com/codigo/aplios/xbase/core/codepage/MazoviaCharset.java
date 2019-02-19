@@ -23,7 +23,7 @@ public final class MazoviaCharset extends Charset {
 	/**
 	 * Mapa kodowania znaków dla standardu Mazovia
 	 */
-	private final static char[][] CHARSET = { { '\u0104', 143 }// Ą
+	private static final char[][] CHARSET = { { '\u0104', 143 }// Ą
 			, { '\u0105', 134 }// ą
 			, { '\u0106', 149 }// Ć
 			, { '\u0107', 141 }// ć
@@ -53,7 +53,9 @@ public final class MazoviaCharset extends Charset {
 	 */
 	public MazoviaCharset(final String canonicalName, final String[] aliases) {
 
-		super(canonicalName, aliases);
+		super(
+				canonicalName,
+				aliases);
 	}
 
 	/*
@@ -75,8 +77,7 @@ public final class MazoviaCharset extends Charset {
 	@Override
 	public CharsetDecoder newDecoder() {
 
-		return new MazoviaCharsetDecoder(
-			this, 1, 1);
+		return new MazoviaCharsetDecoder(this, 1, 1);
 	}
 
 	/*
@@ -87,8 +88,7 @@ public final class MazoviaCharset extends Charset {
 	@Override
 	public CharsetEncoder newEncoder() {
 
-		return new MazoviaCharsetEncoder(
-			this, 1, 1);
+		return new MazoviaCharsetEncoder(this, 1, 1);
 	}
 
 	/**
@@ -116,7 +116,11 @@ public final class MazoviaCharset extends Charset {
 		public MazoviaCharsetEncoder(final Charset cs, final float averageBytesPerChar, final float maxBytesPerChar,
 				final byte[] replacement) {
 
-			super(cs, averageBytesPerChar, maxBytesPerChar, replacement);
+			super(
+					cs,
+					averageBytesPerChar,
+					maxBytesPerChar,
+					replacement);
 		}
 
 		/**
@@ -131,7 +135,10 @@ public final class MazoviaCharset extends Charset {
 		 */
 		public MazoviaCharsetEncoder(final Charset cs, final float averageBytesPerChar, final float maxBytesPerChar) {
 
-			super(cs, averageBytesPerChar, maxBytesPerChar);
+			super(
+					cs,
+					averageBytesPerChar,
+					maxBytesPerChar);
 		}
 
 		/*
@@ -177,7 +184,10 @@ public final class MazoviaCharset extends Charset {
 		 */
 		public MazoviaCharsetDecoder(final Charset cs, final float averageCharsPerByte, final float maxCharsPerByte) {
 
-			super(cs, averageCharsPerByte, maxCharsPerByte);
+			super(
+					cs,
+					averageCharsPerByte,
+					maxCharsPerByte);
 		}
 
 		/*

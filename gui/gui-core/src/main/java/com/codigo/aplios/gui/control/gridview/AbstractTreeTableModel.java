@@ -80,7 +80,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/*
 	 * Notify all listeners that have registered interest for notification on this event type. The event
 	 * instance is lazily created using the parameters passed into the fire method.
-	 * 
+	 *
 	 * @see EventListenerList
 	 */
 	protected void fireTreeNodesChanged(final Object source, final Object[] path, final int[] childIndices,
@@ -104,7 +104,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/*
 	 * Notify all listeners that have registered interest for notification on this event type. The event
 	 * instance is lazily created using the parameters passed into the fire method.
-	 * 
+	 *
 	 * @see EventListenerList
 	 */
 	protected void fireTreeNodesInserted(final Object source, final Object[] path, final int[] childIndices,
@@ -128,7 +128,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/*
 	 * Notify all listeners that have registered interest for notification on this event type. The event
 	 * instance is lazily created using the parameters passed into the fire method.
-	 * 
+	 *
 	 * @see EventListenerList
 	 */
 	protected void fireTreeNodesRemoved(final Object source, final Object[] path, final int[] childIndices,
@@ -152,7 +152,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/*
 	 * Notify all listeners that have registered interest for notification on this event type. The event
 	 * instance is lazily created using the parameters passed into the fire method.
-	 * 
+	 *
 	 * @see EventListenerList
 	 */
 	protected void fireTreeStructureChanged(final Object source, final Object[] path, final int[] childIndices,
@@ -178,7 +178,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	//
 
 	@Override
-	public Class getColumnClass(final int column) {
+	public Class<?> getColumnClass(final int column) {
 
 		return Object.class;
 	}

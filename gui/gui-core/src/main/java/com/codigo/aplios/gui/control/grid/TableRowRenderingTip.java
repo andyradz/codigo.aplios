@@ -22,56 +22,20 @@ import javax.swing.table.TableCellRenderer;
 
 public class TableRowRenderingTip extends JPanel {
 
+	private static final long serialVersionUID = 6333573922522726215L;
+
 	public TableRowRenderingTip() {
 
 		final Object[] columnNames = { "Type", "Company", "Shares", "Price", "Boolean" };
-		final Object[][] data = {
-				{
-						"Buy",
-						"IBM",
-						new Integer(
-							1000),
-						new Double(
-							80.5),
-						Boolean.TRUE },
-				{
-						"Sell",
-						"Dell",
-						new Integer(
-							2000),
-						new Double(
-							6.25),
-						Boolean.FALSE },
-				{
-						"Short Sell",
-						"Apple",
-						new Integer(
-							3000),
-						new Double(
-							7.35),
-						Boolean.TRUE },
-				{
-						"Buy",
-						"MicroSoft",
-						new Integer(
-							4000),
-						new Double(
-							27.50),
-						Boolean.FALSE },
-				{
-						"Short Sell",
-						"Cisco",
-						new Integer(
-							5000),
-						new Double(
-							20),
-						Boolean.TRUE } };
+		final Object[][] data = { { "Buy", "IBM", Integer.valueOf(1000), Double.valueOf(80.5), Boolean.TRUE }, {} };
 
 		final DefaultTableModel model = new DefaultTableModel(
 			data, columnNames) {
 
+			private static final long serialVersionUID = -5681989186521474211L;
+
 			@Override
-			public Class getColumnClass(final int column) {
+			public Class<?> getColumnClass(final int column) {
 
 				return getValueAt(0, column).getClass();
 			}
@@ -88,6 +52,8 @@ public class TableRowRenderingTip extends JPanel {
 
 		final JTable table = new JTable(
 			model) {
+
+			private static final long serialVersionUID = 4431659024472592674L;
 
 			@Override
 			public Component prepareRenderer(final TableCellRenderer renderer, final int row, final int column) {
@@ -114,11 +80,12 @@ public class TableRowRenderingTip extends JPanel {
 		final JTable table = new JTable(
 			model) {
 
-			private final Border	outside		= new MatteBorder(
+			private static final long	serialVersionUID	= 4796513908683705227L;
+			private final Border		outside				= new MatteBorder(
 				1, 0, 1, 0, Color.ORANGE);
-			private final Border	inside		= new EmptyBorder(
+			private final Border		inside				= new EmptyBorder(
 				0, 1, 0, 1);
-			private final Border	highlight	= new CompoundBorder(
+			private final Border		highlight			= new CompoundBorder(
 				this.outside, this.inside);
 
 			@Override
@@ -146,6 +113,8 @@ public class TableRowRenderingTip extends JPanel {
 
 		final JTable table = new JTable(
 			model) {
+
+			private static final long serialVersionUID = 4515189191319036608L;
 
 			@Override
 			public Component prepareRenderer(final TableCellRenderer renderer, final int row, final int column) {

@@ -45,7 +45,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 /**
  * A basic File Browser. Requires 1.6+ for the Desktop & SwingWorker classes, amongst other minor
@@ -117,9 +116,9 @@ class FileBrowser {
 	private JRadioButton	isFile;
 
 	/* GUI options/containers for new File/Directory creation. Created lazily. */
-	private JPanel			newFilePanel;
-	private JRadioButton	newTypeFile;
-	private JTextField		name;
+	// private JPanel newFilePanel;
+	// private JRadioButton newTypeFile;
+	// private JTextField name;
 
 	public Container getGui() {
 
@@ -375,25 +374,25 @@ class FileBrowser {
 		this.tree.setSelectionInterval(0, 0);
 	}
 
-	private TreePath findTreePath(final File find) {
+	// private TreePath findTreePath(final File find) {
+	//
+	// for (int ii = 0; ii < this.tree.getRowCount(); ii++) {
+	// final TreePath treePath = this.tree.getPathForRow(ii);
+	// final Object object = treePath.getLastPathComponent();
+	// final DefaultMutableTreeNode node = (DefaultMutableTreeNode) object;
+	// final File nodeFile = (File) node.getUserObject();
+	//
+	// if (nodeFile == find)
+	// return treePath;
+	// }
+	// // not found!
+	// return null;
+	// }
 
-		for (int ii = 0; ii < this.tree.getRowCount(); ii++) {
-			final TreePath treePath = this.tree.getPathForRow(ii);
-			final Object object = treePath.getLastPathComponent();
-			final DefaultMutableTreeNode node = (DefaultMutableTreeNode) object;
-			final File nodeFile = (File) node.getUserObject();
-
-			if (nodeFile == find)
-				return treePath;
-		}
-		// not found!
-		return null;
-	}
-
-	private void showErrorMessage(final String errorMessage, final String errorTitle) {
-
-		JOptionPane.showMessageDialog(this.gui, errorMessage, errorTitle, JOptionPane.ERROR_MESSAGE);
-	}
+	// private void showErrorMessage(final String errorMessage, final String errorTitle) {
+	//
+	// JOptionPane.showMessageDialog(this.gui, errorMessage, errorTitle, JOptionPane.ERROR_MESSAGE);
+	// }
 
 	private void showThrowable(final Throwable t) {
 
@@ -568,9 +567,10 @@ class FileBrowser {
 /** A TableModel to hold File[]. */
 class FileTableModel1 extends AbstractTableModel {
 
+	private static final long		serialVersionUID	= -653525679203116634L;
 	private File[]					files;
-	private final FileSystemView	fileSystemView	= FileSystemView.getFileSystemView();
-	private final String[]			columns			= {
+	private final FileSystemView	fileSystemView		= FileSystemView.getFileSystemView();
+	private final String[]			columns				= {
 			"Icon",
 			"File",
 			"Path/name",
@@ -584,7 +584,8 @@ class FileTableModel1 extends AbstractTableModel {
 
 	FileTableModel1() {
 
-		this(new File[0]);
+		this(
+				new File[0]);
 	}
 
 	FileTableModel1(final File[] files) {
@@ -675,6 +676,8 @@ class FileTableModel1 extends AbstractTableModel {
 
 /** A TreeCellRenderer for a File. */
 class FileTreeCellRenderer extends DefaultTreeCellRenderer {
+
+	private static final long serialVersionUID = 2591097725697952983L;
 
 	private final FileSystemView fileSystemView;
 

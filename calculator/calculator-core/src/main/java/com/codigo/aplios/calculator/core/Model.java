@@ -74,6 +74,8 @@ public class Model {
 }
 
 class CalculationError extends Exception {
+	private static final long serialVersionUID = -4476403173017746776L;
+
 	public CalculationError() {
 
 		super();
@@ -81,6 +83,7 @@ class CalculationError extends Exception {
 
 	public CalculationError(final String s) {
 
-		super(s);
+		super(
+				s);
 	}
 }

@@ -46,7 +46,8 @@ public class MultipleTableCell extends JFrame {
 
 	public MultipleTableCell() {
 
-		super("Multi-Span Cell Example");
+		super(
+				"Multi-Span Cell Example");
 
 		final AttributiveCellTableModel ml = new AttributiveCellTableModel(
 			10, 6);
@@ -118,11 +119,14 @@ public class MultipleTableCell extends JFrame {
 
 class AttributiveCellTableModel extends DefaultTableModel {
 
-	protected CellAttribute cellAtt;
+	private static final long	serialVersionUID	= -2916207923109742854L;
+	protected CellAttribute		cellAtt;
 
 	public AttributiveCellTableModel() {
 
-		this((Vector) null, 0);
+		this(
+				(Vector) null,
+				0);
 	}
 
 	public AttributiveCellTableModel(final int numRows, final int numColumns) {
@@ -148,7 +152,9 @@ class AttributiveCellTableModel extends DefaultTableModel {
 
 	public AttributiveCellTableModel(final Object[] columnNames, final int numRows) {
 
-		this(DefaultTableModel.convertToVector(columnNames), numRows);
+		this(
+				DefaultTableModel.convertToVector(columnNames),
+				numRows);
 	}
 
 	public AttributiveCellTableModel(final Vector data, final Vector columnNames) {
@@ -188,14 +194,17 @@ class AttributiveCellTableModel extends DefaultTableModel {
 				"addColumn() - null parameter");
 		this.columnIdentifiers.addElement(columnName);
 		int index = 0;
-		final Enumeration eeration = this.dataVector.elements();
+		final Enumeration<Vector> eeration = this.dataVector.elements();
 		while (eeration.hasMoreElements()) {
+
 			Object value;
 			if ((columnData != null) && (index < columnData.size()))
 				value = columnData.elementAt(index);
 			else
 				value = null;
-			((Vector) eeration.nextElement()).addElement(value);
+
+			eeration.nextElement()
+					.addElement(value);
 			index++;
 		}
 
@@ -288,7 +297,9 @@ class DefaultCellAttribute
 
 	public DefaultCellAttribute() {
 
-		this(1, 1);
+		this(
+				1,
+				1);
 	}
 
 	public DefaultCellAttribute(final int numRows, final int numColumns) {
@@ -615,9 +626,12 @@ interface CellSpan {
 
 class MultiSpanCellTable extends JTable {
 
+	private static final long serialVersionUID = 339670824453510653L;
+
 	public MultiSpanCellTable(final TableModel model) {
 
-		super(model);
+		super(
+				model);
 		setUI(new MultiSpanCellTableUI());
 		getTableHeader().setReorderingAllowed(false);
 		setCellSelectionEnabled(true);

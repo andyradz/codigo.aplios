@@ -105,7 +105,8 @@ public class CalendarComboBox extends JPanel implements java.awt.event.FocusList
 	 */
 	public CalendarComboBox() {
 
-		this(new GregorianCalendar());
+		this(
+				new GregorianCalendar());
 		this.calLabel.setEditable(false);
 
 	}
@@ -369,8 +370,7 @@ public class CalendarComboBox extends JPanel implements java.awt.event.FocusList
 					// overwrite any left over values from old month
 					this.display.setValueAt("", row, col);
 				else {
-					this.display.setValueAt(new Integer(
-						day), row, col);
+					this.display.setValueAt(Integer.valueOf(day), row, col);
 					day++;
 				}
 
@@ -445,9 +445,13 @@ public class CalendarComboBox extends JPanel implements java.awt.event.FocusList
 	 */
 	private class CalendarModel extends DefaultTableModel {
 
+		private static final long serialVersionUID = 525673425993055919L;
+
 		public CalendarModel(final int row, final int col) {
 
-			super(row, col);
+			super(
+					row,
+					col);
 		}
 
 		/**
@@ -455,7 +459,7 @@ public class CalendarComboBox extends JPanel implements java.awt.event.FocusList
 		 * automatically right-aligned by a default renderer that's supplied as part of JTable.
 		 */
 		@Override
-		public Class getColumnClass(final int column) {
+		public Class<?> getColumnClass(final int column) {
 
 			return Integer.class;
 		}

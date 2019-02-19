@@ -1,8 +1,8 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -20,6 +20,8 @@ import javax.swing.JPanel;
  * @author root
  */
 public class SlideContainer extends JPanel {
+
+	private static final long serialVersionUID = 1811561018980191626L;
 
 	@Override
 	public Insets getInsets() {

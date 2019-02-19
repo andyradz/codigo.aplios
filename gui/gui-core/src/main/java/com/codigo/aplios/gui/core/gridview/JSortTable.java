@@ -41,42 +41,52 @@ public class JSortTable extends JTable implements MouseListener {
 
 	public JSortTable() {
 
-		this(new DefaultSortTableModel());
+		this(
+				new DefaultSortTableModel());
 	}
 
 	public JSortTable(final int rows, final int cols) {
 
-		this(new DefaultSortTableModel(
-			rows, cols));
+		this(
+				new DefaultSortTableModel(
+					rows, cols));
 	}
 
 	public JSortTable(final Object[][] data, final Object[] names) {
 
-		this(new DefaultSortTableModel(
-			data, names));
+		this(
+				new DefaultSortTableModel(
+					data, names));
 	}
 
 	public JSortTable(final Vector<Object> data, final Vector<String> names) {
 
-		this(new DefaultSortTableModel(
-			data, names));
+		this(
+				new DefaultSortTableModel(
+					data, names));
 	}
 
 	public JSortTable(final SortTableModel model) {
 
-		super(model);
+		super(
+				model);
 		initSortHeader();
 	}
 
 	public JSortTable(final SortTableModel model, final TableColumnModel colModel) {
 
-		super(model, colModel);
+		super(
+				model,
+				colModel);
 		initSortHeader();
 	}
 
 	public JSortTable(final SortTableModel model, final TableColumnModel colModel, final ListSelectionModel selModel) {
 
-		super(model, colModel, selModel);
+		super(
+				model,
+				colModel,
+				selModel);
 		initSortHeader();
 	}
 
@@ -168,22 +178,30 @@ class DefaultSortTableModel extends DefaultTableModel implements SortTableModel 
 
 	public DefaultSortTableModel(final int rows, final int cols) {
 
-		super(rows, cols);
+		super(
+				rows,
+				cols);
 	}
 
 	public DefaultSortTableModel(final Object[][] data, final Object[] names) {
 
-		super(data, names);
+		super(
+				data,
+				names);
 	}
 
 	public DefaultSortTableModel(final Object[] names, final int rows) {
 
-		super(names, rows);
+		super(
+				names,
+				rows);
 	}
 
 	public DefaultSortTableModel(final Vector<String> names, final int rows) {
 
-		super(names, rows);
+		super(
+				names,
+				rows);
 	}
 
 	public DefaultSortTableModel(final Vector<Object> data, final Vector<String> names) {
@@ -201,10 +219,9 @@ class DefaultSortTableModel extends DefaultTableModel implements SortTableModel 
 	@Override
 	public void sortColumn(final int col, final boolean ascending) {
 
-		Collections.sort(getDataVector(), new ColumnComparator(
+		Collections.sort(getDataVector(), new ColumnComparator<>(
 			col, ascending));
 	}
-
 }
 
 /*

@@ -1,7 +1,7 @@
-package com.codigo.aplios.data.sort;
+package com.codigo.aplios.data.sort; 
 
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.List; 
+import java.util.stream.Stream; 
 
 /**
  * Interfejs definuje zestaw metod sortujących wybrane typy kolekcji danych. Sortowanie elementów w kolekcji będzie
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * @param <T>
  * Generyczny typ elementów kolekcji
  */
-public interface ISortable<T> {
+public interface ISortable < T >  {
 
     /**
      * Rodzaje algorytmów sortujących
@@ -25,19 +25,19 @@ public interface ISortable<T> {
         /**
          * Znacznik sortowania bąbelkowego
          */
-        BUBBLESORT,
+        BUBBLESORT, 
         /**
          * Znacznik sortowania przez wstawianie
          */
-        INSERTSORT,
+        INSERTSORT, 
         /**
          * Znacznik sortowania mieszanego
          */
-        COCTAILSORT,
+        COCTAILSORT, 
         /**
          * Znacznik sortowania przez kopcowanie
          */
-        MERGESORT,
+        MERGESORT, 
         /**
          * Znacznik sortowania szybkiego
          */
@@ -53,11 +53,11 @@ public interface ISortable<T> {
         /**
          * Tryb sortowanie - malejący
          */
-        ASCENDING,
+        ASCENDING, 
         /**
          * Tryb sortowania - rosnący
          */
-        DESCENDING;
+        DESCENDING; 
 
     }
 
@@ -67,7 +67,7 @@ public interface ISortable<T> {
      * @param data
      * Kolekcja elementów w postaci tablicy
      */
-    void sort(final T[] data);
+    void sort(final T[] data); 
 
     /**
      * Wersja metody przeciążonej {@link #sort(Object[]) }
@@ -75,7 +75,7 @@ public interface ISortable<T> {
      * @param data
      * Kolekcja elementów w postaci listy
      */
-    void sort(final List<T> data);
+    void sort(final List < T > data); 
 
     /**
      * Wersja metody przeciążonej {@link #sort(Object[]) }
@@ -83,6 +83,6 @@ public interface ISortable<T> {
      * @param data
      * Kolekcja elementów w postaci strumienia danych
      */
-    void sort(final Stream<T> data);
+    void sort(final Stream < T > data); 
 
 }

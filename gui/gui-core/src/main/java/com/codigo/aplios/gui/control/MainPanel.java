@@ -22,11 +22,17 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 public final class MainPanel extends JPanel {
+
+	private static final long serialVersionUID = 7218813503271488303L;
+
 	public MainPanel() {
 
-		super(new BorderLayout());
+		super(
+				new BorderLayout());
 		final JTextField textField01 = new JTextField(
 			20) {
+			private static final long serialVersionUID = -1206010654843832925L;
+
 			// Unleash Your Creativity with Swing and the Java 2D API!
 			// http://java.sun.com/products/jfc/tsc/articles/swing2d/index.html
 			@Override

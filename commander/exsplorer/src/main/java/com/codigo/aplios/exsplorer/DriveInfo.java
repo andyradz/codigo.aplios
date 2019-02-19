@@ -10,269 +10,304 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public class DriveInfo
-        extends PathInfo
-        implements IDriveInfo {
+public class DriveInfo extends PathInfo implements IDriveInfo {
 
-    public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-        final DriveInfo driveInfo = new DriveInfo(Paths.get("c://"));
-        // long value = driveInfo.availableFreeSpace();
-        // value = driveInfo.totalFreeSpace();
-        // value = driveInfo.totalSize();
-        // driveInfo.driveType();
-    }
+		// final DriveInfo driveInfo = new DriveInfo(Paths.get("c://"));
+		// long value = driveInfo.availableFreeSpace();
+		// value = driveInfo.totalFreeSpace();
+		// value = driveInfo.totalSize();
+		// driveInfo.driveType();
+	}
 
-    public DriveInfo(String driveName) throws IllegalArgumentException {
+	public DriveInfo(final String driveName) throws IllegalArgumentException {
 
-        super(Paths.get(driveName));
-    }
+		super(
+				Paths.get(driveName));
+	}
 
-    public DriveInfo(IDirectoryInfo driveName) throws IllegalArgumentException {
+	public DriveInfo(final IDirectoryInfo driveName) throws IllegalArgumentException {
 
-        super(Paths.get(driveName.fullName()));
-    }
+		super(
+				Paths.get(driveName.fullName()));
+	}
 
-    public DriveInfo(File driveName) throws IllegalArgumentException {
+	public DriveInfo(final File driveName) throws IllegalArgumentException {
 
-        super(driveName.toPath());
-    }
+		super(
+				driveName.toPath());
+	}
 
-    public DriveInfo(URI driveName) throws IllegalArgumentException {
+	public DriveInfo(final URI driveName) throws IllegalArgumentException {
 
-        super(Paths.get(driveName));
-    }
+		super(
+				Paths.get(driveName));
+	}
 
-    public DriveInfo(Path driveName) throws IllegalArgumentException {
+	public DriveInfo(final Path driveName) throws IllegalArgumentException {
 
-        super(driveName);
-    }
+		super(
+				driveName);
+	}
 
-    // ------------------------------------------------------------------------------------------------------------------
-    @Override
-    public boolean isReady() {
+	// ------------------------------------------------------------------------------------------------------------------
+	@Override
+	public boolean isReady() {
 
-        return super.path().getFileSystem()
-                .isOpen();
-    }
+		return super.path().getFileSystem()
+				.isOpen();
+	}
 
-    @Override
-    public String name() {
+	@Override
+	public String name() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public IDirectoryInfo rootDirectory() {
+	@Override
+	public IDirectoryInfo rootDirectory() {
 
-        // return new DirectoryInfo(
-        // this.driveName.toFile().getParentFile());
-        return null;
-    }
+		// return new DirectoryInfo(
+		// this.driveName.toFile().getParentFile());
+		return null;
+	}
 
-    @Override
-    public String volumeLabel() {
+	@Override
+	public String volumeLabel() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    // ------------------------------------------------------------------------------------------------------------------
-    @Override
-    public long totalSize() {
+	// ------------------------------------------------------------------------------------------------------------------
+	@Override
+	public long totalSize() {
 
-        return super.path().toFile()
-                .getTotalSpace();
-    }
+		return super.path().toFile()
+				.getTotalSpace();
+	}
 
-    // ------------------------------------------------------------------------------------------------------------------
-    @Override
-    public long totalFreeSpace() {
+	// ------------------------------------------------------------------------------------------------------------------
+	@Override
+	public long totalFreeSpace() {
 
-        return super.path().toFile()
-                .getFreeSpace();
-    }
+		return super.path().toFile()
+				.getFreeSpace();
+	}
 
-    // ------------------------------------------------------------------------------------------------------------------
-    @Override
-    public IDriveInfo.DriveType driveType() {
+	// ------------------------------------------------------------------------------------------------------------------
+	@Override
+	public IDriveInfo.DriveType driveType() {
 
-        // FileSystemView fsv = this.driveName.getFileSystem();
-        FileSystems.getDefault()
-                .getFileStores()
-                .forEach(fileStore -> {
-                    System.out.println(fileStore.type() + " " + fileStore.name());
-                });
-        return null;
-    }
+		// FileSystemView fsv = this.driveName.getFileSystem();
+		FileSystems.getDefault()
+				.getFileStores()
+				.forEach(fileStore -> {
+					System.out.println(fileStore.type() + " " + fileStore.name());
+				});
+		return null;
+	}
 
-    // ------------------------------------------------------------------------------------------------------------------
-    @Override
-    public IDriveInfo.DriveFormat driveFormat() {
+	// ------------------------------------------------------------------------------------------------------------------
+	@Override
+	public IDriveInfo.DriveFormat driveFormat() {
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public long availableFreeSpace() {
+	@Override
+	public long availableFreeSpace() {
 
-        return this.totalSize() - super.path().toFile()
-                .getUsableSpace();
-    }
+		return totalSize() - super.path().toFile()
+				.getUsableSpace();
+	}
 
-    @Override
-    public Image icon() {
+	@Override
+	public Image icon() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 
-        return Objects.toString(this);
-    }
+		return Objects.toString(this);
+	}
 
-    @Override
-    public int hashCode() {
+	@Override
+	public int hashCode() {
 
-        return Objects.hashCode(this);
-    }
+		return Objects.hashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object driveInfo) {
+	@Override
+	public boolean equals(final Object driveInfo) {
 
-        if (this == driveInfo)
-            return true;
-        if (driveInfo == null)
-            return false;
-        if (this.getClass() != driveInfo.getClass())
-            return false;
-        final DriveInfo other = (DriveInfo)driveInfo;
-        return (!Objects.equals(super.path(), other.path()));
-    }
+		if (this == driveInfo)
+			return true;
+		if (driveInfo == null)
+			return false;
+		if (this.getClass() != driveInfo.getClass())
+			return false;
+		final DriveInfo other = (DriveInfo) driveInfo;
+		return (!Objects.equals(super.path(), other.path()));
+	}
 
-    @Override
-    public String fullName() {
+	@Override
+	public String fullName() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public String localName() {
+	@Override
+	public String localName() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public boolean isRoot() {
+	@Override
+	public boolean isRoot() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public boolean isDirectory() {
+	@Override
+	public boolean isDirectory() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public boolean isFile() {
+	@Override
+	public boolean isFile() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public long deeph() {
+	@Override
+	public long deeph() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public long size() {
+	@Override
+	public long size() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public long capacity() {
+	@Override
+	public long capacity() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public LocalDateTime creationTime() {
+	@Override
+	public LocalDateTime creationTime() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public LocalDateTime creationTimeUtc() {
+	@Override
+	public LocalDateTime creationTimeUtc() {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public void accept(IPathVisitor visitor) {
+	@Override
+	public void accept(final IPathVisitor visitor) {
 
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose
+		// Tools | Templates.
+	}
 
-    @Override
-    public long length() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public long length() {
 
-    @Override
-    public LocalDateTime lastAccessTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public LocalDateTime lastAccessTimeUtc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public LocalDateTime lastAccessTime() {
 
-    @Override
-    public LocalDateTime lastWriteTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public LocalDateTime lastWriteTimeUtc() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public LocalDateTime lastAccessTimeUtc() {
 
-    @Override
-    public String type() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public String description() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public LocalDateTime lastWriteTime() {
 
-    @Override
-    public String label() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
 
-    @Override
-    public List<?> atributes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public LocalDateTime lastWriteTimeUtc() {
+
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public String type() {
+
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public String description() {
+
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public String label() {
+
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public List<?> atributes() {
+
+		throw new UnsupportedOperationException(
+			"Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+	}
 
 }

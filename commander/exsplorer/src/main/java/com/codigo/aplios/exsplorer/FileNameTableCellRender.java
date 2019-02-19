@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class FileNameTableCellRender extends DefaultTableCellRenderer {
 
+	private static final long serialVersionUID = -2199133597812949262L;
+
 	@Override
 	public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
 			final boolean hasFocus, final int row, final int col) {
@@ -23,8 +25,10 @@ public class FileNameTableCellRender extends DefaultTableCellRenderer {
 		final JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 		String myValue = String.valueOf(value);
 		final int index = myValue.lastIndexOf("\\");
+
 		myValue = myValue.substring(index + 1);
 		setText(myValue);
+
 		return l;
 	}
 

@@ -9,7 +9,7 @@ public class IsCurrentlyRunning extends AbstractSpecification<String> {
 	@Override
 	public boolean isSatisfiedBy(final String poll) {
 
-		return 1 == 1;
+		return 1 == 0;
 
 		// return poll.getStartDate()
 		// .isBeforeNow()

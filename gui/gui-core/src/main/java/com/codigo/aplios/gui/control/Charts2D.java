@@ -31,9 +31,12 @@ import javax.swing.SwingConstants;
 
 public class Charts2D extends JFrame {
 
+	private static final long serialVersionUID = 2238600734944113306L;
+
 	public Charts2D() {
 
-		super("2D Charts");
+		super(
+				"2D Charts");
 		setSize(720, 280);
 		getContentPane().setLayout(new GridLayout(
 			1, 3, 10, 0));
@@ -94,6 +97,9 @@ public class Charts2D extends JFrame {
 }
 
 class JChart2D extends JPanel {
+
+	private static final long serialVersionUID = 2256254298947216858L;
+
 	public static final int LineChart = 0;
 
 	public static final int ColumnChart = 1;
@@ -146,12 +152,18 @@ class JChart2D extends JPanel {
 
 	public JChart2D(final int type, final int nData, final int[] yData, final String text) {
 
-		this(type, nData, null, yData, text);
+		this(
+				type,
+				nData,
+				null,
+				yData,
+				text);
 	}
 
 	public JChart2D(final int type, final int nData, final int[] xD, final int[] yD, final String text) {
 
-		super(new BorderLayout());
+		super(
+				new BorderLayout());
 		setBackground(Color.white);
 		this.titleLabel = new JLabel(
 			text, SwingConstants.CENTER);
@@ -295,6 +307,9 @@ class JChart2D extends JPanel {
 	}
 
 	class ChartPanel extends JComponent {
+
+		private static final long serialVersionUID = 8068964177329491688L;
+
 		int xMargin = 5;
 
 		int yMargin = 5;

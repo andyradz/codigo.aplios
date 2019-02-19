@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 import java.awt.Image;
 
 import javax.swing.BoxLayout;
@@ -16,12 +15,13 @@ import javax.swing.JPanel;
  */
 public class SlidingPanel extends JPanel implements StateListener {
 
-	final int		EXPAND		= 1;
-	final int		COLLAPSE	= 0;
-	int				state		= this.COLLAPSE;
-	JPanel			slideContainer;
-	SlideAnimator	slider		= null;
-	TitlePanel		titlePanel	= null;
+	private static final long	serialVersionUID	= -8413097622378427416L;
+	final int					EXPAND				= 1;
+	final int					COLLAPSE			= 0;
+	int							state				= this.COLLAPSE;
+	JPanel						slideContainer;
+	SlideAnimator				slider				= null;
+	TitlePanel					titlePanel			= null;
 
 	public SlidingPanel(final JComponent slideComponent, final String title, final Image imageIcon,
 			final boolean isExpand) {

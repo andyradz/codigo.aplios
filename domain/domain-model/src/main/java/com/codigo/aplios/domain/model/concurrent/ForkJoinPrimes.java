@@ -14,21 +14,23 @@ public class ForkJoinPrimes {
 
 	// Use this to collect work
 	private static class Results {
-		public final int	minPrimeTry;
-		public final int	maxPrimeTry;
-		public final Set	resultSet;
+		// public final int minPrimeTry;
+		// public final int maxPrimeTry;
+		public final Set<Integer> resultSet;
 
-		public Results(final int minPrimeTry, final int maxPrimeTry, final Set resultSet) {
+		public Results(final int minPrimeTry, final int maxPrimeTry, final Set<Integer> resultSet) {
 
-			this.minPrimeTry = minPrimeTry;
-			this.maxPrimeTry = maxPrimeTry;
+			// this.minPrimeTry = minPrimeTry;
+			// this.maxPrimeTry = maxPrimeTry;
 			this.resultSet = resultSet;
 		}
 	}
 
 	private static class FindPrimes extends RecursiveAction {
-		private final int	start;
-		private final int	end;
+
+		private static final long	serialVersionUID	= -968645370791773665L;
+		private final int			start;
+		private final int			end;
 
 		public FindPrimes(final int start, final int end) {
 

@@ -28,7 +28,8 @@ import javax.swing.border.LineBorder;
  */
 public class FormConfig extends JFrame {
 
-	private final JPanel contentPane;
+	private static final long	serialVersionUID	= -9125041662517529686L;
+	private final JPanel		contentPane;
 
 	/**
 	 * Launch the application.

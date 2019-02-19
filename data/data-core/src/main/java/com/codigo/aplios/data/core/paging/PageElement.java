@@ -8,10 +8,12 @@ public class PageElement<T> {
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>PageElement</code>
-	 * 
-	 * @param ordinalNumber Numer porządkowy pozycji na stronie
+	 *
+	 * @param ordinalNumber
+	 *        Numer porządkowy pozycji na stronie
 	 */
-	public PageElement(long ordinalNumber) {
+	public PageElement(final long ordinalNumber) {
+
 		super();
 		this.setOrdinalNumber(ordinalNumber);
 	}
@@ -20,13 +22,16 @@ public class PageElement<T> {
 	 * @return the dataElement
 	 */
 	public T getDataElement() {
-		return dataElement;
+
+		return this.dataElement;
 	}
 
 	/**
-	 * @param dataElement the dataElement to set
+	 * @param dataElement
+	 *        the dataElement to set
 	 */
-	public void setDataElement(T dataElement) {
+	public void setDataElement(final T dataElement) {
+
 		this.dataElement = dataElement;
 	}
 
@@ -34,13 +39,16 @@ public class PageElement<T> {
 	 * @return the ordinalNumber
 	 */
 	public long getOrdinalNumber() {
-		return ordinalNumber;
+
+		return this.ordinalNumber;
 	}
 
 	/**
-	 * @param ordinalNumber the ordinalNumber to set
+	 * @param ordinalNumber
+	 *        the ordinalNumber to set
 	 */
-	private void setOrdinalNumber(long ordinalNumber) {
+	private void setOrdinalNumber(final long ordinalNumber) {
+
 		this.ordinalNumber = ordinalNumber;
 	}
 }

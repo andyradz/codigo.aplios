@@ -21,7 +21,7 @@ import com.codigo.aplios.domain.model.catalog.Category;
 
 public class AuditListener1 extends DescriptorEventAdapter implements SessionCustomizer, DescriptorCustomizer {
 
-	public static ThreadLocal currentUser = new ThreadLocal();
+	public static ThreadLocal<?> currentUser = new ThreadLocal<>();
 
 	/**
 	 * This will audit a specific class.
@@ -64,6 +64,7 @@ public class AuditListener1 extends DescriptorEventAdapter implements SessionCus
 
 	@SuppressWarnings("unchecked")
 	public void processEvent(final DescriptorEvent event, final AuditOperation operation) {
+
 		final Object object = new Category();
 
 		final UnitOfWorkImpl uow = (UnitOfWorkImpl) event.getSession();

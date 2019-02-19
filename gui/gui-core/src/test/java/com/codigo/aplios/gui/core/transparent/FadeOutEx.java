@@ -95,6 +95,8 @@ class Surface1 extends JPanel implements ActionListener {
 
 public class FadeOutEx extends JFrame {
 
+	private static final long serialVersionUID = -1148004275634279781L;
+
 	public FadeOutEx() {
 
 		initUI();

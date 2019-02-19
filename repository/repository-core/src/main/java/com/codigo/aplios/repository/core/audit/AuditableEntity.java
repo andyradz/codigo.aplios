@@ -2,6 +2,7 @@ package com.codigo.aplios.repository.core.audit;
 
 import java.io.Serializable;
 import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -11,59 +12,58 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @MappedSuperclass
-@EntityListeners({AuditListener.class})
-public abstract class AuditableEntity
-        implements Serializable {
+@EntityListeners({ AuditListener.class })
+public abstract class AuditableEntity implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 3077961887990985379L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3077961887990985379L;
 
-    public static ThreadLocal currentUser = new ThreadLocal();
+	public static ThreadLocal<?> currentUser = new ThreadLocal<>();
 
-    @Column(name = "AUDIT_USER")
-    protected String auditUser;
+	@Column(name = "AUDIT_USER")
+	protected String auditUser;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "AUDIT_TIMESTAMP")
-    protected Calendar auditTimestamp;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "AUDIT_TIMESTAMP")
+	protected Calendar auditTimestamp;
 
-    public String getAuditUser() {
+	public String getAuditUser() {
 
-        return this.auditUser;
-    }
+		return this.auditUser;
+	}
 
-    public void setAuditUser(String auditUser) {
+	public void setAuditUser(final String auditUser) {
 
-        this.auditUser = auditUser;
-    }
+		this.auditUser = auditUser;
+	}
 
-    public Calendar getAuditTimestamp() {
+	public Calendar getAuditTimestamp() {
 
-        return this.auditTimestamp;
-    }
+		return this.auditTimestamp;
+	}
 
-    public void setAuditTimestamp(Calendar auditTimestamp) {
+	public void setAuditTimestamp(final Calendar auditTimestamp) {
 
-        this.auditTimestamp = auditTimestamp;
-    }
+		this.auditTimestamp = auditTimestamp;
+	}
 
-    @PrePersist
-    @PreUpdate
-    public void updateAuditInfo() {
+	@PrePersist
+	@PreUpdate
+	public void updateAuditInfo() {
 
-        this.setAuditUser((String)AuditableEntity.currentUser.get());
-        this.setAuditTimestamp(Calendar.getInstance());
-    }
+		setAuditUser((String) AuditableEntity.currentUser.get());
+		setAuditTimestamp(Calendar.getInstance());
+	}
 
-    // -----------------------------------------------------------------------//
-    // toString
-    // -----------------------------------------------------------------------//
-    @Override
-    public String toString() {
+	// -----------------------------------------------------------------------//
+	// toString
+	// -----------------------------------------------------------------------//
+	@Override
+	public String toString() {
 
-        return "";
-    }
+		return "";
+	}
 
 }

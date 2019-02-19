@@ -37,6 +37,8 @@ import javax.swing.WindowConstants;
  */
 public class JavaPixelManipulation extends JPanel {
 
+	private static final long serialVersionUID = 1939218118180840971L;
+
 	/**
 	 * The main routine simply opens a window that shows a JavaPixelManipulation panel. The window is
 	 * fixed size, and the size is set to allow the panel to have its preferred size.
@@ -369,13 +371,10 @@ public class JavaPixelManipulation extends JPanel {
 		final int h = this.OSC.getHeight();
 		final int[] rgbArray = new int[w * h]; // An array to hold the RGB colors of the entire image.
 		this.OSC.getRGB(0, 0, w, h, rgbArray, 0, w); // Grab the RGB color data from the image.
-		double v;
 		switch (filter) {
 		case "Blur":
-			v = 1.0 / 9.0;
 			break;
 		case "Sharpen":
-			v = 1.0 / 3.0;
 			break;
 		case "Emboss":
 			break;

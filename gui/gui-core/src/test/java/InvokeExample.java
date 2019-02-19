@@ -6,6 +6,7 @@ import javax.swing.SwingWorker;
 
 public class InvokeExample extends javax.swing.JFrame {
 
+	private static final long	serialVersionUID	= -2714355203554063546L;
 	private javax.swing.JButton	badWayOneButton;
 	private javax.swing.JButton	badWayTwoButton;
 	private javax.swing.JButton	goodNewWayButton;
@@ -17,7 +18,6 @@ public class InvokeExample extends javax.swing.JFrame {
 		initComponents();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initComponents() {
 
 		java.awt.GridBagConstraints gridBagConstraints;
@@ -120,10 +120,10 @@ public class InvokeExample extends javax.swing.JFrame {
 
 		// Wykonujemy to samo zadanie, tym razem korzystając z klasy
 		// SwingWorker'a.
-		final SwingWorker<?, ?> worker = new SwingWorker() {
+		final SwingWorker<?, ?> worker = new SwingWorker<>() {
 
 			@Override
-			protected void process(final List chunks) {
+			protected void process(final List<Object> chunks) {
 
 				// Aktualizujemy status zadania wykorzystując fakt, że metoda
 				// process() wykonywana jest w EDT.

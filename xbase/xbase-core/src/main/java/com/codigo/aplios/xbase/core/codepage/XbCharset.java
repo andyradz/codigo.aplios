@@ -4,8 +4,11 @@ import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
+
+import org.checkerframework.com.google.common.base.Defaults;
 
 import com.codigo.aplios.core.message.ErrorMessages;
 
@@ -206,26 +209,24 @@ public enum XbCharset {
 	 */
 	public static Charset ofCodepage(final int codepage) {
 
-		if (codepage < 0)
-			throw new IllegalArgumentException(
-				"Wartość codepage nie może być ujemna!");
+		if (codepage < Defaults.defaultValue(Integer.class))
+			throw new IllegalArgumentException("Wartość codepage nie może być ujemna!");
 
 		final Supplier<XbCharset> operator = () -> {
 			final Annotation annotation = XbCharset.class.getAnnotation(XbDefaultCharset.class);
 
 			return (annotation instanceof XbDefaultCharset) ? XbDefaultCharset.class.cast(annotation)
-					.value() : XbCharset.ASCII;
+				.value() : XbCharset.ASCII;
 		};
 
 		return Stream.of(XbCharset.values())
-				.filter(item -> Long.valueOf(1L)
-						.equals(Arrays.stream(item.codepages)
-								.filter(e -> Integer.valueOf(codepage)
-										.equals(e))
-								.count()))
-				.findAny()
-				.orElse(operator.get()).charset;
-
+			.filter(item -> Long.valueOf(1L)
+				.equals(Arrays.stream(item.codepages)
+					.filter(e -> Integer.valueOf(codepage)
+						.equals(e))
+					.count()))
+			.findAny()
+			.orElse(operator.get()).charset;
 	}
 
 	/**
@@ -242,9 +243,11 @@ public enum XbCharset {
 		if (Objects.isNull(charset))
 			ErrorMessages.getNullPointerExceptioMessage(charset);
 
+		final Predicate<XbCharset> filter = item -> item.charset.equals(charset);
+
 		return Stream.of(XbCharset.values())
-				.filter(item -> item.charset.equals(charset))
-				.findAny()
-				.orElse(ASCII).codepages[0];
+			.filter(filter)
+			.findAny()
+			.orElse(ASCII).codepages[0];
 	}
 }

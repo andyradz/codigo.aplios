@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
  * File size reported by the operating system must match the logical file size. Logical file size =
  * ( Length of header + ( Number of records * Length of each record ) )
  */
-public class XbFieldInfo {
+public class XbFieldFormat {
 
 	// -----------------------------------------------------------------------------------------------------------------
 	private static final Charset COLUMN_CHARSET;
@@ -56,7 +56,7 @@ public class XbFieldInfo {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	public XbFieldInfo(final ByteBuffer fieldData) {
+	public XbFieldFormat(final ByteBuffer fieldData) {
 
 		super();
 		initalize(fieldData);
@@ -77,8 +77,7 @@ public class XbFieldInfo {
 
 		final byte[] fieldName = new byte[11];
 		fieldData.get(fieldName);
-		this.fieldName = new String(
-			fieldName, XbFieldInfo.COLUMN_CHARSET);
+		this.fieldName = new String(fieldName, XbFieldFormat.COLUMN_CHARSET);
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------

@@ -10,13 +10,13 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(value = Parameterized.class)
 public class DomainHelpersTest {
 
-	private final String	domain;
-	private final boolean	expected;
+	// private final String domain;
+	// private final boolean expected;
 
 	public DomainHelpersTest(final String domain, final boolean expected) {
 
-		this.domain = domain;
-		this.expected = expected;
+		// this.domain = domain;
+		// this.expected = expected;
 	}
 
 	@Parameters(name = "{index}: isValid({0})={1}")

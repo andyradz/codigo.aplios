@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,10 +31,9 @@ public class XBaseReader1 {
 		// final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\!michal\\",
 		// "POZYCJE.DBF");
 		// final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\!alma\\", "ASORTYM.DBF");
-		final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\!marex\\", "KLIENT.DBF");
-
+		// final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\!marex\\", "KLIENT.DBF");
 		// final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\!alma\\", "KONTRA.DBF");
-		// final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\", "MG00GLIG.DBF");
+		final Path dbfPath = Paths.get("d:\\codigo.warehouse\\Database\\XBase\\", "MG00GLIG.DBF");
 
 		final BasicFileAttributeView view = Files.getFileAttributeView(dbfPath, BasicFileAttributeView.class);
 		view.readAttributes();
@@ -48,8 +46,7 @@ public class XBaseReader1 {
 			fch.read(dbfBuffer);
 			dbfBuffer.flip();
 
-			final XbFileHeader head = XbFileHeader.builder(dbfBuffer.array())
-					.build();
+			final XbFileHeader head = XbFileHeader.builder(dbfBuffer.array()).build();
 
 			System.out.println(head);
 
@@ -79,8 +76,7 @@ public class XBaseReader1 {
 				dbfBuffer.clear();
 				fch.read(dbfBuffer);
 				dbfBuffer.flip();
-				columns.add(new XbDataColumn(
-					dbfBuffer));
+				columns.add(new XbDataColumn(dbfBuffer));
 			}
 
 			final ByteBuffer terminal = ByteBuffer.allocate(2);
@@ -89,6 +85,9 @@ public class XBaseReader1 {
 			columns.forEach(System.out::println);
 			final ByteBuffer data = ByteBuffer.allocate(recordBytes);
 			int lineLen = 0;
+
+			System.out.println(head.getLastUpdateYear());
+
 			for (int jdx = 1; jdx <= recCount; jdx++) {
 				data.clear();
 				fch.read(data);
@@ -96,17 +95,12 @@ public class XBaseReader1 {
 				System.out.printf("%-4d|", jdx);
 
 				for (int idx = 0; idx < nNumFields; idx++) {
-					final byte[] raw = new byte[columns.get(idx)
-							.getFieldSize()];
+					final byte[] raw = new byte[columns.get(idx).getFieldSize()];
 					data.get(raw);
-					final String value = new String(
-						raw, Charset.forName("MAZOVIA"));
-					lineLen += columns.get(idx)
-							.getFieldSize()
-							+ columns.get(idx)
-									.getFieldDecimalPlaces();
-					System.out.printf("%-" + (columns.get(idx)
-							.getFieldSize()) + "s|", value);
+					head.getCharset();
+					final String value = new String(raw, head.getCharset());
+					lineLen += columns.get(idx).getFieldSize() + columns.get(idx).getFieldDecimalPlaces() + 4;
+					System.out.printf("%-" + (columns.get(idx).getFieldSize()) + "s|", value);
 				}
 				System.out.println("");
 				System.out.println(String.join("", Collections.nCopies(lineLen, "-")));
@@ -123,6 +117,10 @@ public class XBaseReader1 {
 		}
 	}
 
+	/**
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(final String[] args) throws IOException {
 
 		new XBaseReader1().readDbf();

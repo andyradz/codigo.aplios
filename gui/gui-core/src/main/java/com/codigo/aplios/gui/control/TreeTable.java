@@ -126,7 +126,8 @@ public class TreeTable extends JTable {
 
 		public TreeTableCellRenderer(final TreeModel model) {
 
-			super(model);
+			super(
+					model);
 		}
 
 		/**
@@ -405,7 +406,7 @@ interface TreeTableModel extends TreeModel {
 	/**
 	 * Returns the type for column number <code>column</code>.
 	 */
-	public Class getColumnClass(int column);
+	public Class<?> getColumnClass(int column);
 
 	/**
 	 * Returns the value to be displayed for node <code>node</code>, at column number
@@ -533,7 +534,7 @@ class TreeTableModelAdapter extends AbstractTableModel {
 	}
 
 	@Override
-	public Class getColumnClass(final int column) {
+	public Class<?> getColumnClass(final int column) {
 
 		return this.treeTableModel.getColumnClass(column);
 	}
@@ -731,7 +732,7 @@ abstract class AbstractTreeTableModel implements TreeTableModel {
 	//
 
 	@Override
-	public Class getColumnClass(final int column) {
+	public Class<?> getColumnClass(final int column) {
 
 		return Object.class;
 	}

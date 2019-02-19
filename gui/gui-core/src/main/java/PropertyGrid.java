@@ -44,7 +44,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.event.CellEditorListener;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicTableUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -55,6 +54,9 @@ import com.codigo.aplios.gui.DatePicker;
 import com.codigo.aplios.gui.core.gridview.JSortTable;
 
 public class PropertyGrid extends JTable {
+
+	private static final long serialVersionUID = 2931801730588225089L;
+
 	public PropertyGrid(final JFrame parent) {
 
 		this.labelRenderer = new LabelCellRenderer();
@@ -366,6 +368,9 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class GeneralCellRenderer extends DefaultTableCellRenderer {
+
+		private static final long serialVersionUID = -1629423005838078274L;
+
 		@Override
 		public Component getTableCellRendererComponent(final JTable table, Object value, final boolean isSelected,
 				final boolean hasFocus, final int row, final int col) {
@@ -377,7 +382,9 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class FloatCellRenderer extends DefaultTableCellRenderer {
-		JLabel label;
+
+		private static final long	serialVersionUID	= 194358554945220534L;
+		JLabel						label;
 
 		public FloatCellRenderer() {
 
@@ -476,8 +483,10 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class FloatCellEditor extends AbstractCellEditor implements TableCellEditor {
-		JSpinner	spinner;
-		Field		field;
+
+		private static final long	serialVersionUID	= -6563105422119971211L;
+		JSpinner					spinner;
+		Field						field;
 
 		public FloatCellEditor(final Field f) {
 
@@ -512,9 +521,10 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class TextCellEditor extends AbstractCellEditor implements TableCellEditor {
-		JTextField	textfield;
-		Field		field;
-		boolean		isInt;
+		private static final long	serialVersionUID	= -7782086271048471729L;
+		JTextField					textfield;
+		Field						field;
+		boolean						isInt;
 
 		public TextCellEditor(final Field f) {
 
@@ -572,14 +582,16 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class ListCellEditor extends AbstractCellEditor implements TableCellEditor {
-		JComboBox	combo;
-		Field		field;
+
+		private static final long	serialVersionUID	= -3263903819579902838L;
+		JComboBox<?>				combo;
+		Field						field;
 
 		public ListCellEditor(final Field f) {
 
 			this.field = f;
 
-			this.combo = new JComboBox(
+			this.combo = new JComboBox<>(
 				f.choices.toArray());
 
 			this.combo.addActionListener(evt -> {
@@ -645,10 +657,11 @@ public class PropertyGrid extends JTable {
 	}
 
 	public class ObjectCellEditor extends AbstractCellEditor implements TableCellEditor {
-		JPanel		container;
-		JTextField	textfield;
-		JButton		button;
-		Field		field;
+		private static final long	serialVersionUID	= -6140303185028155547L;
+		JPanel						container;
+		JTextField					textfield;
+		JButton						button;
+		Field						field;
 
 		public ObjectCellEditor(final Field f) {
 
@@ -805,7 +818,7 @@ public class PropertyGrid extends JTable {
 
 		jlbempty.setPreferredSize(new Dimension(
 			175, 100));
-		PropertyGrid.WygladProgramujComboBox = new JComboBox(
+		PropertyGrid.WygladProgramujComboBox = new JComboBox<>(
 			new String[] { "1", "2", "3", "4" });
 
 		PropertyGrid.WygladProgramujComboBox.addActionListener(PropertyGrid::WygladProgramu_jComboBoxActionPerformed);
@@ -816,337 +829,14 @@ public class PropertyGrid extends JTable {
 						"Kathy",
 						"Smith",
 						"Snowboarding",
-						new Double(
-							5.01),
-						new Boolean(
-							false),
-						new Double(
-							0.50), },
-				{
-						"Andrzej",
-						"Radziszewski",
-						"Snowboarding",
-						new Double(
-							-5.01),
-						new Boolean(
-							true),
-						new Double(
-							-0.50), },
-				{
-						"Andrzej",
-						"Radziszewski",
-						"Pudło",
-						new Double(
-							-225.02521),
-						new Boolean(
-							true),
-						new Double(
-							-0.50), },
-
-				{
-						"Adriam",
-						"Kalisamon",
-						"<p>df</p>",
-						new Double(
-							13215.01),
-						new Boolean(
-							false),
-						new Double(
-							.50), },
-				{
-						"John",
-						"Doe",
-						"Rowing",
-						new Double(
-							3.65),
-						new Boolean(
-							true),
-						new Double(
-							0.75), },
-				{
-						"Sue",
-						"Black",
-						"Knitting",
-						new Double(
-							2.232),
-						new Boolean(
-							false),
-						new Double(
-							1), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.333),
-						new Boolean(
-							true),
-						new Double(
-							1), },
-				{
-						"Jane12",
-						"White12",
-						"Speed12 reading",
-						new Double(
-							210.3555),
-						new Boolean(
-							true),
-						new Double(
-							0.10), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.23),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane3",
-						"White3",
-						"Speed3 reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jan4e",
-						"Whit4e",
-						"Speed4 reading",
-						new Double(
-							20.0),
-						new Boolean(
-							true),
-						new Double(
-							0.1), },
-				{
-						"Jo6e",
-						"Bro5wn",
-						"Pool3",
-						new Double(
-							10.89),
-						new Boolean(
-							false),
-						new Double(
-							1) },
-				{
-						"Kathy",
-						"Smith",
-						"Snowboarding",
-						new Double(
-							5.01),
-						new Boolean(
-							false),
-						new Double(
-							0.50), },
-				{
-						"John",
-						"Doe",
-						"Rowing",
-						new Double(
-							3.65),
-						new Boolean(
-							true),
-						new Double(
-							0.75), },
-				{
-						"Sue",
-						"Black",
-						"Knitting",
-						new Double(
-							2.232),
-						new Boolean(
-							false),
-						new Double(
-							1), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.333),
-						new Boolean(
-							true),
-						new Double(
-							1), },
-				{
-						"Jane12",
-						"White12",
-						"Speed12 reading",
-						new Double(
-							210.3555),
-						new Boolean(
-							true),
-						new Double(
-							0.10), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.23),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane3",
-						"White3",
-						"Speed3 reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jan412312e",
-						"Whit4e23",
-						"Speed4 rea213ding",
-						new Double(
-							20.0),
-						new Boolean(
-							true),
-						new Double(
-							0.1), },
-				{
-						"Jo6e23",
-						"Bro5wn1",
-						"Pool3232",
-						new Double(
-							10.89),
-						new Boolean(
-							false),
-						new Double(
-							1) },
-				{
-						"Kathy",
-						"Smith",
-						"Snowboarding",
-						new Double(
-							5.01),
-						new Boolean(
-							false),
-						new Double(
-							0.50), },
-				{
-						"John",
-						"Doe",
-						"Rowing",
-						new Double(
-							3.65),
-						new Boolean(
-							true),
-						new Double(
-							0.75), },
-				{
-						"Sue",
-						"Black",
-						"Knitting",
-						new Double(
-							2.232),
-						new Boolean(
-							false),
-						new Double(
-							1), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.333),
-						new Boolean(
-							true),
-						new Double(
-							1), },
-				{
-						"Jane12",
-						"White12",
-						"Speed12 reading",
-						new Double(
-							210.3555),
-						new Boolean(
-							true),
-						new Double(
-							0.10), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.23),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane",
-						"White",
-						"Speed reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jane3",
-						"White3",
-						"Speed3 reading",
-						new Double(
-							20.232),
-						new Boolean(
-							true),
-						new Double(
-							0.100), },
-				{
-						"Jan4e",
-						"Whit4e",
-						"Speed4 reading",
-						new Double(
-							20.0),
-						new Boolean(
-							true),
-						new Double(
-							0.1), },
-				{
-						"Jo6e",
-						"Bro5wn",
-						"Pool3",
-						new Double(
-							12220.89),
-						new Boolean(
-							false),
-						new Double(
-							1) } };
+						Double.valueOf(5.01),
+						Boolean.valueOf(false),
+						Double.valueOf(0.50) }, };
 
 		class CustomTableCellRender extends DefaultTableCellRenderer {
 
-			Border padding = BorderFactory.createEmptyBorder(0, 2, 0, 2);
+			private static final long	serialVersionUID	= 3892743523344580648L;
+			Border						padding				= BorderFactory.createEmptyBorder(0, 2, 0, 2);
 
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value,
@@ -1161,7 +851,8 @@ public class PropertyGrid extends JTable {
 
 		class PercentTableCellRenderer extends CustomTableCellRender {
 
-			private final NumberFormat numFormat = NumberFormat.getPercentInstance(Locale.getDefault());
+			private static final long	serialVersionUID	= 5110057309320837936L;
+			private final NumberFormat	numFormat			= NumberFormat.getPercentInstance(Locale.getDefault());
 
 			@Override
 			public final Component getTableCellRendererComponent(final JTable table, final Object value,
@@ -1182,7 +873,8 @@ public class PropertyGrid extends JTable {
 
 		class CurrencyTableCellRenderer extends CustomTableCellRender {
 
-			private final NumberFormat FORMAT = NumberFormat.getCurrencyInstance();
+			private static final long	serialVersionUID	= 7477511819850959638L;
+			private final NumberFormat	FORMAT				= NumberFormat.getCurrencyInstance();
 
 			@Override
 			public final Component getTableCellRendererComponent(final JTable table, final Object value,
@@ -1209,6 +901,8 @@ public class PropertyGrid extends JTable {
 
 		class BooleanTableCellRenderer extends CustomTableCellRender {
 
+			private static final long serialVersionUID = -5031026174757990289L;
+
 			@Override
 			public final Component getTableCellRendererComponent(final JTable table, final Object value,
 					final boolean isSelected, final boolean hasFocus, final int row, final int column) {
@@ -1229,27 +923,28 @@ public class PropertyGrid extends JTable {
 			}
 		}
 
-		class HeaderRenderer implements UIResource, TableCellRenderer {
-
-			private final TableCellRenderer original;
-
-			public HeaderRenderer(final TableCellRenderer original) {
-
-				this.original = original;
-			}
-
-			@Override
-			public Component getTableCellRendererComponent(final JTable table, final Object value,
-					final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-
-				final Component comp = this.original.getTableCellRendererComponent(table, value, isSelected, hasFocus,
-						row, column);
-				comp.setFont(comp.getFont()
-						.deriveFont(Font.BOLD));
-				return comp;
-			}
-
-		}
+		// class HeaderRenderer implements UIResource, TableCellRenderer {
+		//
+		// private final TableCellRenderer original;
+		//
+		// public HeaderRenderer(final TableCellRenderer original) {
+		//
+		// this.original = original;
+		// }
+		//
+		// @Override
+		// public Component getTableCellRendererComponent(final JTable table, final Object value,
+		// final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+		//
+		// final Component comp = this.original.getTableCellRendererComponent(table, value, isSelected,
+		// hasFocus,
+		// row, column);
+		// comp.setFont(comp.getFont()
+		// .deriveFont(Font.BOLD));
+		// return comp;
+		// }
+		//
+		// }
 
 		final JSortTable sorttable = new JSortTable(
 			data, columnNames);

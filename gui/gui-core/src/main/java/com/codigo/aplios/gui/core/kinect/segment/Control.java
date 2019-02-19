@@ -7,199 +7,215 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
-public class Control
-        extends JFrame
-        implements ActionListener {
+public class Control extends JFrame implements ActionListener {
 
-    public static void main(final String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	private static final long serialVersionUID = 1731297258294827885L;
 
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                | UnsupportedLookAndFeelException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        final Timer myTimer = new Timer();
-        myTimer.schedule(new CoolClockTimer(), 0, 1000);
+	public static void main(final String[] args) {
 
-    }
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-    /**
-     * JFrame used for pop up messages.
-     */
-    JFrame popUpFrame;
+		}
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		final Timer myTimer = new Timer();
+		myTimer.schedule(new CoolClockTimer(), 0, 1000);
 
-    /**
-     * The clock digit display JPanel
-     */
-    Display displayPanel;
+	}
 
-    /**
-     * Instance of the CoolClockTimer for passing UI interaction information
-     */
-    CoolClockTimer coolClock;
+	/**
+	 * JFrame used for pop up messages.
+	 */
+	JFrame popUpFrame;
 
-    /**
-     * Constructor. Initializes the GUI, GUI components, and necessary variables with appropriate settings.
-     *
-     * @param myClock
-     *                an instance of the CoolClockTimer that created this Control object, used for passing UI information
-     *                (button presses) to the clock controller
-     */
-    public Control(final CoolClockTimer myClock) {
-        super("Hyperclock 2000");
+	/**
+	 * The clock digit display JPanel
+	 */
+	Display displayPanel;
 
-        // Set coolClock
-        this.coolClock = myClock;
+	/**
+	 * Instance of the CoolClockTimer for passing UI interaction information
+	 */
+	CoolClockTimer coolClock;
 
-        // Set layout (how panels are organized within frame)
-        // Alan, feel free to change this if need be
-        this.setLayout(new FlowLayout());
+	/**
+	 * Constructor. Initializes the GUI, GUI components, and necessary variables with appropriate
+	 * settings.
+	 *
+	 * @param myClock
+	 *        an instance of the CoolClockTimer that created this Control object, used for passing UI
+	 *        information (button presses) to the clock controller
+	 */
+	public Control(final CoolClockTimer myClock) {
 
-        // Sets the size, width px X height px
-        // Note: this includes the ~40px top bar
-        this.setSize(1500, 600);
+		super(
+				"Hyperclock 2000");
 
-        // Make the background black
-        this.getContentPane()
-                .setBackground(Color.BLACK);
+		// Set coolClock
+		this.coolClock = myClock;
 
-        // Puts the window in the middle of the screen
-        this.setLocationRelativeTo(null);
+		// Set layout (how panels are organized within frame)
+		// Alan, feel free to change this if need be
+		setLayout(new FlowLayout());
 
-        // Make the window not resizable
-        this.setResizable(true);
+		// Sets the size, width px X height px
+		// Note: this includes the ~40px top bar
+		this.setSize(1500, 600);
 
-        // Exit the application when the "X" button is pressed
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Make the background black
+		getContentPane().setBackground(Color.BLACK);
 
-        this.displayPanel = new Display();
-        this.getContentPane()
-                .add(this.displayPanel);
+		// Puts the window in the middle of the screen
+		setLocationRelativeTo(null);
 
-        // Button Interface Code
-        // buttonPanel will hold all of the buttons
-        // the GridLayout will arange the buttons in a 2 row grid, 0 means it can have any number of columns
-        final JPanel buttonPanel = new JPanel(new GridLayout(2,
-                0));
-        buttonPanel.setPreferredSize(new Dimension(1500,
-                150));
+		// Make the window not resizable
+		setResizable(true);
 
-        // Create the buttons
-        // Top Row
-        final JButton addHour = new JButton("Hour +");
-        final JButton addMinute = new JButton("Minutes +");
-        final JButton addSecond = new JButton("Seconds +");
-        final JButton toggleFormat = new JButton("Toggle 24 hour/12 hour format");
-        // Bottom Row
-        final JButton subHour = new JButton("Hour -");
-        final JButton subMinute = new JButton("Minutes -");
-        final JButton subSecond = new JButton("Seconds -");
-        final JButton togglePause = new JButton("Start/Pause");
+		// Exit the application when the "X" button is pressed
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        // Add actionListeners for the buttons
-        addHour.addActionListener(this);
-        addMinute.addActionListener(this);
-        addSecond.addActionListener(this);
-        toggleFormat.addActionListener(this);
+		this.displayPanel = new Display();
+		getContentPane().add(this.displayPanel);
 
-        subHour.addActionListener(this);
-        subMinute.addActionListener(this);
-        subSecond.addActionListener(this);
-        togglePause.addActionListener(this);
+		// Button Interface Code
+		// buttonPanel will hold all of the buttons
+		// the GridLayout will arange the buttons in a 2 row grid, 0 means it can have any number of columns
+		final JPanel buttonPanel = new JPanel(
+			new GridLayout(
+				2, 0));
+		buttonPanel.setPreferredSize(new Dimension(
+			1500, 150));
 
-        // Add the buttons to our buttonPanel
-        buttonPanel.add(addHour);
-        buttonPanel.add(addMinute);
-        buttonPanel.add(addSecond);
-        buttonPanel.add(toggleFormat);
+		// Create the buttons
+		// Top Row
+		final JButton addHour = new JButton(
+			"Hour +");
+		final JButton addMinute = new JButton(
+			"Minutes +");
+		final JButton addSecond = new JButton(
+			"Seconds +");
+		final JButton toggleFormat = new JButton(
+			"Toggle 24 hour/12 hour format");
+		// Bottom Row
+		final JButton subHour = new JButton(
+			"Hour -");
+		final JButton subMinute = new JButton(
+			"Minutes -");
+		final JButton subSecond = new JButton(
+			"Seconds -");
+		final JButton togglePause = new JButton(
+			"Start/Pause");
 
-        buttonPanel.add(subHour);
-        buttonPanel.add(subMinute);
-        buttonPanel.add(subSecond);
-        buttonPanel.add(togglePause);
+		// Add actionListeners for the buttons
+		addHour.addActionListener(this);
+		addMinute.addActionListener(this);
+		addSecond.addActionListener(this);
+		toggleFormat.addActionListener(this);
 
-        // Add the buttonPanel to our JFrame
-        this.getContentPane()
-                .add(buttonPanel);
+		subHour.addActionListener(this);
+		subMinute.addActionListener(this);
+		subSecond.addActionListener(this);
+		togglePause.addActionListener(this);
 
-        // Reveal ourselves to the world
-        this.setVisible(true);
+		// Add the buttons to our buttonPanel
+		buttonPanel.add(addHour);
+		buttonPanel.add(addMinute);
+		buttonPanel.add(addSecond);
+		buttonPanel.add(toggleFormat);
 
-        // For pop up messages
-        this.popUpFrame = new JFrame("Dialogue");
-    }
+		buttonPanel.add(subHour);
+		buttonPanel.add(subMinute);
+		buttonPanel.add(subSecond);
+		buttonPanel.add(togglePause);
 
-    /**
-     * Handles GUI event responses such as button presses.
-     *
-     * @param event
-     *              the event that has occurred
-     * @post the appropriate response to the event will be executed
-     */
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-        switch (event.getActionCommand()) {
-            case "Hour +":
-                this.coolClock.addTime(3600);
-                break;
-            case "Minutes +":
-                this.coolClock.addTime(60);
-                break;
-            case "Seconds +":
-                this.coolClock.addTime(1);
-                break;
-            case "Start/Pause":
-                this.coolClock.togglePause();
-                break;
-            case "Toggle 24 hour/12 hour format":
-                this.coolClock.toggleHourFormat();
-                break;
-            case "Hour -":
-                this.coolClock.addTime(-3600);
-                break;
-            case "Minutes -":
-                this.coolClock.addTime(-60);
-                break;
-            case "Seconds -":
-                this.coolClock.addTime(-1);
-                break;
-            default:
-                this.displayMessage("ERROR: Unrecognized event");
-                break;
-        }
-    }
+		// Add the buttonPanel to our JFrame
+		getContentPane().add(buttonPanel);
 
-    /**
-     * Calls setDisplay in displayPanel
-     *
-     * @param digits
-     *               a four digit number to be displayed on the clock face
-     * @param colon
-     *               true if colon should be displayed, false if it should not
-     * @param msg
-     *               the message to be displayed next to the digit display (am/pm)
-     */
-    public void setDisplay(final int[] digits, final boolean colon, final String msg) {
-        this.displayPanel.setDisplay(digits, colon, msg);
-    }
+		// Reveal ourselves to the world
+		setVisible(true);
 
-    /**
-     * Displays a message popup for errors or other messages.
-     *
-     * @param msg
-     *            The string to be displayed in the dialogue window
-     */
-    public void displayMessage(final String msg) {
-        JOptionPane.showMessageDialog(this.popUpFrame, msg);
-    }
+		// For pop up messages
+		this.popUpFrame = new JFrame(
+			"Dialogue");
+	}
+
+	/**
+	 * Handles GUI event responses such as button presses.
+	 *
+	 * @param event
+	 *        the event that has occurred
+	 * @post the appropriate response to the event will be executed
+	 */
+	@Override
+	public void actionPerformed(final ActionEvent event) {
+
+		switch (event.getActionCommand()) {
+		case "Hour +":
+			this.coolClock.addTime(3600);
+			break;
+		case "Minutes +":
+			this.coolClock.addTime(60);
+			break;
+		case "Seconds +":
+			this.coolClock.addTime(1);
+			break;
+		case "Start/Pause":
+			this.coolClock.togglePause();
+			break;
+		case "Toggle 24 hour/12 hour format":
+			this.coolClock.toggleHourFormat();
+			break;
+		case "Hour -":
+			this.coolClock.addTime(-3600);
+			break;
+		case "Minutes -":
+			this.coolClock.addTime(-60);
+			break;
+		case "Seconds -":
+			this.coolClock.addTime(-1);
+			break;
+		default:
+			displayMessage("ERROR: Unrecognized event");
+			break;
+		}
+	}
+
+	/**
+	 * Calls setDisplay in displayPanel
+	 *
+	 * @param digits
+	 *        a four digit number to be displayed on the clock face
+	 * @param colon
+	 *        true if colon should be displayed, false if it should not
+	 * @param msg
+	 *        the message to be displayed next to the digit display (am/pm)
+	 */
+	public void setDisplay(final int[] digits, final boolean colon, final String msg) {
+
+		this.displayPanel.setDisplay(digits, colon, msg);
+	}
+
+	/**
+	 * Displays a message popup for errors or other messages.
+	 *
+	 * @param msg
+	 *        The string to be displayed in the dialogue window
+	 */
+	public void displayMessage(final String msg) {
+
+		JOptionPane.showMessageDialog(this.popUpFrame, msg);
+	}
 
 }

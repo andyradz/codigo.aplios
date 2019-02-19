@@ -25,6 +25,11 @@ import javax.swing.table.TableModel;
  * @version 1.0 03/03/99
  */
 public class IndicatorTableExample extends JPanel {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 524115731094144146L;
+
 	private static final int MAX = 100;
 
 	private static final int MIN = 0;
@@ -34,8 +39,13 @@ public class IndicatorTableExample extends JPanel {
 		setLayout(new BorderLayout());
 
 		final DefaultTableModel dm = new DefaultTableModel() {
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 5067692475555558571L;
+
 			@Override
-			public Class getColumnClass(final int col) {
+			public Class<?> getColumnClass(final int col) {
 
 				switch (col) {
 				case 0:
@@ -68,8 +78,7 @@ public class IndicatorTableExample extends JPanel {
 					return;
 				}
 				try {
-					final Integer integer = new Integer(
-						obj.toString());
+					final Integer integer = Integer.valueOf(obj.toString());
 					super.setValueAt(checkMinMax(integer), row, col);
 				}
 				catch (final NumberFormatException ex) {
@@ -77,31 +86,12 @@ public class IndicatorTableExample extends JPanel {
 				}
 			}
 		};
-		dm.setDataVector(new Object[][] {
-				{
-						"not human",
-						new Integer(
-							100),
-						new Integer(
-							100) },
-				{
-						"hard worker",
-						new Integer(
-							76),
-						new Integer(
-							76) },
-				{
-						"ordinary guy",
-						new Integer(
-							51),
-						new Integer(
-							51) },
-				{
-						"lazy fellow",
-						new Integer(
-							12),
-						new Integer(
-							12) } },
+		dm.setDataVector(
+				new Object[][] {
+						{ "not human", Integer.valueOf(100), Integer.valueOf(100) },
+						{ "hard worker", Integer.valueOf(76), Integer.valueOf(76) },
+						{ "ordinary guy", Integer.valueOf(51), Integer.valueOf(51) },
+						{ "lazy fellow", Integer.valueOf(12), Integer.valueOf(12) } },
 				new Object[] { "Name", "Result", "Indicator" });
 
 		final JTable table = new JTable(
@@ -114,13 +104,10 @@ public class IndicatorTableExample extends JPanel {
 		renderer.setBackground(table.getBackground());
 
 		// set limit value and fill color
-		final Hashtable limitColors = new Hashtable();
-		limitColors.put(new Integer(
-			0), Color.green);
-		limitColors.put(new Integer(
-			60), Color.yellow);
-		limitColors.put(new Integer(
-			80), Color.CYAN);
+		final Hashtable<Integer, Color> limitColors = new Hashtable<>();
+		limitColors.put(Integer.valueOf(0), Color.green);
+		limitColors.put(Integer.valueOf(60), Color.yellow);
+		limitColors.put(Integer.valueOf(80), Color.CYAN);
 		renderer.setLimits(limitColors);
 		table.getColumnModel()
 				.getColumn(2)
@@ -178,8 +165,7 @@ public class IndicatorTableExample extends JPanel {
 			intValue = IndicatorTableExample.MIN;
 		else if (IndicatorTableExample.MAX < intValue)
 			intValue = IndicatorTableExample.MAX;
-		return new Integer(
-			intValue);
+		return Integer.valueOf(intValue);
 	}
 }
 
@@ -188,19 +174,28 @@ public class IndicatorTableExample extends JPanel {
  */
 
 class IndicatorCellRenderer extends JProgressBar implements TableCellRenderer {
-	private Hashtable limitColors;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 2009573217864528893L;
+
+	private Hashtable<Integer, Color> limitColors;
 
 	private int[] limitValues;
 
 	public IndicatorCellRenderer() {
 
-		super(SwingConstants.HORIZONTAL);
+		super(
+				SwingConstants.HORIZONTAL);
 		setBorderPainted(false);
 	}
 
 	public IndicatorCellRenderer(final int min, final int max) {
 
-		super(SwingConstants.HORIZONTAL, min, max);
+		super(
+				SwingConstants.HORIZONTAL,
+				min,
+				max);
 		setBorderPainted(false);
 	}
 
@@ -231,15 +226,16 @@ class IndicatorCellRenderer extends JProgressBar implements TableCellRenderer {
 		return this;
 	}
 
-	public void setLimits(final Hashtable limitColors) {
+	public void setLimits(final Hashtable<Integer, Color> limitColors) {
 
 		this.limitColors = limitColors;
 		int i = 0;
 		final int n = limitColors.size();
 		this.limitValues = new int[n];
-		final Enumeration e = limitColors.keys();
+		final Enumeration<Integer> e = limitColors.keys();
 		while (e.hasMoreElements())
-			this.limitValues[i++] = ((Integer) e.nextElement()).intValue();
+			this.limitValues[i++] = e.nextElement()
+					.intValue();
 		sort(this.limitValues);
 	}
 
@@ -250,8 +246,7 @@ class IndicatorCellRenderer extends JProgressBar implements TableCellRenderer {
 			int i;
 			for (i = 0; i < this.limitValues.length; i++)
 				if (this.limitValues[i] < value)
-					color = (Color) this.limitColors.get(new Integer(
-						this.limitValues[i]));
+					color = this.limitColors.get(Integer.valueOf(this.limitValues[i]));
 		}
 		return color;
 	}

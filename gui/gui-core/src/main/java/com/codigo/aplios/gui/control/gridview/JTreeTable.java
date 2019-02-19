@@ -31,8 +31,10 @@ import javax.swing.tree.TreePath;
  * @author Scott Violet
  */
 public class JTreeTable extends JTable {
+
+	private static final long		serialVersionUID	= 1100145954487305357L;
 	/** A subclass of JTree. */
-	protected TreeTableCellRenderer tree;
+	protected TreeTableCellRenderer	tree;
 
 	public JTreeTable(final TreeTableModel treeTableModel) {
 
@@ -119,12 +121,15 @@ public class JTreeTable extends JTable {
 	 * A TreeCellRenderer that displays a JTree.
 	 */
 	public class TreeTableCellRenderer extends JTree implements TableCellRenderer {
+
+		private static final long	serialVersionUID	= 3868585193535872154L;
 		/** Last table/tree row asked to renderer. */
-		protected int visibleRow;
+		protected int				visibleRow;
 
 		public TreeTableCellRenderer(final TreeModel model) {
 
-			super(model);
+			super(
+					model);
 		}
 
 		/**
@@ -231,7 +236,7 @@ public class JTreeTable extends JTable {
 					if (getColumnClass(counter) == TreeTableModel.class) {
 						final MouseEvent me = (MouseEvent) e;
 						final MouseEvent newME = new MouseEvent(
-							JTreeTable.this.tree, me.getID(), me.getWhen(), me.getModifiers(),
+							JTreeTable.this.tree, me.getID(), me.getWhen(), me.getModifiersEx(),
 							me.getX() - getCellRect(0, counter, true).x, me.getY(), me.getClickCount(),
 							me.isPopupTrigger());
 						JTreeTable.this.tree.dispatchEvent(newME);
@@ -247,8 +252,10 @@ public class JTreeTable extends JTable {
 	 * updated in the DefaultTreeSelectionModel.
 	 */
 	class ListToTreeSelectionModelWrapper extends DefaultTreeSelectionModel {
+
+		private static final long	serialVersionUID	= -161684956663964726L;
 		/** Set to true when we are updating the ListSelectionModel. */
-		protected boolean updatingListSelectionModel;
+		protected boolean			updatingListSelectionModel;
 
 		public ListToTreeSelectionModelWrapper() {
 

@@ -19,8 +19,13 @@ public final class Money implements Comparable<Money>, Serializable {
 	 * For example, adding together Euros and Dollars does not make any sense.
 	 */
 	public static final class MismatchedCurrencyException extends RuntimeException {
+
+		private static final long serialVersionUID = -572918744321166344L;
+
 		MismatchedCurrencyException(final String aMessage) {
-			super(aMessage);
+
+			super(
+					aMessage);
 		}
 	}
 
@@ -63,6 +68,7 @@ public final class Money implements Comparable<Money>, Serializable {
 	 *        is required, must match a rounding style used by {@link BigDecimal}.
 	 */
 	public Money(final BigDecimal amount, final Currency currency, final RoundingMode roundingStyle) {
+
 		this.mAmount = amount;
 		this.mCurrency = currency;
 		this.mRounding = roundingStyle;
@@ -79,7 +85,11 @@ public final class Money implements Comparable<Money>, Serializable {
 	 *        is required, can be positive or negative.
 	 */
 	public Money(final BigDecimal amount) {
-		this(amount, Money.DEFAULT_CURRENCY, Money.DEFAULT_ROUNDING);
+
+		this(
+				amount,
+				Money.DEFAULT_CURRENCY,
+				Money.DEFAULT_ROUNDING);
 	}
 
 	/**
@@ -94,7 +104,11 @@ public final class Money implements Comparable<Money>, Serializable {
 	 *        is required.
 	 */
 	public Money(final BigDecimal amount, final Currency currency) {
-		this(amount, currency, Money.DEFAULT_ROUNDING);
+
+		this(
+				amount,
+				currency,
+				Money.DEFAULT_ROUNDING);
 	}
 
 	/**

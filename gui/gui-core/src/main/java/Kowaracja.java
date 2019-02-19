@@ -16,6 +16,8 @@ public class Kowaracja {
 		// ograniczone z góry <? extends X> - oznacza "wszystkie podtypy X"
 		final List<? extends Number> integers = new ArrayList<Integer>() {
 
+			private static final long serialVersionUID = 7157083065889088020L;
+
 			{
 				this.add(Integer.valueOf(-12));
 				this.add(Integer.valueOf(-1));
@@ -28,6 +30,7 @@ public class Kowaracja {
 		// ograniczone z dołu <? super X> - oznacza "wszystkie nadtypy X"
 		final List<? super Integer> numbers = new ArrayList<Number>() {
 
+			private static final long serialVersionUID = -7254494440350340861L;
 			{
 				this.add(100d);
 				this.add(200.f);
@@ -65,6 +68,7 @@ public class Kowaracja {
 		// nowa klasa
 		final List<? super Integer> ints1 = new ArrayList<Number>() {
 
+			private static final long serialVersionUID = 4410863358691129367L;
 			{
 				this.add(213);
 			}
@@ -73,6 +77,7 @@ public class Kowaracja {
 		// kontrwariacja
 		List<? super Integer> ints = new ArrayList<Number>() {
 
+			private static final long serialVersionUID = 1330842375469505803L;
 			{
 				this.add(12);
 				this.add(11);
@@ -81,6 +86,7 @@ public class Kowaracja {
 		Kowaracja.log2(ints);
 		ints = new ArrayList<>() {
 
+			private static final long serialVersionUID = -7077319666395888507L;
 			{
 				this.add(12);
 				this.add(11);
@@ -89,6 +95,8 @@ public class Kowaracja {
 		Kowaracja.log2(ints);
 		// kowariacja
 		List<? extends Number> nums = new ArrayList<Integer>() {
+
+			private static final long serialVersionUID = 3173822994286233411L;
 
 			{
 				this.add(1);
@@ -100,6 +108,8 @@ public class Kowaracja {
 		Kowaracja.log1(nums);
 		nums = new ArrayList<>() {
 
+			private static final long serialVersionUID = -8809754766943624574L;
+
 			{
 				this.add(1);
 				this.add(2);
@@ -110,6 +120,8 @@ public class Kowaracja {
 		Kowaracja.log1(nums);
 		nums = new ArrayList<Byte>() {
 
+			private static final long serialVersionUID = 3955191885162971631L;
+
 			{
 				this.add((byte) 12);
 				this.add((byte) 11);
@@ -119,17 +131,23 @@ public class Kowaracja {
 		// Biwariacja
 		List<?> binums = new ArrayList<Integer>() {
 
+			private static final long serialVersionUID = 5343447985084629621L;
+
 			{
 				this.add(223);
 			}
 		};
 		binums = new ArrayList<Byte>() {
 
+			private static final long serialVersionUID = -517821077269213553L;
+
 			{
 				this.add((byte) 3);
 			}
 		};
 		binums = new ArrayList<Number>() {
+
+			private static final long serialVersionUID = 4605414866071399390L;
 
 			{
 				this.add((byte) 3);
@@ -138,6 +156,8 @@ public class Kowaracja {
 		binums = nums;
 		binums = ints;
 		binums = new ArrayList<String>() {
+
+			private static final long serialVersionUID = -1697953312462873627L;
 
 			{
 				this.add("Andrzej");
@@ -150,7 +170,6 @@ public class Kowaracja {
 	@Override
 	public int hashCode() {
 
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
 
@@ -256,20 +275,6 @@ class Para<S, T> {
 
 	private Object addObjects(final Object o1, final Object o2) throws Exception {
 
-		class me<T extends Number> implements Comparable<T> {
-
-			public me() {
-
-			}
-
-			@Override
-			public int compareTo(final T arg0) {
-
-				return 0;
-			}
-		}
-		;
-
 		if (o1 instanceof String)
 			return (String) o1 + o2; // konkatenacja
 
@@ -292,7 +297,7 @@ class Para<S, T> {
 
 		// Ani String ani Number - więc musi mieć metodę add(...)
 
-		final Class typ = o1.getClass();
+		final Class<?> typ = o1.getClass();
 		final Method m = typ.getDeclaredMethod("add", typ);
 		return m.invoke(o1, o2);
 	}
@@ -319,23 +324,23 @@ class Para<S, T> {
 
 	public void swap() {
 
-		class Dos {
+		// class Dos {
+		//
+		// public int compareTo(final String o) {
+		//
+		// // TODO Auto-generated method stub
+		// return 0;
+		// }
+		// }
+		// ;
 
-			public int compareTo(final String o) {
-
-				// TODO Auto-generated method stub
-				return 0;
-			}
-		}
-		;
-
-		new Dos();
+		// new Dos();
 
 		// s.compareTo("");
 
-		final T temp = (T) this.first;
-		this.first = (S) this.last;
-		this.last = temp;
+		// final T temp = (T) this.first;
+		// this.first = (S) this.last;
+		// this.last = temp;
 	}
 
 	@Override

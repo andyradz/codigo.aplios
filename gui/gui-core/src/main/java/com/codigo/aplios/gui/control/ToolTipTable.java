@@ -138,6 +138,8 @@ class TextWithIconCellRenderer extends DefaultTableCellRenderer {
 	@Override
 	protected void setValue(final Object value) {
 
+		setText("");
+		setIcon(null);
 		if (value instanceof DataWithIcon) {
 			if (value != null) {
 				final DataWithIcon d = (DataWithIcon) value;
@@ -150,10 +152,6 @@ class TextWithIconCellRenderer extends DefaultTableCellRenderer {
 				setHorizontalAlignment(SwingConstants.LEFT);
 				setVerticalAlignment(SwingConstants.CENTER);
 			}
-			else {
-				setText("");
-				setIcon(null);
-			}
 		}
 		else
 			super.setValue(value);
@@ -161,6 +159,9 @@ class TextWithIconCellRenderer extends DefaultTableCellRenderer {
 }
 
 class MultiLineHeaderRenderer extends JPanel implements TableCellRenderer {
+
+	private static final long serialVersionUID = -2611067759297112439L;
+
 	public MultiLineHeaderRenderer(final int horizontalAlignment, final int verticalAlignment) {
 
 		this.horizontalAlignment = horizontalAlignment;
@@ -333,15 +334,18 @@ class DataWithIcon {
 }
 
 class CurrencyTableModel extends AbstractTableModel {
+
+	private static final long serialVersionUID = 8401204432358133497L;
+
 	protected String[] columnNames = { "Currency", "Yesterday", "Today", "Change" };
 
 	// Constructor: calculate currency change to create the last column
 	public CurrencyTableModel() {
 
 		for (int i = 0; i < this.data.length; i++)
-			this.data[i][CurrencyTableModel.DIFF_COLUMN] = new Double(
-				((Double) this.data[i][CurrencyTableModel.NEW_RATE_COLUMN]).doubleValue()
-						- ((Double) this.data[i][CurrencyTableModel.OLD_RATE_COLUMN]).doubleValue());
+			this.data[i][CurrencyTableModel.DIFF_COLUMN] = Double
+					.valueOf(((Double) this.data[i][CurrencyTableModel.NEW_RATE_COLUMN]).doubleValue()
+							- ((Double) this.data[i][CurrencyTableModel.OLD_RATE_COLUMN]).doubleValue());
 	}
 
 	// Implementation of TableModel interface
@@ -364,7 +368,7 @@ class CurrencyTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public Class getColumnClass(final int column) {
+	public Class<?> getColumnClass(final int column) {
 
 		return (this.data[0][column]).getClass();
 	}
@@ -383,78 +387,31 @@ class CurrencyTableModel extends AbstractTableModel {
 
 	protected static final int COLUMN_COUNT = 4;
 
-	protected static final Class thisClass = CurrencyTableModel.class;
+	protected static final Class<?> thisClass = CurrencyTableModel.class;
 
 	protected Object[][] data = new Object[][] {
 			{
 					new DataWithIcon(
 						"Belgian Franc", new ImageIcon(
 							CurrencyTableModel.thisClass.getResource("belgium.gif"))),
-					new Double(
-						37.6460110),
-					new Double(
-						37.6508921),
+					Double.valueOf(37.6460110),
+					Double.valueOf(37.6508921),
 					null },
-			{
-					new DataWithIcon(
-						"British Pound", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("gb.gif"))),
-					new Double(
-						0.6213051),
-					new Double(
-						0.6104102),
-					null },
-			{
-					new DataWithIcon(
-						"Canadian Dollar", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("canada.gif"))),
-					new Double(
-						1.4651209),
-					new Double(
-						1.5011104),
-					null },
-			{
-					new DataWithIcon(
-						"French Franc", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("france.gif"))),
-					new Double(
-						6.1060001),
-					new Double(
-						6.0100101),
-					null },
-			{
-					new DataWithIcon(
-						"Italian Lire", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("italy.gif"))),
-					new Double(
-						1181.3668977),
-					new Double(
-						1182.104),
-					null },
-			{
-					new DataWithIcon(
-						"German Mark", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("germany.gif"))),
-					new Double(
-						1.8191804),
-					new Double(
-						1.8223421),
-					null },
-			{
-					new DataWithIcon(
-						"Japanese Yen", new ImageIcon(
-							CurrencyTableModel.thisClass.getResource("japan.gif"))),
-					new Double(
-						141.0815412),
-					new Double(
-						121.0040432),
-					null } };
+			null };
 }
 
 class ToolTipFractionCellRenderer extends FractionCellRenderer {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 7596304764121836978L;
+
 	public ToolTipFractionCellRenderer(final int integer, final int fraction, final int maxFraction, final int align) {
 
-		super(integer, fraction, align);
+		super(
+				integer,
+				fraction,
+				align);
 		this.maxFraction = maxFraction; // Number of tooltip fraction digits
 	}
 

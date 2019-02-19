@@ -25,7 +25,6 @@ public final class XbCharsetProvider extends CharsetProvider {
 
 	/**
 	 * Typ wyliczeniowy do określenia standarów kodowania znaków dla danych zapisanych w formacie XBase
-	 *
 	 */
 	private enum XbCharsets {
 
@@ -37,10 +36,12 @@ public final class XbCharsetProvider extends CharsetProvider {
 		 * (PN-T-42118:1993) opisująca kodowanie polskich liter diakrytyzowanych w kodach 8 bitowych.
 		 */
 		LATIN2("LATIN2", "CP-852", "852"),
+
 		/**
 		 * Sposób kodowania koduje wyłącznie cyfry.
 		 */
 		ROT5("ROT5"),
+
 		/**
 		 * ROT13 – prosty szyfr przesuwający, którego działanie polega na zamianie każdego znaku alfabetu
 		 * łacińskiego na znak występujący 13 pozycji po nim, przy czym wielkość liter nie ma przy
@@ -48,12 +49,14 @@ public final class XbCharsetProvider extends CharsetProvider {
 		 * Rzymie.
 		 */
 		ROT13("ROT13"),
+
 		/**
 		 * ROT47 – kodowanie przesuwające, zamieniające każdy znak ASCII z przedziału 33-126 na znak
 		 * znajdujący się 47 pozycji dalej, ale nie dalej niż do 126 pozycji. Podobnie jak ROT13 jest on
 		 * samoodwracalny.
 		 */
 		ROT47("ROT47"),
+
 		/**
 		 * Mazovia – 8-bitowe kodowanie znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
 		 * kompatybilnych. Powstało na potrzeby projektowanego polskiego komputera klasy IBM PC o nazwie
@@ -62,6 +65,7 @@ public final class XbCharsetProvider extends CharsetProvider {
 		 * 8-bitowym — tzw. kod MAZOVIA w Spółce Akcyjnej „Mikrokomputery”[1].
 		 */
 		MAZOVIA("MAZOVIA", "CP-896", "CP-896", "CP-620", "CP-620", "CP790", "CP-790"),
+
 		/**
 		 * kodowanie 8-bitowe znaków przeznaczone do stosowania w systemach operacyjnych MS-DOS i
 		 * kompatybilnych. Zostało stworzone przez braci Kamenickich z Czechosłowacji, by umożliwić
@@ -108,45 +112,29 @@ public final class XbCharsetProvider extends CharsetProvider {
 	@Override
 	public Charset charsetForName(final String charsetName) {
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.ROT5.name()))
-			return new Rot5Charset(
-				XbCharsets.ROT5.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.ROT5.name()))
+			return new Rot5Charset(XbCharsets.ROT5.name(), null);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.ROT13.name()))
-			return new Rot13Charset(
-				XbCharsets.ROT13.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.ROT13.name()))
+			return new Rot13Charset(XbCharsets.ROT13.name(), null);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.ROT47.name()))
-			return new Rot47Charset(
-				XbCharsets.ROT47.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.ROT47.name()))
+			return new Rot47Charset(XbCharsets.ROT47.name(), null);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.LATIN2.name()))
-			return new IBMLatinCharset(
-				XbCharsets.LATIN2.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.LATIN2.name()))
+			return new IBMLatinCharset(XbCharsets.LATIN2.name(), null);
 
-		if (Stream.of(XbCharsets.MAZOVIA.charsetAliases)
-				.anyMatch(item -> item.equalsIgnoreCase(charsetName.trim())))
-			return new MazoviaCharset(
-				XbCharsets.MAZOVIA.name(), XbCharsets.MAZOVIA.charsetAliases);
+		if (Stream.of(XbCharsets.MAZOVIA.charsetAliases).anyMatch(item -> item.equalsIgnoreCase(charsetName.trim())))
+			return new MazoviaCharset(XbCharsets.MAZOVIA.name(), XbCharsets.MAZOVIA.charsetAliases);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.MAZOVIA.name()))
-			return new MazoviaCharset(
-				XbCharsets.MAZOVIA.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.MAZOVIA.name()))
+			return new MazoviaCharset(XbCharsets.MAZOVIA.name(), null);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.KAMENICKY.name()))
-			return new KamenickyCharset(
-				XbCharsets.KAMENICKY.name(), XbCharsets.KAMENICKY.charsetAliases);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.KAMENICKY.name()))
+			return new KamenickyCharset(XbCharsets.KAMENICKY.name(), XbCharsets.KAMENICKY.charsetAliases);
 
-		if (EnumHelper.getName(XbCharsets.class, charsetName.trim())
-				.equalsIgnoreCase(XbCharsets.KAMENICKY.name()))
-			return new MazoviaCharset(
-				XbCharsets.KAMENICKY.name(), null);
+		if (EnumHelper.getName(XbCharsets.class, charsetName.trim()).equalsIgnoreCase(XbCharsets.KAMENICKY.name()))
+			return new MazoviaCharset(XbCharsets.KAMENICKY.name(), null);
 
 		return null;
 	}
@@ -161,18 +149,14 @@ public final class XbCharsetProvider extends CharsetProvider {
 
 		if ((XbCharsetProvider.charsets == null) || XbCharsetProvider.charsets.isEmpty()) {
 			XbCharsetProvider.charsets = Lists.mutable.empty();
-			XbCharsetProvider.charsets.add(new Rot5Charset(
-				XbCharsets.ROT5.name(), null));
-			XbCharsetProvider.charsets.add(new Rot13Charset(
-				XbCharsets.ROT13.name(), null));
-			XbCharsetProvider.charsets.add(new Rot47Charset(
-				XbCharsets.ROT47.name(), null));
-			XbCharsetProvider.charsets.add(new IBMLatinCharset(
-				XbCharsets.LATIN2.name(), null));
-			XbCharsetProvider.charsets.add(new MazoviaCharset(
-				XbCharsets.MAZOVIA.name(), XbCharsets.MAZOVIA.charsetAliases));
-			XbCharsetProvider.charsets.add(new KamenickyCharset(
-				XbCharsets.KAMENICKY.name(), XbCharsets.KAMENICKY.charsetAliases));
+			XbCharsetProvider.charsets.add(new Rot5Charset(XbCharsets.ROT5.name(), null));
+			XbCharsetProvider.charsets.add(new Rot13Charset(XbCharsets.ROT13.name(), null));
+			XbCharsetProvider.charsets.add(new Rot47Charset(XbCharsets.ROT47.name(), null));
+			XbCharsetProvider.charsets.add(new IBMLatinCharset(XbCharsets.LATIN2.name(), null));
+			XbCharsetProvider.charsets
+				.add(new MazoviaCharset(XbCharsets.MAZOVIA.name(), XbCharsets.MAZOVIA.charsetAliases));
+			XbCharsetProvider.charsets
+				.add(new KamenickyCharset(XbCharsets.KAMENICKY.name(), XbCharsets.KAMENICKY.charsetAliases));
 
 		}
 		return XbCharsetProvider.charsets.iterator();

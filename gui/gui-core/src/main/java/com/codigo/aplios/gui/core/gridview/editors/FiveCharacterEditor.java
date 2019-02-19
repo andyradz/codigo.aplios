@@ -12,9 +12,12 @@ import javax.swing.border.LineBorder;
 
 public class FiveCharacterEditor extends DefaultCellEditor {
 
+	private static final long serialVersionUID = -3352104220279754899L;
+
 	FiveCharacterEditor() {
 
-		super(new JTextField());
+		super(
+				new JTextField());
 	}
 
 	@Override

@@ -176,13 +176,13 @@ public class GenericRepository<T extends EntityModel> implements Repository<T> {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
-	private void run(final Consumer<EntityManager> operator) {
-
-		this.run(entityManager -> {
-			operator.accept(entityManager);
-			return null;
-		});
-	}
+	// private void run(final Consumer<EntityManager> operator) {
+	//
+	// this.run(entityManager -> {
+	// operator.accept(entityManager);
+	// return null;
+	// });
+	// }
 
 	// -----------------------------------------------------------------------------------------------------------------
 	private TypedQuery<T> createTypedQuery(final IQueryable<T> queryBuilder) {

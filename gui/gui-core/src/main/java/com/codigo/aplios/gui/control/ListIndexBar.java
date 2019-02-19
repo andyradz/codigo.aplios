@@ -39,6 +39,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ListIndexBar extends JComponent {
 
+	private static final long serialVersionUID = 2806056782392656349L;
+
 	public static void main(final String[] args) {
 
 		final Color MARKER_COLOUR = Color.GREEN;

@@ -9,311 +9,316 @@ import java.util.List;
 
 // https://www.clicketyclick.dk/databases/xbase/format/dbf.html#DBF_NOTE_12_TARGET
 /**
- * The data file with suffix DBF is the central table in an Xbase database. All other data files are related to this one
- * file. The Data File is a mix of binary and ASCII data. Header contains binary data. The records are all in ASCII
- * (except ofcause the binary objects like pictures).
+ * The data file with suffix DBF is the central table in an Xbase database. All other data files are
+ * related to this one file. The Data File is a mix of binary and ASCII data. Header contains binary
+ * data. The records are all in ASCII (except ofcause the binary objects like pictures).
  *
- * Several sources claim that dBASE clears the header on creation with blanks (20h). But I've seen data in the reserved
- * areas.
+ * Several sources claim that dBASE clears the header on creation with blanks (20h). But I've seen
+ * data in the reserved areas.
  *
- * Some documents states that deleted records are overwritten by new valid records. My experience is that new records
- * are appended to the data file - not inserted. deleted record can only be deleted physically using the PACK command.
- * Even after PACK the deleted record exists after the EOF mark. The file is not truncated in dBASE III (But don't count
- * on it ;-)
+ * Some documents states that deleted records are overwritten by new valid records. My experience is
+ * that new records are appended to the data file - not inserted. deleted record can only be deleted
+ * physically using the PACK command. Even after PACK the deleted record exists after the EOF mark.
+ * The file is not truncated in dBASE III (But don't count on it ;-)
  *
- * Note that this structure is valid for Xbase - and dBASE v. III - 5. Later versions of dBASE has a different layout,
- * like dBASE 7 (see http://www.dbase.com/KnowledgeBase/int/db7_file_fmt.htm
+ * Note that this structure is valid for Xbase - and dBASE v. III - 5. Later versions of dBASE has a
+ * different layout, like dBASE 7 (see http://www.dbase.com/KnowledgeBase/int/db7_file_fmt.htm
  *
  * @author dp0470
  *
  */
 public class XbFileHeader {
 
-    public static XbFileHeaderBuilder builder() {
+	public static XbFileHeaderBuilder builder() {
 
-        return new XbFileHeader.XbFileHeaderBuilder(Charset.forName("ASCII"));
-    }
+		return new XbFileHeader.XbFileHeaderBuilder(Charset.forName("ASCII"));
+	}
 
-    public static XbFileHeaderBuilder builder(final XbFileHeader fileHeader) {
+	public static XbFileHeaderBuilder builder(final XbFileHeader fileHeader) {
 
-        return new XbFileHeader.XbFileHeaderBuilder(fileHeader);
-    }
+		return new XbFileHeader.XbFileHeaderBuilder(fileHeader);
+	}
 
-    public static XbFileHeaderBuilder builder(final byte[] rawData) {
+	public static XbFileHeaderBuilder builder(final byte[] rawData) {
 
-        return new XbFileHeader.XbFileHeaderBuilder(rawData);
-    }
+		return new XbFileHeader.XbFileHeaderBuilder(rawData);
+	}
 
-    private final Charset charset;
+	private final Charset charset;
 
-    private final byte version;
+	private final byte version;
 
-    private final short lastUpdateYear;
+	private final short lastUpdateYear;
 
-    private final byte lastUpdateMonth;
+	private final byte lastUpdateMonth;
 
-    private final byte lastUpdateDay;
+	private final byte lastUpdateDay;
 
-    private final int recordsCount;
+	private final int recordsCount;
 
-    /**
-     * Length of the header structure
-     */
-    private final int headerSize;// = XbFileHeader.FileDescriptorSize;
+	/**
+	 * Length of the header structure
+	 */
+	private final int headerSize;// = XbFileHeader.FileDescriptorSize;
 
-    private final short recordSize;
+	private final short recordSize;
 
-    private final byte codepage;					// TODO: zamienić to na typ wyliczeniowy
+	private final byte codepage; // TODO: zamienić to na typ wyliczeniowy
 
-    private byte terminator;
+	private byte terminator;
 
-    private final List<XbFieldInfo> columns = new ArrayList<>();
+	private final List<XbFieldFormat> columns = new ArrayList<>();
 
-    /**
-     * Indicates whether header columns can be modified!
-     */
-    private boolean locked;
+	/**
+	 * Indicates whether header columns can be modified!
+	 */
+	private boolean locked;
 
-    /**
-     * When object is modified dirty flag is set
-     */
-    boolean isDirty;
+	/**
+	 * When object is modified dirty flag is set
+	 */
+	boolean isDirty;
 
-    private XbFileHeader(final XbFileHeaderBuilder headerBuilder) {
+	private XbFileHeader(final XbFileHeaderBuilder headerBuilder) {
 
-        this.charset = headerBuilder.charset;
-        this.terminator = 0x0D;
-        this.version = headerBuilder.version;
-        this.lastUpdateYear = headerBuilder.lastUpdateYear;
-        this.lastUpdateMonth = headerBuilder.lastUpdateMonth;
-        this.lastUpdateDay = headerBuilder.lastUpdateDay;
-        this.recordsCount = headerBuilder.recordsCount;
-        this.headerSize = headerBuilder.headerSize;
-        this.recordSize = headerBuilder.recordSize;
-        this.codepage = headerBuilder.codepage;
-        this.terminator = headerBuilder.terminator;
-        this.columns.addAll(headerBuilder.columns);
-    }
+		this.charset = headerBuilder.charset;
+		this.terminator = 0x0D;
+		this.version = headerBuilder.version;
+		this.lastUpdateYear = headerBuilder.lastUpdateYear;
+		this.lastUpdateMonth = headerBuilder.lastUpdateMonth;
+		this.lastUpdateDay = headerBuilder.lastUpdateDay;
+		this.recordsCount = headerBuilder.recordsCount;
+		this.headerSize = headerBuilder.headerSize;
+		this.recordSize = headerBuilder.recordSize;
+		this.codepage = headerBuilder.codepage;
+		this.terminator = headerBuilder.terminator;
+		this.columns.addAll(headerBuilder.columns);
+	}
 
-    public int getVersion() {
+	public int getVersion() {
 
-        return this.version;
-    }
+		return this.version;
+	}
 
-    public short getLastUpdateYear() {
+	public short getLastUpdateYear() {
 
-        return (short)(this.lastUpdateYear + 1900);
-    }
+		return (short) (this.lastUpdateYear + 1900);
+	}
 
-    public byte getLastUpdateMonth() {
+	public byte getLastUpdateMonth() {
 
-        return this.lastUpdateMonth;
-    }
+		return this.lastUpdateMonth;
+	}
 
-    public byte getLastUpdateDay() {
+	public byte getLastUpdateDay() {
 
-        return this.lastUpdateDay;
-    }
+		return this.lastUpdateDay;
+	}
 
-    public LocalDate getLastUpdateDate() {
+	public LocalDate getLastUpdateDate() {
 
-        return LocalDate.of(this.lastUpdateYear, this.lastUpdateMonth, this.lastUpdateDay);
-    }
+		return LocalDate.of(this.lastUpdateYear, this.lastUpdateMonth, this.lastUpdateDay);
+	}
 
-    public int getHeaderSize() {
+	public int getHeaderSize() {
 
-        return this.headerSize;
-    }
+		return this.headerSize;
+	}
 
-    public short getRecordSize() {
+	public short getRecordSize() {
 
-        return this.recordSize;
-    }
+		return this.recordSize;
+	}
 
-    public int getRecordsCount() {
+	public int getRecordsCount() {
 
-        return this.recordsCount;
-    }
+		return this.recordsCount;
+	}
 
-    public byte getCodepage() {
+	public byte getCodepage() {
 
-        return this.codepage;
-    }
+		return this.codepage;
+	}
 
-    public byte getTerminator() {
+	public byte getTerminator() {
 
-        return this.terminator;
-    }
+		return this.terminator;
+	}
 
-    public Charset getCharset() {
+	public Charset getCharset() {
 
-        return this.charset;
-    }
+		return this.charset;
+	}
 
-    public List<XbFieldInfo> getColumns() {
+	public List<XbFieldFormat> getColumns() {
 
-        return this.columns;
-    }
+		return this.columns;
+	}
 
-    // public IXbFileHederSpec
-    public Object test() {
+	// public IXbFileHederSpec
+	public Object test() {
 
-        // dla danej versji odczytujemy konfiguracje, limitacje itp.
-        return null;
-    }
+		// dla danej versji odczytujemy konfiguracje, limitacje itp.
+		return null;
+	}
 
-    boolean getLocked() {
+	boolean getLocked() {
 
-        return this.locked;
-    }
+		return this.locked;
+	}
 
-    public synchronized void unlock() {
+	public synchronized void unlock() {
 
-        this.locked = false;
-    }
+		this.locked = false;
+	}
 
-    /**
-     * Returns true when this object is modified after read or write.
-     */
-    public boolean getIsDirty() {
+	/**
+	 * Returns true when this object is modified after read or write.
+	 */
+	public boolean getIsDirty() {
 
-        return false;
-    }
+		return false;
+	}
 
-    public synchronized void setIsDirty(final boolean dirty) {
+	public synchronized void setIsDirty(final boolean dirty) {
 
-    }
+	}
 
-    static class XbFileHeaderBuilder {
+	static class XbFileHeaderBuilder {
 
-        private final Charset charset;
+		private final Charset charset;
 
-        private byte version;
+		private byte version;
 
-        private short lastUpdateYear;
+		private short lastUpdateYear;
 
-        private byte lastUpdateMonth;
+		private byte lastUpdateMonth;
 
-        private byte lastUpdateDay;
+		private byte lastUpdateDay;
 
-        private int recordsCount;
+		private int recordsCount;
 
-        private short headerSize;
+		private short headerSize;
 
-        private short recordSize;
+		private short recordSize;
 
-        private byte codepage;
+		private byte codepage;
 
-        private byte terminator;
+		private byte terminator;
 
-        private final List<XbFieldInfo> columns = new ArrayList<>();
+		private final List<XbFieldFormat> columns = new ArrayList<>();
 
-        public XbFileHeaderBuilder(final Charset charset) {
+		public XbFileHeaderBuilder(final Charset charset) {
 
-            this.charset = charset;
-        }
+			this.charset = charset;
+		}
 
-        public XbFileHeaderBuilder(final XbFileHeader fileHeader) {
+		public XbFileHeaderBuilder(final XbFileHeader fileHeader) {
 
-            this.charset = fileHeader.charset;
-            this.setVersion(fileHeader.version);
-            this.setLastUpdateYear(fileHeader.lastUpdateYear);
-            this.setLastUpdateMonth(fileHeader.lastUpdateMonth);
-            this.setLastUpdateDay(fileHeader.lastUpdateDay);
-        }
+			this.charset = fileHeader.charset;
+			setVersion(fileHeader.version);
+			setLastUpdateYear(fileHeader.lastUpdateYear);
+			setLastUpdateMonth(fileHeader.lastUpdateMonth);
+			setLastUpdateDay(fileHeader.lastUpdateDay);
+		}
 
-        public XbFileHeaderBuilder(final byte[] rawData) {
+		public XbFileHeaderBuilder(final byte[] rawData) {
 
-            this(Charset.forName("ASCII"));
+			this(
+					Charset.forName("ASCII"));
 
-            final ByteBuffer buffer = ByteBuffer.wrap(rawData);
-            buffer.order(ByteOrder.LITTLE_ENDIAN);
-            this.setVersion(buffer.get());
-            this.setLastUpdateYear(buffer.get());
-            this.setLastUpdateMonth(buffer.get());
-            this.setLastUpdateDay(buffer.get());
-            this.setRecordsCount(buffer.getInt());
-            this.setHeaderSize(buffer.getShort());
-            this.setRecordSize(buffer.getShort());
+			final ByteBuffer buffer = ByteBuffer.wrap(rawData);
+			buffer.order(ByteOrder.LITTLE_ENDIAN);
+			setVersion(buffer.get());
+			setLastUpdateYear(buffer.get());
+			setLastUpdateMonth(buffer.get());
+			setLastUpdateDay(buffer.get());
+			setRecordsCount(buffer.getInt());
+			setHeaderSize(buffer.getShort());
+			setRecordSize(buffer.getShort());
 
-            this.setCodepage(buffer.get(29));
-            this.setTerminator(buffer.get(31));
-            buffer.position(32);
-            this.setColumns(buffer);
-        }
+			setCodepage(buffer.get(29));
+			setTerminator(buffer.get(31));
+			buffer.position(32);
+			setColumns(buffer);
+		}
 
-        public XbFileHeaderBuilder setVersion(final byte version) {
+		public XbFileHeaderBuilder setVersion(final byte version) {
 
-            this.version = version;
-            return this;
-        }
+			this.version = version;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setLastUpdateYear(final short year) {
+		/**
+		 * @param year
+		 * @return
+		 */
+		public XbFileHeaderBuilder setLastUpdateYear(final short year) {
 
-            this.lastUpdateYear = year;
-            return this;
-        }
+			this.lastUpdateYear = year;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setLastUpdateMonth(final byte month) {
+		public XbFileHeaderBuilder setLastUpdateMonth(final byte month) {
 
-            this.lastUpdateMonth = month;
-            return this;
-        }
+			this.lastUpdateMonth = month;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setLastUpdateDay(final byte day) {
+		public XbFileHeaderBuilder setLastUpdateDay(final byte day) {
 
-            this.lastUpdateDay = day;
-            return this;
-        }
+			this.lastUpdateDay = day;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setRecordsCount(final int recordsCount) {
+		public XbFileHeaderBuilder setRecordsCount(final int recordsCount) {
 
-            this.recordsCount = recordsCount;
-            return this;
-        }
+			this.recordsCount = recordsCount;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setHeaderSize(final short headerSize) {
+		public XbFileHeaderBuilder setHeaderSize(final short headerSize) {
 
-            this.headerSize = headerSize;
-            return this;
-        }
+			this.headerSize = headerSize;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setRecordSize(final short recordSize) {
+		public XbFileHeaderBuilder setRecordSize(final short recordSize) {
 
-            this.recordSize = recordSize;
-            return this;
-        }
+			this.recordSize = recordSize;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setCodepage(final byte codePage) {
+		public XbFileHeaderBuilder setCodepage(final byte codePage) {
 
-            this.codepage = codePage;
-            return this;
-        }
+			this.codepage = codePage;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setTerminator(final byte terminator) {
+		public XbFileHeaderBuilder setTerminator(final byte terminator) {
 
-            this.terminator = terminator;
-            return this;
-        }
+			this.terminator = terminator;
+			return this;
+		}
 
-        public XbFileHeaderBuilder setColumns(final ByteBuffer buffer) {
+		public XbFileHeaderBuilder setColumns(final ByteBuffer buffer) {
 
-            // for (int idx = 0; idx < nNumFields; idx++) {
-            // this.columns.add(new XbFieldInfo(buffer));
-            // break;
-            // }
-            return this;
-        }
+			// for (int idx = 0; idx < nNumFields; idx++) {
+			// this.columns.add(new XbFieldInfo(buffer));
+			// break;
+			// }
+			return this;
+		}
 
-        public XbFileHeader build() {
+		public XbFileHeader build() {
 
-            return new XbFileHeader(this);
-        }
+			return new XbFileHeader(this);
+		}
 
-    }
+	}
 
-    static enum TransactionStatus {
+	static enum TransactionStatus {
 
-    }
+	}
 
 }

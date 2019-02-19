@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.codigo.aplios</groupId>
 	<artifactId>aplios</artifactId>
@@ -10,8 +8,8 @@
 	<properties>
 		<java.version>10</java.version>
 		<maven.compiler.release>10</maven.compiler.release>
-		<maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't -->
-		<maven.compiler.target>10</maven.compiler.target> <!--use release when importing -->
+		<maven.compiler.source>9</maven.compiler.source> <!--redundant, but IntelliJ doesn't -->
+		<maven.compiler.target>9</maven.compiler.target> <!--use release when importing -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<checker.framework.version>2.5.6</checker.framework.version>
 		<junit.version>4.12</junit.version>
@@ -29,7 +27,7 @@
 		<jaxb.api.version>2.3.0</jaxb.api.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>		
+		<annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
 	</properties>
 	<!-- <pluginRepositories> <pluginRepository> <id>some-repo</id> <name>Some 
 		Repository</name> <url>d:\codigo.warehouse\pakiety\maven\repository</url> 
@@ -43,6 +41,15 @@
 				<artifactId>maven-resources-plugin</artifactId> <version>2.4.3</version> 
 				<configuration> <encoding>${project.build.sourceEncoding}</encoding> </configuration> 
 				</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<failOnViolation>false</failOnViolation> <!-- this is actually true by default, but can be disabled -->
+					<printFailingErrors>true</printFailingErrors>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -277,7 +284,7 @@
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 			<!-- <dependency> <groupId>javax.xml.bind</groupId> <artifactId>jaxb-api</artifactId> 
-				<version>${jaxb.api.version}</version> </dependency> -->			
+				<version>${jaxb.api.version}</version> </dependency> -->
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
@@ -313,6 +320,15 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	<modules>
 		<module>sdk</module>
 		<module>corporate</module>

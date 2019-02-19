@@ -205,22 +205,20 @@ public enum XbCodePages {
 	public static Charset ofCodepage(final int codepage) {
 
 		if (codepage < 0)
-			throw new IllegalArgumentException(
-				"Wartość codepage nie może być ujemna!");
+			throw new IllegalArgumentException("Wartość codepage nie może być ujemna!");
 
 		final Supplier<XbCodePages> operator = () -> {
 			final Annotation annotation = XbCodePages.class.getAnnotation(DefaultEnumItem.class);
 
-			return annotation instanceof DefaultEnumItem ? DefaultEnumItem.class.cast(annotation)
-					.value() : XbCodePages.ASCII;
+			return annotation instanceof DefaultEnumItem ? DefaultEnumItem.class.cast(annotation).value()
+					: XbCodePages.ASCII;
 		};
 
-		return Stream.of(XbCodePages.values())
-				.filter(item -> Integer.valueOf(1)
-						.equals(Arrays.stream(item.codepages)
-								.filter(e -> Integer.valueOf(codepage)
-										.equals(e))
-								.count()))
+		return Stream
+			.of(XbCodePages.values())
+				.filter(item -> Integer
+					.valueOf(1)
+						.equals(Arrays.stream(item.codepages).filter(e -> Integer.valueOf(codepage).equals(e)).count()))
 				.findAny()
 				.orElse(operator.get()).charset;
 
@@ -236,7 +234,8 @@ public enum XbCodePages {
 	 */
 	public static int ofCharset(final Charset charset) {
 
-		return Stream.of(XbCodePages.values())
+		return Stream
+			.of(XbCodePages.values())
 				.filter(item -> item.charset.equals(charset))
 				.findAny()
 				.orElse(ASCII).codepages[0];

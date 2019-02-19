@@ -150,8 +150,10 @@ class StringSearchable implements Searchable<String, String> {
 	}
 }
 
-class AutocompleteJComboBox extends JComboBox {
+class AutocompleteJComboBox extends JComboBox<String> {
+
 	static final long serialVersionUID = 4321421L;
+
 	// private boolean isAutoCompleted = true;
 	private final Searchable<String, String> searchable;
 
@@ -176,13 +178,13 @@ class AutocompleteJComboBox extends JComboBox {
 						@Override
 						public void insertUpdate(final DocumentEvent arg0) {
 
-							this.update();
+							update();
 						}
 
 						@Override
 						public void removeUpdate(final DocumentEvent arg0) {
 
-							this.update();
+							update();
 						}
 
 						public void update() {

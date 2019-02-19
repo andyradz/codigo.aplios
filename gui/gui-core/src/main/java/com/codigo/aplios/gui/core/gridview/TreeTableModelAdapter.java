@@ -21,131 +21,133 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.tree.TreePath;
 
 /**
- * This is a wrapper class takes a TreeTableModel and implements the table model interface. The implementation is
- * trivial, with all of the event dispatching support provided by the superclass: the AbstractTableModel.
+ * This is a wrapper class takes a TreeTableModel and implements the table model interface. The
+ * implementation is trivial, with all of the event dispatching support provided by the superclass:
+ * the AbstractTableModel.
  *
  * @version 1.2 10/27/98
  *
  * @author Philip Milne
  * @author Scott Violet
  */
-public class TreeTableModelAdapter
-        extends AbstractTableModel {
+public class TreeTableModelAdapter extends AbstractTableModel {
 
-    JTree tree;
+	private static final long serialVersionUID = -4197012030989392568L;
 
-    TreeTableModel treeTableModel;
+	JTree tree;
 
-    public TreeTableModelAdapter(TreeTableModel treeTableModel, JTree tree) {
+	TreeTableModel treeTableModel;
 
-        this.tree = tree;
-        this.treeTableModel = treeTableModel;
+	public TreeTableModelAdapter(final TreeTableModel treeTableModel, final JTree tree) {
 
-        tree.addTreeExpansionListener(new TreeExpansionListener() {
-            // Don't use fireTableRowsInserted() here; the selection model
-            // would get updated twice.
-            @Override
-            public void treeExpanded(TreeExpansionEvent event) {
+		this.tree = tree;
+		this.treeTableModel = treeTableModel;
 
-                TreeTableModelAdapter.this.fireTableDataChanged();
-            }
+		tree.addTreeExpansionListener(new TreeExpansionListener() {
+			// Don't use fireTableRowsInserted() here; the selection model
+			// would get updated twice.
+			@Override
+			public void treeExpanded(final TreeExpansionEvent event) {
 
-            @Override
-            public void treeCollapsed(TreeExpansionEvent event) {
+				TreeTableModelAdapter.this.fireTableDataChanged();
+			}
 
-                TreeTableModelAdapter.this.fireTableDataChanged();
-            }
+			@Override
+			public void treeCollapsed(final TreeExpansionEvent event) {
 
-        });
+				TreeTableModelAdapter.this.fireTableDataChanged();
+			}
 
-        // Install a TreeModelListener that can update the table when
-        // tree changes. We use delayedFireTableDataChanged as we can
-        // not be guaranteed the tree will have finished processing
-        // the event before us.
-        treeTableModel.addTreeModelListener(new TreeModelListener() {
-            @Override
-            public void treeNodesChanged(TreeModelEvent e) {
+		});
 
-                TreeTableModelAdapter.this.delayedFireTableDataChanged();
-            }
+		// Install a TreeModelListener that can update the table when
+		// tree changes. We use delayedFireTableDataChanged as we can
+		// not be guaranteed the tree will have finished processing
+		// the event before us.
+		treeTableModel.addTreeModelListener(new TreeModelListener() {
+			@Override
+			public void treeNodesChanged(final TreeModelEvent e) {
 
-            @Override
-            public void treeNodesInserted(TreeModelEvent e) {
+				TreeTableModelAdapter.this.delayedFireTableDataChanged();
+			}
 
-                TreeTableModelAdapter.this.delayedFireTableDataChanged();
-            }
+			@Override
+			public void treeNodesInserted(final TreeModelEvent e) {
 
-            @Override
-            public void treeNodesRemoved(TreeModelEvent e) {
+				TreeTableModelAdapter.this.delayedFireTableDataChanged();
+			}
 
-                TreeTableModelAdapter.this.delayedFireTableDataChanged();
-            }
+			@Override
+			public void treeNodesRemoved(final TreeModelEvent e) {
 
-            @Override
-            public void treeStructureChanged(TreeModelEvent e) {
+				TreeTableModelAdapter.this.delayedFireTableDataChanged();
+			}
 
-                TreeTableModelAdapter.this.delayedFireTableDataChanged();
-            }
+			@Override
+			public void treeStructureChanged(final TreeModelEvent e) {
 
-        });
-    }
+				TreeTableModelAdapter.this.delayedFireTableDataChanged();
+			}
 
-    // Wrappers, implementing TableModel interface.
-    @Override
-    public int getColumnCount() {
+		});
+	}
 
-        return this.treeTableModel.getColumnCount();
-    }
+	// Wrappers, implementing TableModel interface.
+	@Override
+	public int getColumnCount() {
 
-    @Override
-    public String getColumnName(int column) {
+		return this.treeTableModel.getColumnCount();
+	}
 
-        return this.treeTableModel.getColumnName(column);
-    }
+	@Override
+	public String getColumnName(final int column) {
 
-    @Override
-    public Class getColumnClass(int column) {
+		return this.treeTableModel.getColumnName(column);
+	}
 
-        return this.treeTableModel.getColumnClass(column);
-    }
+	@Override
+	public Class<?> getColumnClass(final int column) {
 
-    @Override
-    public int getRowCount() {
+		return this.treeTableModel.getColumnClass(column);
+	}
 
-        return this.tree.getRowCount();
-    }
+	@Override
+	public int getRowCount() {
 
-    protected Object nodeForRow(int row) {
+		return this.tree.getRowCount();
+	}
 
-        TreePath treePath = this.tree.getPathForRow(row);
-        return treePath.getLastPathComponent();
-    }
+	protected Object nodeForRow(final int row) {
 
-    @Override
-    public Object getValueAt(int row, int column) {
+		final TreePath treePath = this.tree.getPathForRow(row);
+		return treePath.getLastPathComponent();
+	}
 
-        return this.treeTableModel.getValueAt(this.nodeForRow(row), column);
-    }
+	@Override
+	public Object getValueAt(final int row, final int column) {
 
-    @Override
-    public boolean isCellEditable(int row, int column) {
+		return this.treeTableModel.getValueAt(nodeForRow(row), column);
+	}
 
-        return this.treeTableModel.isCellEditable(this.nodeForRow(row), column);
-    }
+	@Override
+	public boolean isCellEditable(final int row, final int column) {
 
-    @Override
-    public void setValueAt(Object value, int row, int column) {
+		return this.treeTableModel.isCellEditable(nodeForRow(row), column);
+	}
 
-        this.treeTableModel.setValueAt(value, this.nodeForRow(row), column);
-    }
+	@Override
+	public void setValueAt(final Object value, final int row, final int column) {
 
-    /**
-     * Invokes fireTableDataChanged after all the pending events have been processed. SwingUtilities.invokeLater is used
-     * to handle this.
-     */
-    protected void delayedFireTableDataChanged() {
+		this.treeTableModel.setValueAt(value, nodeForRow(row), column);
+	}
 
-        SwingUtilities.invokeLater(() -> TreeTableModelAdapter.this.fireTableDataChanged());
-    }
+	/**
+	 * Invokes fireTableDataChanged after all the pending events have been processed.
+	 * SwingUtilities.invokeLater is used to handle this.
+	 */
+	protected void delayedFireTableDataChanged() {
+
+		SwingUtilities.invokeLater(() -> TreeTableModelAdapter.this.fireTableDataChanged());
+	}
 
 }

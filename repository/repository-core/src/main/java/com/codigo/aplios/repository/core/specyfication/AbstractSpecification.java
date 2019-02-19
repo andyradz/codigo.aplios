@@ -12,7 +12,6 @@ abstract class AbstractSpecification<T> implements Specification<T> {
 	public boolean isSatisfiedBy(final T t) {
 
 		return false;
-		// throw new NotImplementedException();
 	}
 
 	@Override
@@ -33,6 +32,7 @@ abstract class AbstractSpecification<T> implements Specification<T> {
 
 		final ParameterizedType type = (ParameterizedType) this.getClass()
 				.getGenericSuperclass();
-		return (Class<T>) type.getActualTypeArguments()[0];
+
+		return Class.class.cast(type.getActualTypeArguments()[0]);
 	}
 }

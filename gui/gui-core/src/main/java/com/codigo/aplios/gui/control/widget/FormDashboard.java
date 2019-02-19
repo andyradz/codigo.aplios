@@ -35,12 +35,12 @@ public class FormDashboard extends FormTemplate {
 	 * Initialize the contents of the frame.
 	 *
 	 */
-	private void initialize() {
+	// private void initialize() {
 
-		// final FormDashboard window = new FormDashboard();
-		// window.frame.setVisible(true);
-		// this.frame.setBounds(100, 100, 450, 300);
-		// this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	// final FormDashboard window = new FormDashboard();
+	// window.frame.setVisible(true);
+	// this.frame.setBounds(100, 100, 450, 300);
+	// this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// }
 
 }

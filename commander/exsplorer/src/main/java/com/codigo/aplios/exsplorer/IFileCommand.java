@@ -58,20 +58,20 @@ class FileLoader implements IFileCommand {
 class FileCommander {
 
 	// TODO:dodać miernik czasu tutaj
-	private final IFileCommand fileCommand;
+	// private final IFileCommand fileCommand;
 
-	public FileCommander(final IFileCommand fileCommand) {
-
-		this.fileCommand = fileCommand;
-	}
-
-	public void run() {
-
-		this.fileCommand.execute();
-	}
-
-	public void end() {
-
-		this.fileCommand.cancel();
-	}
+	// public FileCommander(final IFileCommand fileCommand) {
+	//
+	// this.fileCommand = fileCommand;
+	// }
+	//
+	// public void run() {
+	//
+	// this.fileCommand.execute();
+	// }
+	//
+	// public void end() {
+	//
+	// this.fileCommand.cancel();
+	// }
 }

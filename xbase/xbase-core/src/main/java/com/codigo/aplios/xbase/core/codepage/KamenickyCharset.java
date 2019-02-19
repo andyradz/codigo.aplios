@@ -150,9 +150,17 @@ public class KamenickyCharset extends Charset {
 			{ '\u25A0', 254 },
 			{ '\u00A0', 255 } };
 
+	/**
+	 * Podstawowy konstruktor obiektu klasy <code>KamenickyCharset</code>
+	 *
+	 * @param canonicalName
+	 * @param aliases
+	 */
 	public KamenickyCharset(final String canonicalName, final String[] aliases) {
 
-		super(canonicalName, aliases);
+		super(
+				canonicalName,
+				aliases);
 	}
 
 	@Override
@@ -164,15 +172,13 @@ public class KamenickyCharset extends Charset {
 	@Override
 	public CharsetDecoder newDecoder() {
 
-		return new KamenickyCharsetDecoder(
-			this, 1, 1);
+		return new KamenickyCharsetDecoder(this, 1, 1);
 	}
 
 	@Override
 	public CharsetEncoder newEncoder() {
 
-		return new KamenickyCharsetEncoder(
-			this, 1, 1);
+		return new KamenickyCharsetEncoder(this, 1, 1);
 	}
 
 	public class KamenickyCharsetEncoder extends CharsetEncoder {
@@ -180,12 +186,19 @@ public class KamenickyCharset extends Charset {
 		public KamenickyCharsetEncoder(final Charset cs, final float averageBytesPerChar, final float maxBytesPerChar,
 				final byte[] replacement) {
 
-			super(cs, averageBytesPerChar, maxBytesPerChar, replacement);
+			super(
+					cs,
+					averageBytesPerChar,
+					maxBytesPerChar,
+					replacement);
 		}
 
 		public KamenickyCharsetEncoder(final Charset cs, final float averageBytesPerChar, final float maxBytesPerChar) {
 
-			super(cs, averageBytesPerChar, maxBytesPerChar);
+			super(
+					cs,
+					averageBytesPerChar,
+					maxBytesPerChar);
 		}
 
 		@Override
@@ -222,7 +235,10 @@ public class KamenickyCharset extends Charset {
 		 */
 		public KamenickyCharsetDecoder(final Charset cs, final float averageCharsPerByte, final float maxCharsPerByte) {
 
-			super(cs, averageCharsPerByte, maxCharsPerByte);
+			super(
+					cs,
+					averageCharsPerByte,
+					maxCharsPerByte);
 		}
 
 		/*
