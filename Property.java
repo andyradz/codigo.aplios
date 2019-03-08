@@ -1,18 +1,11 @@
 package com.codigo.aplios.group.timeline.common.helper;
 
-import static com.codigo.aplios.group.timeline.common.helper.CompareOperator.EQUALS;
-import static com.codigo.aplios.group.timeline.common.helper.CompareOperator.EQUALSGREATERTHEN;
-import static com.codigo.aplios.group.timeline.common.helper.CompareOperator.GREATERTHEN;
-
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.function.Consumer;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
-import com.codigo.aplios.group.timeline.common.range.TimeRange;
 
 /**
  * @author dp0470
@@ -21,134 +14,174 @@ import com.codigo.aplios.group.timeline.common.range.TimeRange;
  */
 public final class Property<T> implements Comparable<Property<T>> {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-		Property<String> prop = Property.from("1111");
+		final Property<Integer> counter = Property.from(0);
+
+		final Runnable incrementCounter = () -> {
+
+			for (;;)
+				try {
+					// Thread.sleep(2000);
+					TimeUnit.MILLISECONDS.sleep(100);
+					synchronized (counter) {
+
+						counter.set(counter.get() + 1);
+
+						System.out.println(
+								String.format("%s->%010d",
+										Thread.currentThread()
+											.getName(),
+
+										counter.get()));
+					}
+				} catch (final InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		};
+
+		final Thread thread1 = new Thread(incrementCounter);
+		final Thread thread2 = new Thread(incrementCounter);
+		final Thread thread3 = new Thread(incrementCounter);
+		thread1.start();
+		thread2.start();
+		thread3.start();
+
+		final Object hh = null;
+
+		// gdy nie wskazujemy wartości domyślnej to wołany jest konstruktor kopiujący
+		final Property<Object> prop = Property.from(hh);
+		final Object dd = prop.get(item -> "Pączek");
 		prop.set("Andrzej");
-		prop.set("Marek", value -> EQUALSGREATERTHEN.compare(value.length(), 7));
-		System.out.println(prop);
+		// prop.set("Marek", value -> EQUALSGREATERTHEN.compare(value.length(), 7));
+		System.out.println(dd);
 
-		Property<String> clone = Property.from(prop);
-		// prop.set("Andrzejek");
+		final Property<Object> clone = Property.from(prop);
+		prop.set("Andrzejek");
 
-		prop.compareTo(clone);
+		// prop.compareTo(clone);
 
 		// CompareOperator.EQUALS.compare(prop, clone);
 
-		Property<Integer> prop1 = Property.from(Integer.MAX_VALUE);
+		final Property<Integer> prop1 = Property.from(Integer.MAX_VALUE);
 		prop1.set(1_000_000_000);
 		prop1.set(1_000_000_001);
 		System.out.println(prop1);
 
-		Property<Object> prop2 = Property.from("black", false, false);
+		final Property<Object> prop2 = Property.from("black", false, false);
 		prop2.set(null);
 		prop2.set(null);
 		System.out.println(prop2);
 
-		Property<String> prop3 = Property.from("100");
+		final Property<String> prop3 = Property.from("100");
 		System.out.println(prop3);
 
-		Property<Long> prop4 = Property.from(0L);
-		Boolean val4 = prop4.get(value -> EQUALS.compare((long) (value % 2), 0L));
+		final Property<Long> prop4 = Property.from(0L);
+		// final Boolean val4 = prop4.get(value -> EQUALS.compare(value % 2, 0L));
 		prop4.set(Long.MAX_VALUE + 2L);
 		System.out.println(prop4);
 
-		Property<Double> prop5 = Property.from(110.0912121212, false, false);
-		Object val5 = prop5.get();
+		final Property<Double> prop5 = Property.from(110.0912121212, false, false);
+		final Object val5 = prop5.get();
 		System.out.println(prop5);
 
-		Property<Boolean> prop6 = Property.from(false, true, false);
+		final Property<Boolean> prop6 = Property.from(false, true, false);
 		prop6.set(false);
-		Object val6 = prop6.get();
+		final Object val6 = prop6.get();
 		System.out.println(prop6);
 
-		Property<String> property = Property.from("", String::toUpperCase, in -> in + "_test_", false);
+		final Property<String> property = Property.from("", String::toUpperCase, in -> in + "_test_", false);
 		property.set("12");
 		System.out.println(property);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @return Objekt własciwości
 	 */
 	public static <T> Property<T> from() {
 
-		return new Property<>(null);
+		return new Property<>();
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value Wartość przekazywana dla właściwości
 	 * @return Objekt własciwości
 	 */
-	public static <T> Property<T> from(T value) {
+	public static <T> Property<T> from(final T value) {
 
 		return new Property<>(value);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value Wartość przekazywana dla właściwości
 	 * @param get   Metoda realizująca odczyt wartości
 	 * @param set   Metoda realizująca zapis wartości
 	 * @return Objekt właściwości
 	 */
-	public static <T> Property<T> from(T value, UnaryOperator<T> get, UnaryOperator<T> set) {
+	public static <T> Property<T> from(final T value, final UnaryOperator<T> get, final UnaryOperator<T> set) {
 
 		return new Property<>(value, get, set);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value      Wartość przekazywana dla właściwości
 	 * @param get        Metoda realizująca odczyt wartości
 	 * @param set        Metoda realizująca zapis wartości
 	 * @param isReadOnly Flaga wskazuje czy wartość jest tylko do odczytu
 	 * @return Objekt właściwości
 	 */
-	public static <T> Property<T> from(T value, UnaryOperator<T> get, UnaryOperator<T> set, boolean isReadOnly) {
+	public static <T> Property<T> from(final T value, final UnaryOperator<T> get, final UnaryOperator<T> set,
+			final boolean isReadOnly) {
 
 		return new Property<>(value, get, set, isReadOnly);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value      Wartość przekazywana dla właściwości
 	 * @param isReadOnly Flaga wskazuje czy wartość jest tylko do odczytu
 	 * @return Objekt właściwości
 	 */
-	public static <T> Property<T> from(T value, boolean isReadOnly) {
+	public static <T> Property<T> from(final T value, final boolean isReadOnly) {
 
 		return new Property<>(value, isReadOnly);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value       Wartość przekazywana dla właściwości
 	 * @param throwIfNull Flaga wskazuje czy generować wyjątek gdy wartośc null
 	 * @param isReadOnly  Flaga wskazuje czy wartość jest tylko do odczytu
 	 * @return Objekt właściwości
 	 */
-	public static <T> Property<T> from(T value, boolean throwIfNull, boolean isReadOnly) {
+	public static <T> Property<T> from(final T value, final boolean throwIfNull, final boolean isReadOnly) {
 
 		return new Property<>(value, throwIfNull, isReadOnly);
 	}
 
 	/**
 	 * Metoda tworzenia instancji obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param property Właściwość wartości
 	 * @return Objekt właściwości
 	 */
-	public static <T> Property<T> from(Property<T> property) {
+	public static <T> Property<T> from(final Property<T> property) {
 
-		return new Property<>(property);
+		if (Objects.nonNull(property))
+			return new Property<>(property);
+
+		return new Property<>();
 	}
 
 	/**
@@ -178,10 +211,10 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	/**
 	 * Podstawowy konstruktor kopiujący obiekt klasy <code>Property</code>
-	 * 
+	 *
 	 * @param property Właściwość wartości
 	 */
-	private Property(Property<T> property) {
+	private Property(final Property<T> property) {
 
 		this.value = property.value;
 		this.setMethod = property.setMethod;
@@ -192,38 +225,49 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value Wartość reprezentowana przez właściwość
 	 * @category constructor
 	 */
-	private Property(T value) {
+	private Property() {
+
+		this(null, false, false);
+	}
+
+	/**
+	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
+	 *
+	 * @param value Wartość reprezentowana przez właściwość
+	 * @category constructor
+	 */
+	private Property(final T value) {
 
 		this(value, false, false);
 	}
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value Wartość przekazywana dla właściwości
 	 * @param get   Metoda realizująca odczyt wartości
 	 * @param set   Metoda realizująca zapis wartości
 	 * @category constructor
 	 */
-	private Property(T value, UnaryOperator<T> get, UnaryOperator<T> set) {
+	private Property(final T value, final UnaryOperator<T> get, final UnaryOperator<T> set) {
 
 		this(value, get, set, false);
 	}
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value      Wartość przekazywana dla właściwości
 	 * @param get        Metoda realizująca odczyt wartości
 	 * @param set        Metoda realizująca zapis wartości
 	 * @param isReadOnly Flaga wskazuje czy wartość jest tylko do odczytu
 	 * @category constructor
 	 */
-	private Property(T value, UnaryOperator<T> get, UnaryOperator<T> set, boolean isReadOnly) {
+	private Property(final T value, final UnaryOperator<T> get, final UnaryOperator<T> set, final boolean isReadOnly) {
 
 		this(value, false, isReadOnly);
 		this.setMethod = set;
@@ -232,42 +276,42 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value      Wartość przekazywana dla właściwości
 	 * @param isReadOnly Flaga określa czy wartość własciwości tylko do odczytu
 	 * @category constructor
 	 */
-	private Property(T value, boolean isReadOnly) {
+	private Property(final T value, final boolean isReadOnly) {
 
 		this(value, false, isReadOnly);
 	}
 
 	/**
 	 * Podstawowy konstruktor obiektu klasy <code>Property</code>
-	 * 
+	 *
 	 * @param value       Wartość przekazywana dla właściwości
 	 * @param throwIfNull Flaga określająca czy generować wyjątek podczas próby
 	 *                    przypisania wartości null
 	 * @param isReadOnly  Flaga określa czy wartość właściwości tylko do odczytu
 	 * @category constructor
 	 */
-	private Property(T value, boolean throwIfNull, boolean isReadOnly) {
+	private Property(final T value, final boolean throwIfNull, final boolean isReadOnly) {
 
 		this.getMethod = UnaryOperator.identity();
 		this.setMethod = UnaryOperator.identity();
 		this.throwIfNull = throwIfNull;
-		set(value);
+		this.set(value);
 		this.isReadOnly = isReadOnly;
 	}
 
 	/**
 	 * Metoda wykonuje sprawdzenie poprawności wartości
-	 * 
+	 *
 	 * @param value Wartość właściwości
 	 */
-	private void checkValue(T value) {
+	private void checkValue(final T value) {
 
-		checkNullableValue(value);
+		this.checkNullableValue(value);
 	}
 
 	/**
@@ -281,73 +325,98 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	/**
 	 * Metoda wykonuje sprawdzenie wartości czy jest null
-	 * 
+	 *
 	 * @param value Wartość właściwości
 	 */
-	private void checkNullableValue(T value) {
+	private void checkNullableValue(final T value) {
 
 		if (this.throwIfNull && Objects.isNull(value))
 			throw new IllegalArgumentException("Value of property cannot be set null!");
 	}
-	
+
+	/**
+	 * Właściwość określa czy wartość własciwośći jest tylko do
+	 * odczytu(niemutowalna)
+	 *
+	 * @return Informacja czy wartośc tylko to odczytu
+	 */
 	public boolean isReadOnly() {
-		return isReadOnly;
+
+		return this.isReadOnly;
+	}
+
+	/**
+	 * Właściwość określa czy wartość własciwośći ma wartość nieokreśloną null
+	 *
+	 * @return Informacja czy wartość jest null
+	 */
+	public boolean isNull() {
+
+		return Objects.isNull(this.value);
 	}
 
 	/**
 	 * Metoda Settera ustawiająca wartość właściwości
-	 * 
+	 *
 	 * @param value Nowa wartość własciwości
 	 * @category setter
 	 */
-	public synchronized void set(T value) {
+	public synchronized void set(final T value) {
 
-		checkReadonlyValue();
-		checkValue(value);
+		this.checkReadonlyValue();
+		this.checkValue(value);
 
 		this.value = this.setMethod.apply(value);
 	}
 
 	/**
 	 * Metoda Settera ustawiająca wartość właściwości
-	 * 
+	 *
 	 * @param value      Nowa wartość właściwości
 	 * @param predictate Warunek określający czy ustawiać nową wartość właściwości
 	 * @category setter
 	 */
-	public synchronized void set(T value, Predicate<T> predictate) {
+	public synchronized void set(final T value, final Predicate<T> predictate) {
 
 		if (predictate.test(value))
-			set(value);
+			this.set(value);
 	}
 
 	/**
 	 * Metoda Gettera pobierająca wartość właściwości
-	 * 
+	 *
 	 * @return Wartość właściwości
 	 * @category getter
 	 */
 	public synchronized T get() {
 
-		return this.getMethod.apply(value);
+		return this.getMethod.apply(this.value);
 	}
 
 	/**
 	 * Metoda Gettera zwraca wartość włąsciwość przekonwertowaną poprzez wskazany
 	 * konwerter
-	 * 
+	 *
 	 * @param converter Metoda konwersji wartości właściwości
 	 * @return Wartość właściwości po konwersji
 	 * @category getter
 	 */
-	public synchronized <R> R get(Function<T, R> converter) {
+	public synchronized <R> R get(final Function<T, R> converter) {
 
 		return (converter.apply(this.get()));
 	}
 
+	public synchronized T get(final UnaryOperator<T> operator) {
+
+		if (!this.throwIfNull && this.isNull())
+			return (operator.apply(this.get()));
+
+		return this.value;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -356,36 +425,36 @@ public final class Property<T> implements Comparable<Property<T>> {
 		final int prime = 31;
 		int result = 1;
 
-		result = prime * result + ((getMethod == null)
+		result = (prime * result) + ((this.getMethod == null)
 				? 0
-				: getMethod.hashCode());
+				: this.getMethod.hashCode());
 
-		result = prime * result + (isReadOnly
+		result = (prime * result) + (this.isReadOnly
 				? 1231
 				: 1237);
 
-		result = prime * result + ((setMethod == null)
+		result = (prime * result) + ((this.setMethod == null)
 				? 0
-				: setMethod.hashCode());
+				: this.setMethod.hashCode());
 
-		result = prime * result + (throwIfNull
+		result = (prime * result) + (this.throwIfNull
 				? 1231
 				: 1237);
 
-		result = prime * result + ((value == null)
+		result = (prime * result) + ((this.value == null)
 				? 0
-				: value.hashCode());
+				: this.value.hashCode());
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 
 		if (this == obj)
 			return true;
@@ -393,65 +462,62 @@ public final class Property<T> implements Comparable<Property<T>> {
 		if (obj == null)
 			return false;
 
-		if (getClass() != obj.getClass())
+		if (this.getClass() != obj.getClass())
 			return false;
 
-		Property<T> other = Property.class.cast(obj);
-		if (getMethod == null) {
+		final Property<T> other = Property.class.cast(obj);
+		if (this.getMethod == null) {
 			if (other.getMethod != null)
 				return false;
-		} else if (!getMethod.equals(other.getMethod))
+		} else if (!this.getMethod.equals(other.getMethod))
 			return false;
-		if (isReadOnly != other.isReadOnly)
+		if (this.isReadOnly != other.isReadOnly)
 			return false;
-		if (setMethod == null) {
+		if (this.setMethod == null) {
 			if (other.setMethod != null)
 				return false;
-		} else if (!setMethod.equals(other.setMethod))
+		} else if (!this.setMethod.equals(other.setMethod))
 			return false;
-		if (throwIfNull != other.throwIfNull)
+		if (this.throwIfNull != other.throwIfNull)
 			return false;
-		if (value == null) {
+		if (this.value == null) {
 			if (other.value != null)
 				return false;
-		} else if (!value.equals(other.value))
+		} else if (!this.value.equals(other.value))
 			return false;
 		return true;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 
-		return "Property [value=" + value
+		return "Property [value=" + this.value
 				+ ", throwIfNull="
-				+ throwIfNull
+				+ this.throwIfNull
 				+ ", isReadOnly="
-				+ isReadOnly
+				+ this.isReadOnly
 				+ ", getMethod="
-				+ getMethod
+				+ this.getMethod
 				+ ", setMethod="
-				+ setMethod
+				+ this.setMethod
 				+ "]";
 	}
 
 	@Override
-	public int compareTo(Property<T> property) {
+	public int compareTo(final Property<T> property) {
 
-		Comparator<Property<T>> comparator = (r, p) -> {
+		final Comparator<Property<T>> comparator = (r, p) -> {
 
-			boolean result = property.value.equals(this.value);
+			final boolean result = property.value.equals(this.value);
 			return result
 					? 0
 					: 1;
 		};
-
-		Comparator.comparing((Property::get);
-			
 
 		return Objects.compare(this, property, comparator);
 	}
