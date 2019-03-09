@@ -1,32 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.codigo.aplios</groupId>
 	<artifactId>aplios</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<description>Test</description>
 	<properties>
 		<java.version>10</java.version>
 		<maven.compiler.release>10</maven.compiler.release>
-		<maven.compiler.source>9</maven.compiler.source> <!--redundant, but IntelliJ doesn't -->
-		<maven.compiler.target>9</maven.compiler.target> <!--use release when importing -->
+		<maven.compiler.source>9</maven.compiler.source> 
+		<maven.compiler.target>9</maven.compiler.target> 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<checker.framework.version>2.5.6</checker.framework.version>
-		<junit.version>4.12</junit.version>
-		<junit.jupiter.api.version>5.2.0</junit.jupiter.api.version>
-		<junit.jupiter.engine.version>5.2.0</junit.jupiter.engine.version>
-		<junit.platform.version>1.2.0</junit.platform.version>
-		<junit.vintage.version>${junit.version}.0</junit.vintage.version>
+		<junit.version>4.13-beta-2</junit.version>
+		<junit.jupiter.api.version>5.4.0</junit.jupiter.api.version>
+		<junit.jupiter.engine.version>5.4.0</junit.jupiter.engine.version>
+		<junit.platform.version>1.4.0</junit.platform.version>
+		<junit.vintage.version>5.4.0</junit.vintage.version>
+		<junit.jupiter.engine>5.4.0</junit.jupiter.engine>
+		<junit.jupiter.params>5.4.0</junit.jupiter.params>
 		<jasypt.version>1.9.2</jasypt.version>
 		<hamcrest.all.version>1.3</hamcrest.all.version>
-		<google.guice.version>4.2.0</google.guice.version>
-		<javax.persistence.version>2.1.1</javax.persistence.version>
+		<google.guice.version>4.2.2</google.guice.version>
+		<javax.persistence.version>2.2.1</javax.persistence.version>
 		<validation.api.version>2.0.1.Final</validation.api.version>
-		<eclipse.persistence.core.version>2.6.4</eclipse.persistence.core.version>
+		<eclipse.persistence.core.version>2.7.4</eclipse.persistence.core.version>
 		<eclipse.collections>9.2.0</eclipse.collections>
 		<jaxb.api.version>2.3.0</jaxb.api.version>
-		<slf4j.version>1.7.2</slf4j.version>
+		<slf4j.version>1.8.0-beta4</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+		<checkerframework.version>2.7.0</checkerframework.version>
 		<annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
 	</properties>
 	<!-- <pluginRepositories> <pluginRepository> <id>some-repo</id> <name>Some 
@@ -121,7 +126,7 @@
 					<dependency>
 						<groupId>org.junit.jupiter</groupId>
 						<artifactId>junit-jupiter-engine</artifactId>
-						<version>5.2.0</version>
+						<version>${junit.jupiter.engine}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.ow2.asm</groupId>
@@ -168,18 +173,18 @@
 			<dependency>
 				<groupId>org.checkerframework</groupId>
 				<artifactId>checker</artifactId>
-				<version>2.5.6</version>
+				<version>${checkerframework.version}</version>
 				<type>jar</type>
 			</dependency>
 			<dependency>
 				<groupId>org.checkerframework</groupId>
 				<artifactId>jdk8</artifactId>
-				<version>2.5.6</version>
+				<version>2.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.checkerframework</groupId>
 				<artifactId>checker-qual</artifactId>
-				<version>2.5.6</version>
+				<version>2.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jasypt</groupId>
@@ -242,7 +247,7 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-params</artifactId>
-				<version>5.0.2</version>
+				<version>${junit.jupiter.params}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -273,13 +278,13 @@
 			<dependency>
 				<groupId>org.eclipse.collections</groupId>
 				<artifactId>eclipse-collections</artifactId>
-				<version>9.1.0</version>
+				<version>10.0.0.M2</version>
 				<type>jar</type>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.collections</groupId>
 				<artifactId>eclipse-collections-api</artifactId>
-				<version>9.1.0</version>
+				<version>10.0.0.M2</version>
 				<type>jar</type>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
@@ -288,7 +293,7 @@
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
-				<version>2.3.0</version>
+				<version>2.4.0-b180830.0438</version>
 				<scope>runtime</scope>
 			</dependency>
 			<dependency>
@@ -311,12 +316,12 @@
 			<dependency>
 				<groupId>javax.xml.bind</groupId>
 				<artifactId>jaxb-api</artifactId>
-				<version>2.3.1</version>
+				<version>2.4.0-b180830.0359</version>
 			</dependency>
 			<dependency>
 				<groupId>net.java.dev.jna</groupId>
 				<artifactId>jna-platform</artifactId>
-				<version>4.0.0</version>
+				<version>5.2.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

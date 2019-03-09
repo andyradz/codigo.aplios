@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.codigo.aplios</groupId>
 		<artifactId>toolbox</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>toolbox-core</artifactId>
 	<name>toolbox-core</name>

@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.codigo.aplios</groupId>
 		<artifactId>timeline</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>timeline-core</artifactId>
 	<name>timeline-core</name>

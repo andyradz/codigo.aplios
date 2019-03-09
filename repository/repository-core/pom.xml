@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>repository</artifactId>
 		<groupId>com.codigo.aplios</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>repository-core</artifactId>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.codigo.aplios</groupId>
 			<artifactId>domain-model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 		</dependency>
 		<dependency>

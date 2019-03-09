@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>commander</artifactId>
 		<groupId>com.codigo.aplios</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>exsplorer</artifactId>

@@ -1,0 +1,40 @@
+iparts Zam. nr 459074, Andrzej Radziszewski
+
+Nowa rezerwacja Nr: 459074
+
+Nowa rezerwacja Nr: 459069
+
+mvn  versions:display-dependency-updates
+Converting SNAPSHOTs into RELEASEs
+
+It happens sometimes that a project includes a SNAPSHOT (a version which is still under heavy development).
+
+We can use versions:use-releases to check if the correspondent RELEASE has been published, and even more to convert our SNAPSHOT into that RELEASE at the same time:
+1
+	
+mvn versions:set
+mvn versions:revert
+mvn versions:use-releases
+mvn versions:use-latest-releases
+https://www.baeldung.com/maven-dependency-latest-version
+
+In particular the following goals could be of use:
+
+    versions:use-latest-versions searches the pom for all versions which have been a newer version and replaces them with the latest version.
+    versions:use-latest-releases searches the pom for all non-SNAPSHOT versions which have been a newer release and replaces them with the latest release version.
+    versions:update-properties updates properties defined in a project so that they correspond to the latest available version of specific dependencies. This can be useful if a suite of dependencies must all be locked to one version.
+
+The following other goals are also provided:
+
+    versions:display-dependency-updates scans a project's dependencies and produces a report of those dependencies which have newer versions available.
+    versions:display-plugin-updates scans a project's plugins and produces a report of those plugins which have newer versions available.
+    versions:update-parent updates the parent section of a project so that it references the newest available version. For example, if you use a corporate root POM, this goal can be helpful if you need to ensure you are using the latest version of the corporate root POM.
+    versions:update-child-modules updates the parent section of the child modules of a project so the version matches the version of the current project. For example, if you have an aggregator pom that is also the parent for the projects that it aggregates and the children and parent versions get out of sync, this mojo can help fix the versions of the child modules. (Note you may need to invoke Maven with the -N option in order to run this goal if your project is broken so badly that it cannot build because of the version mis-match).
+    versions:lock-snapshots searches the pom for all -SNAPSHOT versions and replaces them with the current timestamp version of that -SNAPSHOT, e.g. -20090327.172306-4
+    versions:unlock-snapshots searches the pom for all timestamp locked snapshot versions and replaces them with -SNAPSHOT.
+    versions:resolve-ranges finds dependencies using version ranges and resolves the range to the specific version being used.
+    versions:use-releases searches the pom for all -SNAPSHOT versions which have been released and replaces them with the corresponding release version.
+    versions:use-next-releases searches the pom for all non-SNAPSHOT versions which have been a newer release and replaces them with the next release version.
+    versions:use-next-versions searches the pom for all versions which have been a newer version and replaces them with the next version.
+    versions:commit removes the pom.xml.versionsBackup files. Forms one half of the built-in "Poor Man's SCM".
+    versions:revert restores the pom.xml files from the pom.xml.versionsBackup files. Forms one half of the built-in "Poor Man's SCM".

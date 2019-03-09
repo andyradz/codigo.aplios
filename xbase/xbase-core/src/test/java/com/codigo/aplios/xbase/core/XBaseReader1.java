@@ -1,7 +1,5 @@
 package com.codigo.aplios.xbase.core;
 
-import static java.nio.file.StandardOpenOption.READ;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -38,7 +36,7 @@ public class XBaseReader1 {
 		final BasicFileAttributeView view = Files.getFileAttributeView(dbfPath, BasicFileAttributeView.class);
 		view.readAttributes();
 
-		try (FileChannel fch = FileChannel.open(dbfPath, READ)) {
+		try (FileChannel fch = FileChannel.open(dbfPath)) {
 			final ByteBuffer dbfBuffer = ByteBuffer.allocate(XBaseReader1.FileDescriptorSize - 1);
 
 			dbfBuffer.order(ByteOrder.LITTLE_ENDIAN);
@@ -46,7 +44,8 @@ public class XBaseReader1 {
 			fch.read(dbfBuffer);
 			dbfBuffer.flip();
 
-			final XbFileHeader head = XbFileHeader.builder(dbfBuffer.array()).build();
+			final XbFileHeader head = XbFileHeader.builder(dbfBuffer.array())
+				.build();
 
 			System.out.println(head);
 
@@ -95,12 +94,18 @@ public class XBaseReader1 {
 				System.out.printf("%-4d|", jdx);
 
 				for (int idx = 0; idx < nNumFields; idx++) {
-					final byte[] raw = new byte[columns.get(idx).getFieldSize()];
+					final byte[] raw = new byte[columns.get(idx)
+						.getFieldSize()];
 					data.get(raw);
 					head.getCharset();
 					final String value = new String(raw, head.getCharset());
-					lineLen += columns.get(idx).getFieldSize() + columns.get(idx).getFieldDecimalPlaces() + 4;
-					System.out.printf("%-" + (columns.get(idx).getFieldSize()) + "s|", value);
+					lineLen += columns.get(idx)
+						.getFieldSize()
+							+ columns.get(idx)
+								.getFieldDecimalPlaces()
+							+ 4;
+					System.out.printf("%-" + (columns.get(idx)
+						.getFieldSize()) + "s|", value);
 				}
 				System.out.println("");
 				System.out.println(String.join("", Collections.nCopies(lineLen, "-")));
