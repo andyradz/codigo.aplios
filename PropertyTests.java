@@ -1,5 +1,7 @@
 package com.codigo.aplios.group.timeline.core;
 
+import java.util.function.UnaryOperator;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
@@ -7,7 +9,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.codigo.aplios.group.timeline.common.helper.CompareOperator;
+import com.codigo.aplios.group.timeline.common.helper.CompareResult;
 import com.codigo.aplios.group.timeline.common.helper.Property;
+import com.codigo.aplios.group.timeline.common.helper.PropertyIntegerComparator;
+import com.codigo.aplios.group.timeline.common.helper.PropertyStringComparator;
 
 public class PropertyTests {
 
@@ -55,6 +60,8 @@ public class PropertyTests {
 		final Property<Object> property = Property.from(object, true, false);
 
 		// assert
+		// MatcherAssert.assertThat(property.set(null),
+		// CoreMatchers.instanceOf(Property.class));
 		Assertions.assertThrows(IllegalArgumentException.class, () -> property.set(null));
 	}
 
@@ -316,44 +323,90 @@ public class PropertyTests {
 	}
 
 	@Test
+	public void test1() {
+
+		// arrange
+		final Property<String> propertyOne = Property.from("2");
+		final Property<String> propertyTwo = Property.from("2");
+
+		// act
+		final PropertyStringComparator c = new PropertyStringComparator();
+
+		// assert
+		MatcherAssert.assertThat(CompareResult.EQUALS.result(),
+				CoreMatchers.is(c.compare(propertyOne, propertyTwo)));
+	}
+
+	@Test
 	public void test2() {
 
-		final Property<Integer> propertyOne = Property.from(0);
+		// arrange
+		final Property<Integer> propertyOne = Property.from(-1);
 		final Property<Integer> propertyTwo = Property.from(1);
 
-		MatcherAssert.assertThat(true, CoreMatchers.is(CompareOperator.LESSTHEN.compare(propertyOne, propertyTwo)));
+		// act
+		final PropertyIntegerComparator c = new PropertyIntegerComparator();
 
-		// inal List<Integer> list = Lists.mutable.empty();
+		// assert
+		MatcherAssert.assertThat(CompareResult.LESSER.result(),
+				CoreMatchers.is(c.compare(propertyOne, propertyTwo)));
 
-//		final Property<Integer> counter = Property.from(0);
-//
-//		final Runnable incrementCounter = () -> {
-//
-//			for (;;)
-//
-//				synchronized (counter) {
-//
-//					// if (remain == 0)
-//					// Thread.currentThread()
-//					// .interrupt();
-//
-//					counter.set(counter.get() + 1);
-//					list.add(counter.get());
-//
-//					System.out.println(
-//							String.format("%s->%010d",
-//									Thread.currentThread()
-//										.getName(),
-//
-//									counter.get()));
-//				}
-//		};
-//
-//		final Thread thread1 = new Thread(incrementCounter);
-//		final Thread thread2 = new Thread(incrementCounter);
-//		final Thread thread3 = new Thread(incrementCounter);
-//		thread1.start();
-//		thread2.start();
-//		thread3.start();
+	}
+
+	@Test
+	public void test4() {
+
+		final Property<Object> property = Property.from(null, UnaryOperator.identity(), UnaryOperator.identity());
+
+		MatcherAssert.assertThat(null, CoreMatchers.is(property.get()));
+	}
+
+	@Test
+	public void test5() {
+
+		final Property<Object> property = Property.from("", UnaryOperator.identity(), UnaryOperator.identity(), true);
+
+		MatcherAssert.assertThat("", CoreMatchers.is(property.get()));
+	}
+
+	@Test
+	public void test6() {
+
+		final Property<Object> property1 = Property.from("", UnaryOperator.identity(), UnaryOperator.identity(), true);
+		final Property<Object> property2 = Property.from(property1);
+
+		MatcherAssert.assertThat("", CoreMatchers.is(property2.get()));
 	}
 }
+//inal List<Integer> list = Lists.mutable.empty();
+
+//final Property<Integer> counter = Property.from(0);
+//
+//final Runnable incrementCounter = () -> {
+//
+//	for (;;)
+//
+//		synchronized (counter) {
+//
+//			// if (remain == 0)
+//			// Thread.currentThread()
+//			// .interrupt();
+//
+//			counter.set(counter.get() + 1);
+//			list.add(counter.get());
+//
+//			System.out.println(
+//					String.format("%s->%010d",
+//							Thread.currentThread()
+//								.getName(),
+//
+//							counter.get()));
+//		}
+//};
+//
+//final Thread thread1 = new Thread(incrementCounter);
+//final Thread thread2 = new Thread(incrementCounter);
+//final Thread thread3 = new Thread(incrementCounter);
+//thread1.start();
+//thread2.start();
+//thread3.start();

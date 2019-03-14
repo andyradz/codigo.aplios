@@ -470,28 +470,29 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
 	public int compareTo(final Property<T> property) {
 
-		final Comparator<Property<T>> comparator = (r, p) -> {
+		final Comparator<Property<T>> comparator = (final Property<T> a, final Property<T> b) -> {
 
-			if ((property.value == null) || (this.value == null))
-				return -1;
+			if (a.value == null)
+				return (b == null)
+						? CompareResult.EQUALS.result()
+						: CompareResult.LESSER.result();
 
-			final boolean result = (property.value.equals(this.value)
-					&& (property.isReadOnly == this.isReadOnly)
-					&& (property.throwIfNull == this.throwIfNull));
+			if (b == a)
+				return 1;
+
+			final boolean result = a.equals(b);
 
 			return result
-					? 0
-					: 1;
+					? CompareResult.EQUALS.result()
+					: CompareResult.GREATER.result();
 		};
 
 		return comparator.compare(this, property);
-
-		// return Objects.compare(this, property, comparator);
 	}
 }
