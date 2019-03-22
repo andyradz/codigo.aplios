@@ -290,7 +290,7 @@ public final class Property<T> implements Comparable<Property<T>> {
 	private void checkNullableValue(final T value) {
 
 		if (this.throwIfNull && Objects.isNull(value))
-			throw new IllegalArgumentException(
+			throw new UnsupportedOperationException(
 					"Value of property cannot be set null!");
 	}
 
@@ -368,7 +368,7 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 	public synchronized T get(final UnaryOperator<T> operator) {
 
-		if (!this.throwIfNull && this.isNull())
+		if (!(this.throwIfNull && this.isNull()))
 			return (operator.apply(this.get()));
 
 		return this.value;
@@ -478,19 +478,21 @@ public final class Property<T> implements Comparable<Property<T>> {
 
 		final Comparator<Property<T>> comparator = (final Property<T> a, final Property<T> b) -> {
 
-			if (a.value == null)
-				return (b == null)
+			if (Objects.isNull(a.value))
+				return (Objects.isNull(b))
 						? CompareResult.EQUALS.result()
 						: CompareResult.LESSER.result();
 
+			if (Objects.isNull(b))
+				return CompareResult.GREATER.result();
+
 			if (b == a)
-				return 1;
+				return CompareResult.EQUALS.result();
 
-			final boolean result = a.equals(b);
+			final String left = a.toString();
+			final String right = b.toString();
 
-			return result
-					? CompareResult.EQUALS.result()
-					: CompareResult.GREATER.result();
+			return left.compareTo(right);
 		};
 
 		return comparator.compare(this, property);
