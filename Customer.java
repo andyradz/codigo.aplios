@@ -20,7 +20,6 @@ import data.mapping.user.Caption;
 //...https://en.wikibooks.org/wiki/Java_Persistence/Embeddables
 //overrride assocation
 
-
 //many to many with additional table with mapping
 //...https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany
 
@@ -42,28 +41,29 @@ public abstract class Customer {
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "caption", column = @Column(name = "OfficialTitle", length = 50)) })
 	private Caption officialTitle;
-	
+
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "caption", column = @Column(name = "FirstName", length = 50)) })
 	private Caption firstName;
-	
+
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "caption", column = @Column(name = "LastName", length = 50)) })
 	private Caption lastName;
-	
+
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "caption", column = @Column(name = "FullName", length = 100)) })
 	private Caption fullName;
-	
+
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "caption", column = @Column(name = "OfficialSalutation", length = 25)) })
+	@AttributeOverrides({
+			@AttributeOverride(name = "caption", column = @Column(name = "OfficialSalutation", length = 25)) })
 	private Caption officialSalutation;
 
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
-	
+
 		return this.id;
 	}
 
@@ -71,7 +71,7 @@ public abstract class Customer {
 	 * @param id the id to set
 	 */
 	public void setId(Long id) {
-	
+
 		this.id = id;
 	}
 
@@ -79,7 +79,7 @@ public abstract class Customer {
 	 * @return the officialTitle
 	 */
 	public Caption getOfficialTitle() {
-	
+
 		return this.officialTitle;
 	}
 
@@ -87,7 +87,7 @@ public abstract class Customer {
 	 * @param officialTitle the officialTitle to set
 	 */
 	public void setOfficialTitle(Caption officialTitle) {
-	
+
 		this.officialTitle = officialTitle;
 	}
 
@@ -95,7 +95,7 @@ public abstract class Customer {
 	 * @return the firstName
 	 */
 	public Caption getFirstName() {
-	
+
 		return this.firstName;
 	}
 
@@ -103,7 +103,7 @@ public abstract class Customer {
 	 * @param firstName the firstName to set
 	 */
 	public void setFirstName(Caption firstName) {
-	
+
 		this.firstName = firstName;
 	}
 
@@ -111,7 +111,7 @@ public abstract class Customer {
 	 * @return the lastName
 	 */
 	public Caption getLastName() {
-	
+
 		return this.lastName;
 	}
 
@@ -119,7 +119,7 @@ public abstract class Customer {
 	 * @param lastName the lastName to set
 	 */
 	public void setLastName(Caption lastName) {
-	
+
 		this.lastName = lastName;
 	}
 
@@ -127,7 +127,7 @@ public abstract class Customer {
 	 * @return the fullName
 	 */
 	public Caption getFullName() {
-	
+
 		return this.fullName;
 	}
 
@@ -135,7 +135,7 @@ public abstract class Customer {
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(Caption fullName) {
-	
+
 		this.fullName = fullName;
 	}
 
@@ -143,7 +143,7 @@ public abstract class Customer {
 	 * @return the officialSalutation
 	 */
 	public Caption getOfficialSalutation() {
-	
+
 		return this.officialSalutation;
 	}
 
@@ -151,8 +151,8 @@ public abstract class Customer {
 	 * @param officialSalutation the officialSalutation to set
 	 */
 	public void setOfficialSalutation(Caption officialSalutation) {
-	
+
 		this.officialSalutation = officialSalutation;
-	}	
-	
+	}
+
 }

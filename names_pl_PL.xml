@@ -53,6 +53,9 @@
     <entry key="1">plus</entry>
     <entry key="-1">minus</entry>
     <entry key="0">zero</entry>
+    <entry key="+">plus</entry>
+    <entry key="-">minus</entry>
+    <entry key="n">zero</entry>
 
     <!-- NAZWY TYSIĘCTY -->
     <entry key="v.1.1">tysiąć</entry>

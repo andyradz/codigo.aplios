@@ -1,5 +1,6 @@
 package com.codigo.aplios.checksum.core;
 
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.codigo.aplios.checksum.core.crc.CRC8;
 import com.codigo.aplios.checksum.core.crc.CRC8_OPTIONS;
+
 
 public class TestsCRC8LookupTable {
 

@@ -8,8 +8,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import org.checkerframework.com.google.common.base.Defaults;
-
+import com.codigo.aplios.core.constants.Default;
 import com.codigo.aplios.core.message.ErrorMessages;
 
 /**
@@ -209,7 +208,7 @@ public enum XbCharset {
 	 */
 	public static Charset ofCodepage(final int codepage) {
 
-		if (codepage < Defaults.defaultValue(Integer.class))
+		if (codepage < Default.of(Integer.class))
 			throw new IllegalArgumentException("Wartość codepage nie może być ujemna!");
 
 		final Supplier<XbCharset> operator = () -> {
