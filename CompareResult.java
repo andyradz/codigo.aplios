@@ -49,7 +49,7 @@ public enum CompareResult {
 	 *
 	 * @return Wartość numeryczna może zwracać wartości (-1, 0, 1)
 	 */
-	public int result() {
+	public int get() {
 
 		return this.compareCode;
 	}

@@ -1,7 +1,12 @@
 package com.codigo.aplios.group.timeline.common.helper;
 
+import java.util.Comparator;
+
 public enum CompareOperator implements IComparable {
 
+	/**
+	 * Operator porównania, sprawdzający zależność ===
+	 */
 	EQUALS {
 
 		@Override
@@ -11,10 +16,14 @@ public enum CompareOperator implements IComparable {
 
 			final Comparable<Object> comparable = Comparable.class.cast(leftOperand);
 
-			return comparable.compareTo(rightOperand) == CompareResult.EQUALS.result();
+			return comparable.compareTo(rightOperand) == CompareResult.EQUALS.get();
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność ===
+	 */
 	NOTEQUALS {
 
 		@Override
@@ -24,6 +33,10 @@ public enum CompareOperator implements IComparable {
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność >
+	 */
 	GREATERTHEN {
 
 		@Override
@@ -33,10 +46,14 @@ public enum CompareOperator implements IComparable {
 
 			final Comparable<Object> comparable = Comparable.class.cast(leftOperand);
 
-			return comparable.compareTo(rightOperand) == CompareResult.GREATER.result();
+			return comparable.compareTo(rightOperand) == CompareResult.GREATER.get();
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność not >
+	 */
 	NOTGREATERTHEN {
 
 		@Override
@@ -46,6 +63,10 @@ public enum CompareOperator implements IComparable {
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność >=
+	 */
 	EQUALSGREATERTHEN {
 
 		@Override
@@ -55,11 +76,15 @@ public enum CompareOperator implements IComparable {
 
 			final Comparable<Object> comparable = Comparable.class.cast(leftOperand);
 
-			return (comparable.compareTo(rightOperand) == CompareResult.EQUALS.result())
-					|| (comparable.compareTo(rightOperand) == CompareResult.GREATER.result());
+			return (comparable.compareTo(rightOperand) == CompareResult.EQUALS.get())
+					|| (comparable.compareTo(rightOperand) == CompareResult.GREATER.get());
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność not >=
+	 */
 	NOTEQUALSGREATERTHEN {
 
 		@Override
@@ -69,6 +94,10 @@ public enum CompareOperator implements IComparable {
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność <
+	 */
 	LESSTHEN {
 
 		@Override
@@ -78,10 +107,14 @@ public enum CompareOperator implements IComparable {
 
 			final Comparable<Object> comparable = Comparable.class.cast(leftOperand);
 
-			return comparable.compareTo(rightOperand) == CompareResult.LESSER.result();
+			return comparable.compareTo(rightOperand) == CompareResult.LESSER.get();
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność not <
+	 */
 	NOTLESSTHEN {
 
 		@Override
@@ -91,6 +124,10 @@ public enum CompareOperator implements IComparable {
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność <=
+	 */
 	EQUALSLESSTHEN {
 
 		@Override
@@ -100,11 +137,15 @@ public enum CompareOperator implements IComparable {
 
 			final Comparable<Object> comparable = Comparable.class.cast(leftOperand);
 
-			return (comparable.compareTo(rightOperand) == CompareResult.EQUALS.result())
-					|| (comparable.compareTo(rightOperand) == CompareResult.LESSER.result());
+			return (comparable.compareTo(rightOperand) == CompareResult.EQUALS.get())
+					|| (comparable.compareTo(rightOperand) == CompareResult.LESSER.get());
 		}
 
 	},
+
+	/**
+	 * Operator porównania, sprawdzający zależność not <=
+	 */
 	NOTEQUALSLESSTHEN {
 
 		@Override
@@ -115,6 +156,32 @@ public enum CompareOperator implements IComparable {
 	};
 
 	/**
+	 * @param comparator
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	public static <T> boolean compare(final Comparator<T> comparator, final T first,
+			final T second) {
+
+		final int result = comparator.compare(first, second);
+
+		switch (result) {
+		case -1:
+			return result == CompareResult.LESSER.get();
+
+		case 1:
+			return result == CompareResult.GREATER.get();
+
+		case 0:
+			return result == CompareResult.EQUALS.get();
+
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	/**
 	 *
 	 * @param leftOperand
 	 * @param rightOperand
@@ -122,8 +189,7 @@ public enum CompareOperator implements IComparable {
 	private static void checkObjectClass(final Comparable<?> leftOperand, final Comparable<?> rightOperand) {
 
 		if (leftOperand.getClass() != rightOperand.getClass())
-			throw new UnsupportedOperationException(
-					"leftOperand.getClass() != rightOperand.getClass()");
+			throw new UnsupportedOperationException("leftOperand.getClass() != rightOperand.getClass()");
 	}
 
 }
