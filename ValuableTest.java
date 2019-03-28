@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.core;
+package com.codigo.aplios.group.sdk.core;
 
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
@@ -8,13 +8,13 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.codigo.aplios.group.sdk.core.FailsWithMatcher;
-import com.codigo.aplios.group.timeline.common.helper.CompareOperator;
-import com.codigo.aplios.group.timeline.common.helper.CompareResult;
-import com.codigo.aplios.group.timeline.common.helper.Valuable;
-import com.codigo.aplios.group.timeline.common.helper.ValuableDoubleComparator;
-import com.codigo.aplios.group.timeline.common.helper.ValuableIntegerComparator;
-import com.codigo.aplios.group.timeline.common.helper.ValuableStringComparator;
+import com.codigo.aplios.group.sdk.core.compare.CompareOperator;
+import com.codigo.aplios.group.sdk.core.compare.CompareResult;
+import com.codigo.aplios.group.sdk.core.hamcrest.FailsWithMatcher;
+import com.codigo.aplios.group.sdk.core.value.Valuable;
+import com.codigo.aplios.group.sdk.core.value.ValuableDoubleComparator;
+import com.codigo.aplios.group.sdk.core.value.ValuableIntegerComparator;
+import com.codigo.aplios.group.sdk.core.value.ValuableStringComparator;
 
 public class ValuableTest {
 

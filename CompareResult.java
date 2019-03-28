@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.common.helper;
+package com.codigo.aplios.group.sdk.core.compare;
 
 /**
  * Typ wyliczeniowy reprezentuje wynik operacji porówania wyrażony w postaci
@@ -6,6 +6,7 @@ package com.codigo.aplios.group.timeline.common.helper;
  * porównania.
  *
  * @author andrzej.radziszewski
+ * @version 1.0.0.0
  * @category enumeration
  * @serial 2017
  */

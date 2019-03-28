@@ -1,10 +1,12 @@
-package com.codigo.aplios.group.timeline.common.helper;
+package com.codigo.aplios.group.sdk.core.value;
 
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+
+import com.codigo.aplios.group.sdk.core.compare.CompareResult;
 
 /**
  * Klasa reprezentuje właściwość zarządzająca przekazaną wartością. Umożliwia

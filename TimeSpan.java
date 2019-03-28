@@ -1,12 +1,11 @@
-package com.codigo.aplios.group.timeline.common;
+package com.codigo.aplios.group.sdk.core.datetime;
 
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-import com.codigo.aplios.group.timeline.common.TimeSpec.TimeRelations;
-import com.codigo.aplios.group.timeline.common.helper.CompareResult;
-import com.codigo.aplios.group.timeline.common.helper.Valuable;
+import com.codigo.aplios.group.sdk.core.compare.CompareResult;
+import com.codigo.aplios.group.sdk.core.value.Valuable;
 
 /**
  * @author andrzej.radziszewski
@@ -26,7 +25,7 @@ public class TimeSpan implements Comparable<TimeSpan> {
 
 	public static TimeSpan fromDays(final double days) {
 
-		return new TimeSpan(Long.class.cast(Math.ceil(days * TimeRelations.HOURSPERDAY.get()
+		return new TimeSpan(Long.class.cast(Math.ceil(days * 24
 				* 3600.d
 				* 1000.d) * TimeSpan.TICKSPERMILLISECOND));
 	}

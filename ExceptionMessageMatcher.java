@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.core;
+package com.codigo.aplios.group.sdk.core.hamcrest;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -17,8 +17,7 @@ public final class ExceptionMessageMatcher<E extends Throwable>
 
 	public static <E extends Throwable> Matcher<E> exceptionMessage(final String message) {
 
-		return new ExceptionMessageMatcher<>(
-				Matchers.is(message));
+		return new ExceptionMessageMatcher<>(Matchers.is(message));
 	}
 
 	@Override

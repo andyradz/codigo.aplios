@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.core;
+package com.codigo.aplios.group.sdk.core.hamcrest;
 
 @FunctionalInterface
 public interface IThrowingRunnable<E extends Throwable> {

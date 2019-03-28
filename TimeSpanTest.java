@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.core;
+package com.codigo.aplios.group.sdk.core;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,7 +7,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-import com.codigo.aplios.group.timeline.common.TimeSpan;
+import com.codigo.aplios.group.sdk.core.datetime.TimeSpan;
 
 //https://docs.microsoft.com/en-us/dotnet/api/system.timespan.ticks?redirectedfrom=MSDN&view=netframework-4.7.2#System_TimeSpan_Ticks
 //The example displays the following output if the current culture is en-US:
@@ -86,8 +86,7 @@ public class TimeSpanTest {
 	@Test
 	public void testConstructor_Passing_Ticks() {
 
-		final TimeSpan span = new TimeSpan(
-				864000000000l);
+		final TimeSpan span = new TimeSpan(864000000000l);
 
 		MatcherAssert.assertThat(864000000000l, CoreMatchers.is(span.ticks()
 			.get()));

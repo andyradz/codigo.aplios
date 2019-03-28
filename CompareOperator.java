@@ -1,4 +1,4 @@
-package com.codigo.aplios.group.timeline.common.helper;
+package com.codigo.aplios.group.sdk.core.compare;
 
 import java.util.Comparator;
 
